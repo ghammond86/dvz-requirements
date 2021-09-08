@@ -15,6 +15,7 @@
 	\item \label{testEOSIFC67} EOS test for IFC67: compare density calculations between PFLOTRAN and python script from STOMP documentation
 	\item \label{testEOSIF97} EOS test for IF97: compare density calculations between PFLOTRAN and online calculator
 	\item \label{testRepMatCellIDStruc} Representation of material properties by cell ID on structured grid (with a 2x2x2 cube)
+	\item \label{testRepMatCellIDStruc16} Representation of material properties by cell ID on structured grid using random correlated fields of porosity and permeability
 	\item \label{testRepMatCellIDUnstruc} Representation of material properties by cell ID on unstructured grid (with a 2x2x2 cube)
 	\item \label{testRepMatGridStruc} Representation of material properties by location using gridded datasets on structured grid
 	\item \label{testRepMatGridUnstruc} Representation of material properties by location using gridded datasets on unstructured grid
@@ -24,7 +25,16 @@
 	\item \label{testInactive} Test capability of inactivating cells
 	\item \label{testNonContMaterialIDS} Test non-contiguous material IDs
 	\item \label{testStructIrregGrid} Test the ability to create structured grids with irregular spacing.
-	
+	\item \label{testRepICCellIDStruc} Representation of initial conditions by cell ID on structured grid (with a 2x2x2 cube)
+\end{enumerate}
+
+\begin{enumerate}[label=Test \greek*.,ref=Test \greek*,nosep]
+\item \label{testRepICCellIDUnstruc} Representation of initial conditions by cell ID on unstructured grid (with a 2x2x2 cube)
+\item \label{testRepICCellIDStruc16} Representation of initial conditions by cell ID on structured grid using random correlated fields of porosity, permeability, and initial pressure.
+\item \label{testRepICRegStruc} Representation of initial conditions by location using regions on structured grid
+\item \label{testRepICRegUnstruc} Representation of initial conditions by location using regions on unstructured grid
+\item \label{testRepICIJKStruc} Representation of initial conditions with IJK indices on structured grid
+\item \label{testRepICGridStruc} Representation of initial conditions by location using gridded datasets on structured grid
 \end{enumerate}
 
 \subsection{Test matrix for Constitutive Relations}
@@ -156,11 +166,11 @@
 	Requirement & Test(s) & Check implementation \\
 	\hline
 	\hline
-	\ref{repICRegions} & Most problems use Region all & \\
+	\ref{repICRegions} & \ref{testRepICRegStruc}, \ref{testRepICRegUnstruc}, \ref{testRepICIJKStruc}  & Yes \\
 	\hline
-	\ref{repICLocation} & \ref{testa} & \\
+	\ref{repICLocation} &  \ref{testRepICGridStruc} & Yes \\
 	\hline
-	\ref{repICCellID} & \ref{testa} & \\
+	\ref{repICCellID} & \ref{testRepICCellIDStruc}, \ref{testRepICCellIDStruc16}, \ref{testRepICCellIDUnstruc}, & Yes\\
 	\hline
 \end{tabular}
 

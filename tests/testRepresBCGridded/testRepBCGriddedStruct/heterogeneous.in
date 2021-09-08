@@ -1,4 +1,4 @@
-#Description: 3D transient Neunann BCs - variably saturated
+#Description: 3D problem with correlated random initial pressure
 
 SIMULATION
   SIMULATION_TYPE SUBSURFACE
@@ -17,7 +17,9 @@ NUMERICAL_METHODS FLOW
   LINEAR_SOLVER
     SOLVER DIRECT
   /
-
+  TIMESTEPPER
+    MAXIMUM_NUMBER_OF_TIMESTEPS 0
+  /
 END
 
 #=========================== solver options ===================================
@@ -44,6 +46,10 @@ DATASET poro_field
   HDF5_DATASET_NAME Porosity
 END
 
+DATASET pres_field
+  FILENAME ./gridded-parameters.h5
+  HDF5_DATASET_NAME Pressure
+END
 #=========================== material properties ==============================
 MATERIAL_PROPERTY soil1
   ID 1
@@ -73,10 +79,6 @@ CHARACTERISTIC_CURVES cc1
 END
 
 #=========================== eos ==============================================
-# EOS WATER
-#  DENSITY EXPONENTIAL 1000.0 0 1E-4
-#  VISCOSITY CONSTANT 0.000864 Pa-s
-# END
 
 #=========================== output options ===================================
 OUTPUT
@@ -121,7 +123,7 @@ FLOW_CONDITION initial_pressure
   TYPE
     PRESSURE DIRICHLET
   /
-  PRESSURE 20000.d0 Pa
+  PRESSURE DATASET pres_field
 END
 
 FLOW_CONDITION influx
