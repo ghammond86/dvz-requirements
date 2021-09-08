@@ -1,0 +1,148 @@
+#Description: 1D transient - fully saturated flow problem: checking mass rate
+
+SIMULATION
+  SIMULATION_TYPE SUBSURFACE
+  PROCESS_MODELS
+    SUBSURFACE_FLOW flow
+      MODE RICHARDS
+    /
+  /
+END
+
+SUBSURFACE
+
+#=========================== numerical methods ================================
+NUMERICAL_METHODS FLOW
+
+  LINEAR_SOLVER
+    SOLVER DIRECT
+  /
+END
+
+#=========================== solver options ===================================
+
+#=========================== discretization ===================================
+GRID
+  TYPE STRUCTURED
+  NXYZ 10 1 1
+  BOUNDS
+    0.0 0.0 0.0
+    10.0 1.0 1.0
+  /
+END
+
+#=========================== material properties ==============================
+MATERIAL_PROPERTY soil1
+  ID 1
+  POROSITY 0.25
+  ROCK_DENSITY 2500.0
+  PERMEABILITY
+    PERM_ISO 1e-14
+  /
+  CHARACTERISTIC_CURVES cc1
+END
+
+
+#=========================== characteristic curves ============================
+CHARACTERISTIC_CURVES cc1
+  SATURATION_FUNCTION VAN_GENUCHTEN
+    ALPHA 1.d-4
+    M 0.5d0
+    LIQUID_RESIDUAL_SATURATION 0.1d0
+  /
+  PERMEABILITY_FUNCTION MUALEM_VG_LIQ
+    M 0.5d0
+    LIQUID_RESIDUAL_SATURATION 0.1d0
+  /
+END
+
+#=========================== eos ==============================================
+EOS WATER
+ DENSITY CONSTANT 1000.0
+ VISCOSITY CONSTANT 0.001017 Pa-s
+END
+
+#=========================== output options ===================================
+OUTPUT
+  SNAPSHOT_FILE
+    FORMAT HDF5
+	FORMAT TECPLOT BLOCK
+    TIMES d 1.0
+  /
+  MASS_BALANCE_FILE
+  	PERIODIC TIMESTEP 1
+  /
+END
+
+#=========================== times ============================================
+TIME
+  FINAL_TIME 1.0 d
+  INITIAL_TIMESTEP_SIZE 0.1 d
+  MAXIMUM_TIMESTEP_SIZE 0.1 d
+END
+
+#=========================== regions ==========================================
+REGION all
+  COORDINATES
+    0.0 0.0 0.0
+    10.0 1.0 1.0
+  /
+END
+
+REGION right_face
+  FACE EAST
+  COORDINATES
+    10.0 0.0 0.0
+    10.0 1.0 1.0
+  /
+END
+
+REGION injector
+  COORDINATE 0.5d0 0.5d0 0.5d0
+/
+
+#=========================== flow conditions ==================================
+FLOW_CONDITION initial_pressure
+  TYPE
+    PRESSURE DIRICHLET
+  /
+  PRESSURE 101325.0 Pa
+END
+
+FLOW_CONDITION right_face
+  TYPE
+    PRESSURE DIRICHLET
+  /
+  PRESSURE 101325.0 Pa
+END
+
+FLOW_CONDITION injector
+  TYPE
+    RATE MASS_RATE
+  / 
+  RATE 1.d-3 g/s
+END
+
+#=========================== condition couplers ===============================
+INITIAL_CONDITION
+  FLOW_CONDITION initial_pressure
+  REGION all
+END
+
+BOUNDARY_CONDITION right_face
+  FLOW_CONDITION right_face
+  REGION right_face
+END
+
+SOURCE_SINK injector
+  FLOW_CONDITION injector
+  REGION injector
+END
+
+#=========================== stratigraphy couplers ============================
+STRATA
+  REGION all
+  MATERIAL soil1
+END
+
+END_SUBSURFACE

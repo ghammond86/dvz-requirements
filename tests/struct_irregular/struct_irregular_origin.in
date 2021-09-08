@@ -1,0 +1,122 @@
+#Description: Testing structured irregular grid
+
+SIMULATION
+  SIMULATION_TYPE SUBSURFACE
+  PROCESS_MODELS
+    SUBSURFACE_FLOW flow
+      MODE RICHARDS
+    /
+  /
+END
+
+SUBSURFACE
+
+#=========================== numerical methods ================================
+NUMERICAL_METHODS FLOW
+
+  LINEAR_SOLVER
+    SOLVER DIRECT
+  /
+  TIMESTEPPER
+    MAXIMUM_NUMBER_OF_TIMESTEPS 0
+  /
+
+END
+
+#=========================== solver options ===================================
+
+#=========================== discretization ===================================
+GRID
+  TYPE STRUCTURED
+  ORIGIN 1.d0 2.d0 3.d0
+  NXYZ 5 5 5
+  DXYZ
+    1.0
+    0.25 0.5 1.0 2.0 4.0
+    1.0 2.0 2.0 2.0 2.0
+  /
+END
+
+#=========================== material properties ==============================
+MATERIAL_PROPERTY soil1
+  ID 1
+  POROSITY 0.25
+  ROCK_DENSITY 2000.0
+  SOIL_COMPRESSIBILITY_FUNCTION DEFAULT ! LEIJNSE
+  SOIL_COMPRESSIBILITY 1.d-8
+  SOIL_REFERENCE_PRESSURE 101325.d0
+  CHARACTERISTIC_CURVES cc1
+  PERMEABILITY 
+    PERM_ISO 1.d-12
+  /
+END
+
+#=========================== characteristic curves ============================
+
+CHARACTERISTIC_CURVES cc1
+  SATURATION_FUNCTION VAN_GENUCHTEN
+    ALPHA 3.7073013e-4
+    M 0.3872549
+    LIQUID_RESIDUAL_SATURATION 0.2806d0
+  /
+  PERMEABILITY_FUNCTION MUALEM_VG_LIQ
+    M 0.3872549
+    LIQUID_RESIDUAL_SATURATION 0.2806d0
+  /
+END
+
+#=========================== eos ==============================================
+EOS WATER
+ DENSITY DEFAULT
+ VISCOSITY DEFAULT
+END
+
+#=========================== output options ===================================
+OUTPUT
+  SNAPSHOT_FILE
+    FORMAT HDF5
+	FORMAT TECPLOT BLOCK
+    PERIODIC TIME 1.0 day
+  /
+END
+
+#=========================== times ============================================
+TIME
+  FINAL_TIME 1. d
+  INITIAL_TIMESTEP_SIZE 1. d
+  MAXIMUM_TIMESTEP_SIZE 1.0 d
+END
+
+#=========================== regions ==========================================
+REGION all
+  COORDINATES
+    0.0 0.0 0.0
+    6.0 9.75 12.0
+  /
+END
+
+
+#=========================== flow conditions ==================================
+FLOW_CONDITION initial
+  TYPE
+    PRESSURE DIRICHLET
+  /
+  PRESSURE 101325.
+END
+
+
+#=========================== condition couplers ===============================
+# initial condition
+INITIAL_CONDITION
+  FLOW_CONDITION initial
+  REGION all
+END
+
+
+#=========================== stratigraphy couplers ============================
+STRATA
+  REGION all
+  MATERIAL soil1
+END
+
+END_SUBSURFACE

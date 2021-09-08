@@ -1,0 +1,109 @@
+
+=================
+  PFLOTRAN v3.0
+=================
+
+
+ *DXYZ 
+  dx  
+  1.0000E+00  1.0000E+00
+  dy  
+  1.0000E+00  1.0000E+00
+  dz  
+  1.0000E+00  1.0000E+00
+ Extent of Gridded Domain
+  X: 0.0000000000000000 - 2.0000000000000000
+  Y: 0.0000000000000000 - 2.0000000000000000
+  Z: 0.0000000000000000 - 2.0000000000000000
+
+
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+  Initial Condition
+
+--------------------------------------------------------------------------------
+          Flow Condition:   initial_pressure
+                  Region:   all
+--------------------------------------------------------------------------------
+
+  Flow Condition: initial_pressure
+    Synchronize time with update: no
+    Time units: yr
+    Length units: m
+      Datum:
+
+    Sub Condition: pressure
+      Type: dirichlet
+      Gradient:
+      Data:
+        Dataset: Unnamed Ascii Dataset
+          Type: dataset_ascii_type
+          Transient: no
+          Array Rank:  1
+
+--------------------------------------------------------------------------------
+
+ Requested processors and decomposition =     1, npx,y,z=   -1  -1  -1
+ Actual decomposition: npx,y,z=    1   1   1
+
+
+FLOW Time Stepper
+                 acceleration: on
+       acceleration threshold: 5
+       number of ramp entries: 5
+                ramp entry #1: 2.0000
+                ramp entry #2: 2.0000
+                ramp entry #3: 2.0000
+                ramp entry #4: 2.0000
+                ramp entry #5: 2.0000
+                ramp entry #6: 1.8000
+                ramp entry #7: 1.6000
+                ramp entry #8: 1.4000
+                ramp entry #9: 1.2000
+               ramp entry #10: 1.0000
+               ramp entry #11: 1.0000
+               ramp entry #12: 1.0000
+               ramp entry #13: 1.0000
+      maximum number of steps: 999999
+constant time steps threshold: 5
+       maximum number of cuts: 16
+             reduction factor: 5.000000E-01
+        maximum growth factor: 2.000000E+00
+
+FLOW Newton Solver
+                         atol: 1.000000E-50
+                         rtol: 1.000000E-08
+                         stol: 1.000000E-08
+                         dtol: 1.000000E+04
+                      maxnorm: 1.000000E+20
+                    inftolres: -9.990000E+02
+                    inftolupd: -9.990000E+02
+                 inftolrelupd: -9.990000E+02
+                 inftolsclres: -9.990000E+02
+                     max iter: 50
+                     min iter: 1
+                         maxf: 10000
+                  matrix type: baij
+         precond. matrix type: baij
+               inexact newton: off
+            print convergence: on
+   print detailed convergence: off
+          check infinity norm: on
+
+FLOW Linear Solver
+                       solver: preonly
+               preconditioner: lu
+                         atol: 1.000000E-50
+                         rtol: 1.000000E-05
+                         dtol: 1.000000E+04
+            maximum iteration: 10000
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.30E-09 2x: 0.00E+00 2u: 0.00E+00 ir: 4.58E-10 iu: 0.00E+00 rsn:   0
+  1 2r: 5.84E-14 2x: 5.66E+04 2u: 1.32E+01 ir: 4.63E-14 iu: 1.05E+01 rsn:   0
+  2 2r: 5.08E-20 2x: 5.66E+04 2u: 1.11E-03 ir: 2.71E-20 iu: 1.06E-03 rsn: rtol
+ Step      1 Time=  1.00000E+00 Dt=  1.00000E+00 [d] snes_conv_reason:    3
+  newton =   2 [       2] linear =     2 [         2] cuts =  0 [   0]
+  --> max chng: dpmx=   1.0514E+01
+
+ Wall Clock Time:  3.0328E-02 [sec]   5.0547E-04 [min]   8.4245E-06 [hr]

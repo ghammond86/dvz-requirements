@@ -1,0 +1,291 @@
+
+=================
+  PFLOTRAN v3.0
+=================
+
+ Extent of Gridded Domain
+  X: 0.50000000000000000 - 1.5000000000000000
+  Y: 0.50000000000000000 - 0.50000000000000000
+  Z: 0.50000000000000000 - 7.2500000000000000
+
+
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+  Initial Condition
+
+--------------------------------------------------------------------------------
+          Flow Condition:   initial_pressure
+                  Region:   all
+--------------------------------------------------------------------------------
+
+  Flow Condition: initial_pressure
+    Synchronize time with update: no
+    Time units: yr
+    Length units: m
+      Datum:
+
+    Sub Condition: pressure
+      Type: dirichlet
+      Gradient:
+      Data:
+        Dataset: Unnamed Ascii Dataset
+          Type: dataset_ascii_type
+          Transient: no
+          Array Rank:  1
+
+--------------------------------------------------------------------------------
+
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+  Boundary Condition
+
+--------------------------------------------------------------------------------
+          Flow Condition:   right_face
+                  Region:   cell1
+--------------------------------------------------------------------------------
+
+  Flow Condition: right_face
+    Synchronize time with update: no
+    Time units: yr
+    Length units: m
+      Datum:
+
+    Sub Condition: pressure
+      Type: dirichlet
+      Gradient:
+      Data:
+        Dataset: Unnamed Ascii Dataset
+          Type: dataset_ascii_type
+          Transient: no
+          Array Rank:  1
+
+--------------------------------------------------------------------------------
+
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+  Boundary Condition
+
+--------------------------------------------------------------------------------
+          Flow Condition:   right_face
+                  Region:   cell2
+--------------------------------------------------------------------------------
+
+  Flow Condition: right_face
+    Synchronize time with update: no
+    Time units: yr
+    Length units: m
+      Datum:
+
+    Sub Condition: pressure
+      Type: dirichlet
+      Gradient:
+      Data:
+        Dataset: Unnamed Ascii Dataset
+          Type: dataset_ascii_type
+          Transient: no
+          Array Rank:  1
+
+--------------------------------------------------------------------------------
+
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+  Boundary Condition
+
+--------------------------------------------------------------------------------
+          Flow Condition:   right_face
+                  Region:   cell3
+--------------------------------------------------------------------------------
+
+  Flow Condition: right_face
+    Synchronize time with update: no
+    Time units: yr
+    Length units: m
+      Datum:
+
+    Sub Condition: pressure
+      Type: dirichlet
+      Gradient:
+      Data:
+        Dataset: Unnamed Ascii Dataset
+          Type: dataset_ascii_type
+          Transient: no
+          Array Rank:  1
+
+--------------------------------------------------------------------------------
+
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+  Boundary Condition
+
+--------------------------------------------------------------------------------
+          Flow Condition:   right_face
+                  Region:   cell4
+--------------------------------------------------------------------------------
+
+  Flow Condition: right_face
+    Synchronize time with update: no
+    Time units: yr
+    Length units: m
+      Datum:
+
+    Sub Condition: pressure
+      Type: dirichlet
+      Gradient:
+      Data:
+        Dataset: Unnamed Ascii Dataset
+          Type: dataset_ascii_type
+          Transient: no
+          Array Rank:  1
+
+--------------------------------------------------------------------------------
+
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+  Source Sink
+
+--------------------------------------------------------------------------------
+          Flow Condition:   injector
+                  Region:   injector
+--------------------------------------------------------------------------------
+
+  Flow Condition: injector
+    Synchronize time with update: no
+    Time units: yr
+    Length units: m
+      Datum:
+
+    Sub Condition: rate
+      Type: scaled mass rate
+      Gradient:
+      Data:
+        Dataset: Unnamed Ascii Dataset
+          Type: dataset_ascii_type
+          Transient: no
+          Array Rank:  1
+
+--------------------------------------------------------------------------------
+
+ Requested processors =     1
+
+FLOW Time Stepper
+                 acceleration: on
+       acceleration threshold: 5
+       number of ramp entries: 5
+                ramp entry #1: 2.0000
+                ramp entry #2: 2.0000
+                ramp entry #3: 2.0000
+                ramp entry #4: 2.0000
+                ramp entry #5: 2.0000
+                ramp entry #6: 1.8000
+                ramp entry #7: 1.6000
+                ramp entry #8: 1.4000
+                ramp entry #9: 1.2000
+               ramp entry #10: 1.0000
+               ramp entry #11: 1.0000
+               ramp entry #12: 1.0000
+               ramp entry #13: 1.0000
+      maximum number of steps: 999999
+constant time steps threshold: 5
+       maximum number of cuts: 16
+             reduction factor: 5.000000E-01
+        maximum growth factor: 2.000000E+00
+
+FLOW Newton Solver
+                         atol: 1.000000E-50
+                         rtol: 1.000000E-08
+                         stol: 1.000000E-08
+                         dtol: 1.000000E+04
+                      maxnorm: 1.000000E+20
+                    inftolres: -9.990000E+02
+                    inftolupd: -9.990000E+02
+                 inftolrelupd: -9.990000E+02
+                 inftolsclres: -9.990000E+02
+                     max iter: 50
+                     min iter: 1
+                         maxf: 10000
+                  matrix type: baij
+         precond. matrix type: baij
+               inexact newton: off
+            print convergence: on
+   print detailed convergence: off
+          check infinity norm: on
+
+FLOW Linear Solver
+                       solver: preonly
+               preconditioner: lu
+                         atol: 1.000000E-50
+                         rtol: 1.000000E-05
+                         dtol: 1.000000E+04
+            maximum iteration: 10000
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 3.41E-08 2x: 0.00E+00 2u: 0.00E+00 ir: 2.96E-08 iu: 0.00E+00 rsn:   0
+  1 2r: 4.34E-19 2x: 2.87E+05 2u: 5.75E+01 ir: 3.76E-19 iu: 2.03E+01 rsn: rtol
+ Step      1 Time=  1.00000E-01 Dt=  1.00000E-01 [d] snes_conv_reason:    3
+  newton =   1 [       1] linear =     1 [         1] cuts =  0 [   0]
+  --> max chng: dpmx=   2.0340E+01
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 4.34E-19 2x: 0.00E+00 2u: 0.00E+00 ir: 3.76E-19 iu: 0.00E+00 rsn:   0
+  1 2r: 5.66E-19 2x: 2.87E+05 2u: 7.31E-10 ir: 4.91E-19 iu: 2.59E-10 rsn: stol
+ Step      2 Time=  2.00000E-01 Dt=  1.00000E-01 [d] snes_conv_reason:    4
+  newton =   1 [       2] linear =     1 [         2] cuts =  0 [   0]
+  --> max chng: dpmx=   2.6193E-10
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 5.66E-19 2x: 0.00E+00 2u: 0.00E+00 ir: 4.91E-19 iu: 0.00E+00 rsn:   0
+  1 2r: 4.34E-19 2x: 2.87E+05 2u: 9.54E-10 ir: 3.76E-19 iu: 3.37E-10 rsn: stol
+ Step      3 Time=  3.00000E-01 Dt=  1.00000E-01 [d] snes_conv_reason:    4
+  newton =   1 [       3] linear =     1 [         3] cuts =  0 [   0]
+  --> max chng: dpmx=   3.3469E-10
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 4.34E-19 2x: 0.00E+00 2u: 0.00E+00 ir: 3.76E-19 iu: 0.00E+00 rsn:   0
+  1 2r: 5.66E-19 2x: 2.87E+05 2u: 7.31E-10 ir: 4.91E-19 iu: 2.59E-10 rsn: stol
+ Step      4 Time=  4.00000E-01 Dt=  1.00000E-01 [d] snes_conv_reason:    4
+  newton =   1 [       4] linear =     1 [         4] cuts =  0 [   0]
+  --> max chng: dpmx=   2.6193E-10
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 5.66E-19 2x: 0.00E+00 2u: 0.00E+00 ir: 4.91E-19 iu: 0.00E+00 rsn:   0
+  1 2r: 4.34E-19 2x: 2.87E+05 2u: 9.54E-10 ir: 3.76E-19 iu: 3.37E-10 rsn: stol
+ Step      5 Time=  5.00000E-01 Dt=  1.00000E-01 [d] snes_conv_reason:    4
+  newton =   1 [       5] linear =     1 [         5] cuts =  0 [   0]
+  --> max chng: dpmx=   3.3469E-10
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 4.34E-19 2x: 0.00E+00 2u: 0.00E+00 ir: 3.76E-19 iu: 0.00E+00 rsn:   0
+  1 2r: 5.66E-19 2x: 2.87E+05 2u: 7.31E-10 ir: 4.91E-19 iu: 2.59E-10 rsn: stol
+ Step      6 Time=  6.00000E-01 Dt=  1.00000E-01 [d] snes_conv_reason:    4
+  newton =   1 [       6] linear =     1 [         6] cuts =  0 [   0]
+  --> max chng: dpmx=   2.6193E-10
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 5.66E-19 2x: 0.00E+00 2u: 0.00E+00 ir: 4.91E-19 iu: 0.00E+00 rsn:   0
+  1 2r: 4.34E-19 2x: 2.87E+05 2u: 9.54E-10 ir: 3.76E-19 iu: 3.37E-10 rsn: stol
+ Step      7 Time=  7.00000E-01 Dt=  1.00000E-01 [d] snes_conv_reason:    4
+  newton =   1 [       7] linear =     1 [         7] cuts =  0 [   0]
+  --> max chng: dpmx=   3.3469E-10
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 4.34E-19 2x: 0.00E+00 2u: 0.00E+00 ir: 3.76E-19 iu: 0.00E+00 rsn:   0
+  1 2r: 5.66E-19 2x: 2.87E+05 2u: 7.31E-10 ir: 4.91E-19 iu: 2.59E-10 rsn: stol
+ Step      8 Time=  8.00000E-01 Dt=  1.00000E-01 [d] snes_conv_reason:    4
+  newton =   1 [       8] linear =     1 [         8] cuts =  0 [   0]
+  --> max chng: dpmx=   2.6193E-10
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 5.66E-19 2x: 0.00E+00 2u: 0.00E+00 ir: 4.91E-19 iu: 0.00E+00 rsn:   0
+  1 2r: 4.34E-19 2x: 2.87E+05 2u: 9.54E-10 ir: 3.76E-19 iu: 3.37E-10 rsn: stol
+ Step      9 Time=  9.00000E-01 Dt=  1.00000E-01 [d] snes_conv_reason:    4
+  newton =   1 [       9] linear =     1 [         9] cuts =  0 [   0]
+  --> max chng: dpmx=   3.3469E-10
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 4.34E-19 2x: 0.00E+00 2u: 0.00E+00 ir: 3.76E-19 iu: 0.00E+00 rsn:   0
+  1 2r: 4.34E-19 2x: 2.87E+05 2u: 7.31E-10 ir: 3.76E-19 iu: 2.59E-10 rsn: stol
+ Step     10 Time=  1.00000E+00 Dt=  1.00000E-01 [d] snes_conv_reason:    4
+  newton =   1 [      10] linear =     1 [        10] cuts =  0 [   0]
+  --> max chng: dpmx=   2.6193E-10
+
+ Wall Clock Time:  2.0993E-02 [sec]   3.4988E-04 [min]   5.8314E-06 [hr]

@@ -1,0 +1,155 @@
+#Description: 3D transient Neunann BCs - variably saturated
+
+SIMULATION
+  SIMULATION_TYPE SUBSURFACE
+  PROCESS_MODELS
+    SUBSURFACE_FLOW flow
+      MODE RICHARDS
+    /
+  /
+END
+
+SUBSURFACE
+
+#=========================== numerical methods ================================
+NUMERICAL_METHODS FLOW
+
+  LINEAR_SOLVER
+    SOLVER DIRECT
+  /
+
+END
+
+#=========================== solver options ===================================
+
+#=========================== discretization ===================================
+GRID
+  TYPE STRUCTURED
+  NXYZ 16 16 16
+  DXYZ
+    1.0
+    1.0
+    1.0
+  /
+END
+
+#=========================== data sets ========================================
+DATASET perm_field
+  FILENAME ./parameters.h5
+  HDF5_DATASET_NAME Permeability
+END
+
+DATASET poro_field
+  FILENAME ./parameters.h5
+  HDF5_DATASET_NAME Porosity
+END
+
+#=========================== material properties ==============================
+MATERIAL_PROPERTY soil1
+  ID 1
+  POROSITY DATASET poro_field
+  ROCK_DENSITY 2000.0
+  SOIL_COMPRESSIBILITY_FUNCTION DEFAULT ! LEIJNSE
+  SOIL_COMPRESSIBILITY 1.d-8
+  SOIL_REFERENCE_PRESSURE 20000.d0
+  CHARACTERISTIC_CURVES cc1
+  PERMEABILITY 
+    DATASET perm_field
+  /
+END
+
+#=========================== characteristic curves ============================
+
+CHARACTERISTIC_CURVES cc1
+  SATURATION_FUNCTION VAN_GENUCHTEN
+    ALPHA 3.7073013e-4
+    M 0.3872549
+    LIQUID_RESIDUAL_SATURATION 0.2806d0
+  /
+  PERMEABILITY_FUNCTION MUALEM_VG_LIQ
+    M 0.3872549
+    LIQUID_RESIDUAL_SATURATION 0.2806d0
+  /
+END
+
+#=========================== eos ==============================================
+# EOS WATER
+#  DENSITY EXPONENTIAL 1000.0 0 1E-4
+#  VISCOSITY CONSTANT 0.000864 Pa-s
+# END
+
+#=========================== output options ===================================
+OUTPUT
+  SNAPSHOT_FILE
+    FORMAT HDF5
+	FORMAT TECPLOT BLOCK
+    PERIODIC TIME 50.0 day
+	VARIABLES
+	  POROSITY
+	  PERMEABILITY
+	  LIQUID_SATURATION
+	  LIQUID_PRESSURE
+	/
+  /
+END
+
+#=========================== times ============================================
+TIME
+  FINAL_TIME 50. d
+  INITIAL_TIMESTEP_SIZE 1.d-3 d
+  #MAXIMUM_TIMESTEP_SIZE 0.1 d
+  MAXIMUM_TIMESTEP_SIZE 1.0 d
+END
+
+#=========================== regions ==========================================
+REGION all
+  COORDINATES
+    0.0 0.0 0.0
+    16.0 16.0 16.0
+  /
+END
+
+REGION top_inf
+  FACE TOP
+  COORDINATES
+    6.5 6.5 16.0
+    9.5 9.5 16.0
+  /
+END
+
+
+#=========================== flow conditions ==================================
+FLOW_CONDITION initial_pressure
+  TYPE
+    PRESSURE DIRICHLET
+  /
+  PRESSURE 20000.d0 Pa
+END
+
+FLOW_CONDITION influx
+  TYPE
+    FLUX NEUMANN
+  /
+  FLUX 0.1 m/day
+END
+
+#=========================== condition couplers ===============================
+# initial condition
+INITIAL_CONDITION
+  FLOW_CONDITION initial_pressure
+  REGION all
+END
+
+BOUNDARY_CONDITION influx
+  FLOW_CONDITION influx
+  REGION top_inf
+END
+
+
+#=========================== stratigraphy couplers ============================
+STRATA
+  REGION all
+  MATERIAL soil1
+END
+
+END_SUBSURFACE

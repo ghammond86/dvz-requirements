@@ -1,0 +1,210 @@
+#Description: 2D problem to test inactive cells and hydrostatic BC
+
+SIMULATION
+  SIMULATION_TYPE SUBSURFACE
+  PROCESS_MODELS
+    SUBSURFACE_FLOW flow
+      MODE RICHARDS
+    /
+  /
+END
+
+SUBSURFACE
+
+#=========================== numerical methods ================================
+NUMERICAL_METHODS FLOW
+
+  LINEAR_SOLVER
+    SOLVER DIRECT
+  /
+END
+
+#=========================== solver options ===================================
+
+#=========================== discretization ===================================
+GRID
+  TYPE STRUCTURED
+  NXYZ 12 1 12
+  BOUNDS
+    -1.0 0.0 -1.0
+    11.0 1.0 11.0
+  /
+END
+
+#=========================== material properties ==============================
+MATERIAL_PROPERTY soil1
+  ID 1
+  POROSITY 0.25
+  ROCK_DENSITY 2500.0
+  SOIL_COMPRESSIBILITY_FUNCTION DEFAULT ! LEIJNSE
+  SOIL_COMPRESSIBILITY 1.d-8
+  SOIL_REFERENCE_PRESSURE 101325.d0
+  PERMEABILITY
+    PERM_ISO 1e-12
+  /
+  CHARACTERISTIC_CURVES cc1
+END
+
+
+#=========================== characteristic curves ============================
+CHARACTERISTIC_CURVES cc1
+  SATURATION_FUNCTION VAN_GENUCHTEN
+    ALPHA 1.d-4
+    M 0.5d0
+    LIQUID_RESIDUAL_SATURATION 0.1d0
+  /
+  PERMEABILITY_FUNCTION MUALEM_VG_LIQ
+    M 0.5d0
+    LIQUID_RESIDUAL_SATURATION 0.1d0
+  /
+END
+
+#=========================== eos ==============================================
+EOS WATER
+ DENSITY CONSTANT 1000.0
+ VISCOSITY CONSTANT 0.001017 Pa-s
+END
+
+#=========================== output options ===================================
+OUTPUT
+  SNAPSHOT_FILE
+    FORMAT HDF5
+	FORMAT TECPLOT BLOCK
+    TIMES d 0.0 100.0
+  /
+END
+
+#=========================== times ============================================
+TIME
+  FINAL_TIME 100.0 d
+  INITIAL_TIMESTEP_SIZE 0.0001 d
+  MAXIMUM_TIMESTEP_SIZE 5.0 d
+END
+
+#=========================== regions ==========================================
+REGION all
+  COORDINATES
+    -1.0 0.0 -1.0
+    11.0 1.0 11.0
+  /
+END
+
+REGION right_face
+  FACE EAST
+  COORDINATES
+    10.0 0.0 0.0
+    10.0 1.0 10.0
+  /
+END
+
+REGION left_face
+  FACE WEST
+  COORDINATES
+    0.0 0.0 0.0
+    0.0 1.0 10.0
+  /
+END
+
+REGION inactive_bottom
+  COORDINATES
+    -1.0 0.0 -1.0
+    11.0 1.0 0.0
+  /
+END
+
+REGION inactive_top
+  COORDINATES
+    -1.0 0.0 10.0
+    11.0 1.0 11.0
+  /
+END
+
+REGION inactive_left
+  COORDINATES
+    -1.0 0.0 -1.0
+    0.0 1.0 11.0
+  /
+END
+
+REGION inactive_right
+  COORDINATES
+    10.0 0.0 -1.0
+    11.0 1.0 11.0
+  /
+END
+
+#=========================== flow conditions ==================================
+FLOW_CONDITION initial_pressure
+  TYPE
+    PRESSURE HYDROSTATIC
+  /
+  DATUM 0.d0 0.d0 2.0
+  GRADIENT
+      PRESSURE 0.2 0.d0 0.d0
+    /
+  PRESSURE 101325.d0
+END
+
+FLOW_CONDITION left_face
+  TYPE
+    PRESSURE HYDROSTATIC
+  /
+  DATUM 0.d0 0.d0 10.0
+  PRESSURE 101325.d0
+END
+
+FLOW_CONDITION right_face
+  TYPE
+    PRESSURE HYDROSTATIC
+  /
+  DATUM 0.d0 0.d0 12.0d0
+  PRESSURE 101325.d0
+END
+
+#=========================== condition couplers ===============================
+INITIAL_CONDITION
+  FLOW_CONDITION initial_pressure
+  REGION all
+END
+
+BOUNDARY_CONDITION right_face
+  FLOW_CONDITION right_face
+  REGION right_face
+END
+
+BOUNDARY_CONDITION left_face
+  FLOW_CONDITION left_face
+  REGION left_face
+END
+
+#=========================== stratigraphy couplers ============================
+STRATA
+  REGION all
+  MATERIAL soil1
+END
+
+STRATA
+  REGION inactive_top
+  MATERIAL soil1
+  INACTIVE
+END
+
+STRATA
+  REGION inactive_bottom
+  MATERIAL soil1
+  INACTIVE
+END
+
+STRATA
+  REGION inactive_left
+  MATERIAL soil1
+  INACTIVE
+END
+
+STRATA
+  REGION inactive_right
+  MATERIAL soil1
+  INACTIVE
+END
+
+END_SUBSURFACE

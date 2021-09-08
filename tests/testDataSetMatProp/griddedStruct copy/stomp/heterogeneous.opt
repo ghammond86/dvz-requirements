@@ -1,0 +1,11 @@
+[output_options]
+times = 50.0 d
+variables = Liquid Saturation
+plot_time_units = d
+plot_dimension = 3D
+plot_title = STOMP vs. PFLOTRAN solution
+plot_x_label = Distance X [m]
+plot_y_label = Distance Y [m]
+plot_type = time slice
+print_error = True
+plot_error = True

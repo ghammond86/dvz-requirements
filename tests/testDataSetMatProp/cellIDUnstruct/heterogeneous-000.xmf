@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<!DOCTYPE Xdmf SYSTEM "Xdmf.dtd" []>
+<Xdmf>
+  <Domain>
+    <Grid Name="Mesh">
+      <Time Value = "0.00000E+00" />
+      <Topology Type="Mixed" NumberOfElements="4096">
+        <DataItem Format="HDF" DataType="Int" Dimensions="36864">
+          heterogeneous.h5:/Domain/Cells
+        </DataItem>
+      </Topology>
+      <Geometry GeometryType="XYZ">
+        <DataItem Format="HDF" Dimensions="4913 3">
+          heterogeneous.h5:/Domain/Vertices
+        </DataItem>
+      </Geometry>
+      <Attribute Name="XC" AttributeType="Scalar"  Center="Cell">
+        <DataItem Dimensions="4096 1" Format="HDF">
+          heterogeneous.h5:/Domain/XC
+        </DataItem>
+      </Attribute>
+      <Attribute Name="YC" AttributeType="Scalar"  Center="Cell">
+        <DataItem Dimensions="4096 1" Format="HDF">
+          heterogeneous.h5:/Domain/YC
+        </DataItem>
+      </Attribute>
+      <Attribute Name="ZC" AttributeType="Scalar"  Center="Cell">
+        <DataItem Dimensions="4096 1" Format="HDF">
+          heterogeneous.h5:/Domain/ZC
+        </DataItem>
+      </Attribute>
+      <Attribute Name="Porosity" AttributeType="Scalar"  Center="Cell">
+        <DataItem Dimensions="4096 1" Format="HDF">
+        heterogeneous.h5:/   0 Time  0.00000E+00 d/Porosity
+        </DataItem>
+      </Attribute>
+      <Attribute Name="Permeability X [m^2]" AttributeType="Scalar"  Center="Cell">
+        <DataItem Dimensions="4096 1" Format="HDF">
+        heterogeneous.h5:/   0 Time  0.00000E+00 d/Permeability X [m^2]
+        </DataItem>
+      </Attribute>
+      <Attribute Name="Liquid Saturation" AttributeType="Scalar"  Center="Cell">
+        <DataItem Dimensions="4096 1" Format="HDF">
+        heterogeneous.h5:/   0 Time  0.00000E+00 d/Liquid Saturation
+        </DataItem>
+      </Attribute>
+      <Attribute Name="Liquid Pressure [Pa]" AttributeType="Scalar"  Center="Cell">
+        <DataItem Dimensions="4096 1" Format="HDF">
+        heterogeneous.h5:/   0 Time  0.00000E+00 d/Liquid Pressure [Pa]
+        </DataItem>
+      </Attribute>
+      <Attribute Name="Material ID" AttributeType="Scalar"  Center="Cell">
+        <DataItem Dimensions="4096 1" Format="HDF">
+        heterogeneous.h5:/   0 Time  0.00000E+00 d/Material ID
+        </DataItem>
+      </Attribute>
+    </Grid>
+  </Domain>
+</Xdmf>

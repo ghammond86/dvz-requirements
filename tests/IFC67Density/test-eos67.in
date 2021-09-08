@@ -1,0 +1,140 @@
+#Description: 3D transient Neunann BCs - variably saturated
+
+SIMULATION
+  SIMULATION_TYPE SUBSURFACE
+  PROCESS_MODELS
+    SUBSURFACE_FLOW flow
+      MODE TH
+    /
+  /
+END
+
+SUBSURFACE
+
+#=========================== numerical methods ================================
+NUMERICAL_METHODS FLOW
+
+  LINEAR_SOLVER
+    SOLVER DIRECT
+  /
+
+END
+
+#=========================== solver options ===================================
+
+#=========================== discretization ===================================
+GRID
+  TYPE STRUCTURED
+  NXYZ 5 5 1
+  DXYZ
+    1.0
+    1.0
+    1.0
+  /
+END
+
+#=========================== data sets ========================================
+DATASET pressure
+  FILENAME ./pres_temp.h5
+  HDF5_DATASET_NAME pressure
+END
+
+DATASET temperature
+  FILENAME ./pres_temp.h5
+  HDF5_DATASET_NAME temperature
+END
+
+#=========================== material properties ==============================
+MATERIAL_PROPERTY soil1
+  ID 1
+  POROSITY 0.25
+  ROCK_DENSITY 2000.0
+  SOIL_COMPRESSIBILITY_FUNCTION DEFAULT ! LEIJNSE
+  SOIL_COMPRESSIBILITY 1.d-8
+  SOIL_REFERENCE_PRESSURE 101325.d0
+  HEAT_CAPACITY 100. J/kg-C
+  THERMAL_CONDUCTIVITY_DRY 0.5787037 W/m-C
+  THERMAL_CONDUCTIVITY_WET 0.5787037 W/m-C
+  CHARACTERISTIC_CURVES cc1
+  PERMEABILITY 
+    PERM_ISO 1.d-12
+  /
+END
+
+#=========================== characteristic curves ============================
+
+CHARACTERISTIC_CURVES cc1
+  SATURATION_FUNCTION VAN_GENUCHTEN
+    ALPHA 3.7073013e-4
+    M 0.3872549
+    LIQUID_RESIDUAL_SATURATION 0.2806d0
+  /
+  PERMEABILITY_FUNCTION MUALEM_VG_LIQ
+    M 0.3872549
+    LIQUID_RESIDUAL_SATURATION 0.2806d0
+  /
+END
+
+#=========================== eos ==============================================
+EOS WATER
+ DENSITY DEFAULT
+ VISCOSITY DEFAULT
+END
+
+#=========================== output options ===================================
+OUTPUT
+  SNAPSHOT_FILE
+    FORMAT HDF5
+	FORMAT TECPLOT BLOCK
+    PERIODIC TIME 1.0 day
+	VARIABLES
+	  LIQUID_SATURATION
+	  LIQUID_PRESSURE
+	  LIQUID_DENSITY
+	  TEMPERATURE
+	/
+  /
+END
+
+#=========================== times ============================================
+TIME
+  FINAL_TIME 1. d
+  INITIAL_TIMESTEP_SIZE 1. d
+  MAXIMUM_TIMESTEP_SIZE 1.0 d
+END
+
+#=========================== regions ==========================================
+REGION all
+  COORDINATES
+    0.0 0.0 0.0
+    16.0 16.0 16.0
+  /
+END
+
+
+#=========================== flow conditions ==================================
+FLOW_CONDITION initial
+  TYPE
+    PRESSURE DIRICHLET
+	TEMPERATURE DIRICHLET
+  /
+  PRESSURE DATASET pressure
+  TEMPERATURE DATASET temperature
+END
+
+
+#=========================== condition couplers ===============================
+# initial condition
+INITIAL_CONDITION
+  FLOW_CONDITION initial
+  REGION all
+END
+
+
+#=========================== stratigraphy couplers ============================
+STRATA
+  REGION all
+  MATERIAL soil1
+END
+
+END_SUBSURFACE

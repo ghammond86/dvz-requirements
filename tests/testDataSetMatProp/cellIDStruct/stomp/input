@@ -1,0 +1,110 @@
+#-------------------------------------------------------
+~Simulation Title Card
+#-------------------------------------------------------
+1,
+Heterogeneous problem,
+Julia Camargo,
+PNNL,
+June 07 2021,
+15:00,
+1,
+Unsaturated vertical flow in 3D heterogenous domain with correlated random permeability field,
+
+#-------------------------------------------------------
+~Solution Control Card
+#-------------------------------------------------------
+! Initialization type
+Normal,
+! Run mode
+STOMP-W,
+1,
+!t_i,        t_f,      dt_i,         dt_max,  dt_increase_fac,  newt_it_max,  resid_tol,  dt_min,     dt_decrease_fac,
+0,s,         50.,d,      5.0e-1,d,      1.0,d,    2.0,             10,          1.e-6,       1.0e-1,d,     0.5,
+! num_steps_max
+100000,
+! Number interfacial averaging variables
+0,
+
+#-------------------------------------------------------
+~Grid Card
+#-------------------------------------------------------
+Uniform Cartesian,
+!nx,   ny,   nz
+16,   16,    16,
+1.0,m,
+1.0,m,
+1.0,m,
+
+#-------------------------------------------------------
+~Rock/Soil Zonation Card
+#-------------------------------------------------------
+IJK Indexing,
+
+#-------------------------------------------------------
+~Mechanical Properties Card
+#-------------------------------------------------------
+! rock_type,   dens_grain,    poro_total,          poro_diff,            compress_model,         compress_bulk,  pres_ref,
+IJK Indexing,  2000, kg/m^3, file:porosity.dat,   file:porosity.dat,    Bulk Compressibility,       1e-8,1/Pa,       20000.,Pa,
+
+#-------------------------------------------------------
+~Hydraulic Properties Card
+#-------------------------------------------------------
+!  rock_type, perm_x,             perm_y,             perm_z
+IJK Indexing, file:permeability.dat, m^2, file:permeability.dat, m^2,  file:permeability.dat, m^2,
+
+#-------------------------------------------------------
+~Saturation Function Card
+#-------------------------------------------------------
+!!! ! function,         alpha,     n_exponent, min saturation,    m, 
+IJK Indexing,Van Genuchten,    3.63,1/m,  1.632,       0.2806,             0.3872549,
+
+#-------------------------------------------------------
+~Aqueous Relative Permeability Card
+#-------------------------------------------------------
+IJK Indexing,Mualem,,
+
+#-------------------------------------------------------
+~Initial Conditions Card
+#-------------------------------------------------------
+Aqueous Pressure,Gas Pressure, 
+! Number of Initial Conditions
+1,
+! Name,           Ref P_aq, units,  X-Direction Gradient,Units(1/m),Y-Direction Gradient,Units(1/m),Z-Direction Gradient,Units(1/m),I Start,I End,J Start,J End,K Start,K End,
+Aqueous Pressure,20000.0,Pa,,,,,,,1,16,1,16,1,16,
+
+#-------------------------------------------------------
+~Boundary Conditions Card
+#-------------------------------------------------------
+!Number BCs
+1,
+!surface orientation, BC keyword
+top,Neumann,
+! I Start,I End,J Start,J End,K Start,K End, Number of time periods
+8,9,8,9,16,16,1,
+!Time,Units(s),Volumetric Aqueous Flux,Units(m^3/s),
+0,d,           -0.1,m/d,
+
+#-------------------------------------------------------
+~Output Options Card
+#-------------------------------------------------------
+! num_output_reference_nodes
+1,
+! reference_node_indices
+1,1,1,
+! screen_output_freqency, file_output_frequency, time_units, length_units, screen_output_sig_figs, output_file_sig_figs, plot_file_sig_figs,
+1,1,d,m,6,6,6,
+! num_output_file_variables
+2,
+aqueous saturation,,
+aqueous pressure,Pa,
+! num_plot_file_times
+1,
+! plot_file_times
+50.,d,
+6,
+no restart,,
+aqueous saturation,,
+aqueous pressure,Pa,
+aqueous density,kg/m^3,
+aqueous viscosity,,
+diffusive porosity,,

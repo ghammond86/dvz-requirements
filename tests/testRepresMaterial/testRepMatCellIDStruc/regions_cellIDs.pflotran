@@ -1,0 +1,146 @@
+#Description: Testing prescription of regions with coordinates
+
+SIMULATION
+  SIMULATION_TYPE SUBSURFACE
+  PROCESS_MODELS
+    SUBSURFACE_FLOW flow
+      MODE RICHARDS
+    /
+  /
+END
+
+SUBSURFACE
+
+#=========================== numerical methods ================================
+NUMERICAL_METHODS FLOW
+
+  LINEAR_SOLVER
+    SOLVER DIRECT
+  /
+  TIMESTEPPER
+    MAXIMUM_NUMBER_OF_TIMESTEPS 0
+  /
+END
+
+#=========================== solver options ===================================
+
+#=========================== discretization ===================================
+GRID
+  TYPE STRUCTURED
+  NXYZ 2 2 2
+  DXYZ
+    1.0
+    1.0
+    1.0
+  /
+END
+
+#=========================== material properties ==============================
+MATERIAL_PROPERTY soil1
+  ID 1
+  POROSITY 0.368
+  ROCK_DENSITY 2000.0
+  SOIL_COMPRESSIBILITY_FUNCTION DEFAULT ! LEIJNSE
+  SOIL_COMPRESSIBILITY 1.d-8
+  SOIL_REFERENCE_PRESSURE 0.d0
+  PERMEABILITY
+    PERM_ISO 9.5129051e-12
+  /
+  CHARACTERISTIC_CURVES cc1
+END
+
+MATERIAL_PROPERTY soil2
+  ID 2
+  POROSITY 0.351
+  ROCK_DENSITY 2000.0
+  SOIL_COMPRESSIBILITY_FUNCTION DEFAULT ! LEIJNSE
+  SOIL_COMPRESSIBILITY 1.d-8
+  SOIL_REFERENCE_PRESSURE 0.d0
+  PERMEABILITY
+    PERM_ISO 5.6591028e-12
+  /
+  CHARACTERISTIC_CURVES cc2
+END
+
+
+#=========================== characteristic curves ============================
+CHARACTERISTIC_CURVES cc1
+  SATURATION_FUNCTION VAN_GENUCHTEN
+    ALPHA 3.41112575e-4
+    M 0.495459132d0
+    LIQUID_RESIDUAL_SATURATION 0.2771d0
+  /
+  PERMEABILITY_FUNCTION MUALEM_VG_LIQ
+    M 0.495459132d0
+    LIQUID_RESIDUAL_SATURATION 0.2771d0
+  /
+END
+
+CHARACTERISTIC_CURVES cc2
+  SATURATION_FUNCTION VAN_GENUCHTEN
+    ALPHA 3.7073013e-4
+    M 0.3872549
+    LIQUID_RESIDUAL_SATURATION 0.2806d0
+  /
+  PERMEABILITY_FUNCTION MUALEM_VG_LIQ
+    M 0.3872549
+    LIQUID_RESIDUAL_SATURATION 0.2806d0
+  /
+END
+
+#=========================== eos ==============================================
+
+#=========================== output options ===================================
+OUTPUT
+  SNAPSHOT_FILE
+    FORMAT HDF5
+	FORMAT TECPLOT BLOCK
+    PERIODIC TIME 8.0 day
+  /
+END
+
+#=========================== times ============================================
+TIME
+  FINAL_TIME 8.0 d
+  INITIAL_TIMESTEP_SIZE 1.d-1 d
+  MAXIMUM_TIMESTEP_SIZE 1.0 d
+END
+
+#=========================== regions ==========================================
+  REGION all
+    FILE ./cellID_region_cube.h5
+  END
+
+  REGION bottom_cells 
+    FILE ./cellID_region_cube.h5
+  END
+
+#=========================== flow conditions ==================================
+FLOW_CONDITION initial_pressure
+  TYPE
+    PRESSURE DIRICHLET
+  /
+  PRESSURE 0.0 Pa
+END
+
+#=========================== condition couplers ===============================
+# initial condition
+INITIAL_CONDITION
+  FLOW_CONDITION initial_pressure
+  REGION all
+END
+
+
+
+#=========================== stratigraphy couplers ============================
+STRATA
+  REGION all
+  MATERIAL soil1
+END
+
+STRATA
+  REGION bottom_cells 
+  MATERIAL soil2
+END
+
+END_SUBSURFACE

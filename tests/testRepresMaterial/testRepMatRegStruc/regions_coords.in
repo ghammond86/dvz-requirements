@@ -1,0 +1,252 @@
+#Description: Testing prescription of regions with coordinates
+
+SIMULATION
+  SIMULATION_TYPE SUBSURFACE
+  PROCESS_MODELS
+    SUBSURFACE_FLOW flow
+      MODE RICHARDS
+    /
+  /
+END
+
+SUBSURFACE
+
+#=========================== numerical methods ================================
+NUMERICAL_METHODS FLOW
+
+  LINEAR_SOLVER
+    SOLVER DIRECT
+  /
+  TIMESTEPPER
+    MAXIMUM_NUMBER_OF_TIMESTEPS 0
+  /
+END
+
+#=========================== solver options ===================================
+
+#=========================== discretization ===================================
+GRID
+  TYPE STRUCTURED
+  NXYZ 80 1 65
+  BOUNDS
+    0.0 0.0 0.0
+    8.0 1.0 6.5
+  /
+END
+
+#=========================== material properties ==============================
+MATERIAL_PROPERTY soil1
+  ID 1
+  POROSITY 0.368
+  ROCK_DENSITY 2000.0
+  SOIL_COMPRESSIBILITY_FUNCTION DEFAULT ! LEIJNSE
+  SOIL_COMPRESSIBILITY 1.d-8
+  SOIL_REFERENCE_PRESSURE 0.d0
+  PERMEABILITY
+    PERM_ISO 9.5129051e-12
+  /
+  CHARACTERISTIC_CURVES cc1
+END
+
+MATERIAL_PROPERTY soil2
+  ID 2
+  POROSITY 0.351
+  ROCK_DENSITY 2000.0
+  SOIL_COMPRESSIBILITY_FUNCTION DEFAULT ! LEIJNSE
+  SOIL_COMPRESSIBILITY 1.d-8
+  SOIL_REFERENCE_PRESSURE 0.d0
+  PERMEABILITY
+    PERM_ISO 5.6591028e-12
+  /
+  CHARACTERISTIC_CURVES cc2
+END
+
+MATERIAL_PROPERTY soil3
+  ID 3
+  POROSITY 0.325
+  ROCK_DENSITY 2000.0  
+  SOIL_COMPRESSIBILITY_FUNCTION DEFAULT ! LEIJNSE
+  SOIL_COMPRESSIBILITY 1.d-8
+  SOIL_REFERENCE_PRESSURE 0.d0
+  PERMEABILITY
+    PERM_ISO 4.9939374e-12
+  /
+  CHARACTERISTIC_CURVES cc3
+END
+
+MATERIAL_PROPERTY soil4
+  ID 4
+  POROSITY 0.325
+  ROCK_DENSITY 2000.0
+  SOIL_COMPRESSIBILITY_FUNCTION DEFAULT ! LEIJNSE
+  SOIL_COMPRESSIBILITY 1.d-8
+  SOIL_REFERENCE_PRESSURE 0.d0
+  PERMEABILITY
+    PERM_ISO 4.9939374e-11
+  /
+  CHARACTERISTIC_CURVES cc4
+END
+
+
+#=========================== characteristic curves ============================
+CHARACTERISTIC_CURVES cc1
+  SATURATION_FUNCTION VAN_GENUCHTEN
+    ALPHA 3.41112575e-4
+    M 0.495459132d0
+    LIQUID_RESIDUAL_SATURATION 0.2771d0
+  /
+  PERMEABILITY_FUNCTION MUALEM_VG_LIQ
+    M 0.495459132d0
+    LIQUID_RESIDUAL_SATURATION 0.2771d0
+  /
+END
+
+CHARACTERISTIC_CURVES cc2
+  SATURATION_FUNCTION VAN_GENUCHTEN
+    ALPHA 3.7073013e-4
+    M 0.3872549
+    LIQUID_RESIDUAL_SATURATION 0.2806d0
+  /
+  PERMEABILITY_FUNCTION MUALEM_VG_LIQ
+    M 0.3872549
+    LIQUID_RESIDUAL_SATURATION 0.2806d0
+  /
+END
+
+CHARACTERISTIC_CURVES cc3
+  SATURATION_FUNCTION VAN_GENUCHTEN
+    ALPHA 3.5234682e-4
+    M 0.8d0
+    LIQUID_RESIDUAL_SATURATION 0.2643d0
+  /
+  PERMEABILITY_FUNCTION MUALEM_VG_LIQ
+    M 0.8d0
+    LIQUID_RESIDUAL_SATURATION 0.2643d0
+  /
+END
+
+CHARACTERISTIC_CURVES cc4
+  SATURATION_FUNCTION VAN_GENUCHTEN
+    ALPHA 4.5447633e-4
+    M 0.8d0
+    LIQUID_RESIDUAL_SATURATION 0.2643d0
+  /
+  PERMEABILITY_FUNCTION MUALEM_VG_LIQ
+    M 0.8d0
+    LIQUID_RESIDUAL_SATURATION 0.2643d0
+  /
+END
+
+#=========================== eos ==============================================
+
+#=========================== output options ===================================
+OUTPUT
+  SNAPSHOT_FILE
+    FORMAT HDF5
+	FORMAT TECPLOT BLOCK
+    PERIODIC TIME 8.0 day
+  /
+END
+
+#=========================== times ============================================
+TIME
+  FINAL_TIME 8.0 d
+  INITIAL_TIMESTEP_SIZE 1.d-1 d
+  #MAXIMUM_TIMESTEP_SIZE 0.1 d
+  MAXIMUM_TIMESTEP_SIZE 1.0 d
+END
+
+#=========================== regions ==========================================
+REGION all
+  COORDINATES
+    0.0 0.0 0.0
+    8.0 1.0 6.5
+  /
+END
+
+REGION top_inf
+  FACE TOP
+  COORDINATES
+    0.0 0.0 6.5
+    2.25 1.0 6.5
+  /
+END
+
+REGION 1
+  COORDINATES
+    0.0 0.0 6.1
+    8.0 1.0 6.5
+  /
+END
+
+REGION 2
+  COORDINATES
+    0.0 0.0 5.6
+    8.0 1.0 6.1
+  /
+END
+
+REGION 3
+  COORDINATES
+    0.0 0.0 0.0
+    8.0 1.0 5.6
+  /
+END
+
+REGION 4
+  COORDINATES
+    1.0 0.0 4.0
+    3.0 1.0 5.0
+  /
+END
+
+#=========================== flow conditions ==================================
+FLOW_CONDITION initial_pressure
+  TYPE
+    PRESSURE DIRICHLET
+  /
+  PRESSURE 0.0 Pa
+END
+
+FLOW_CONDITION influx
+  TYPE
+    FLUX NEUMANN
+  /
+  FLUX 0.02 m/day
+END
+
+#=========================== condition couplers ===============================
+# initial condition
+INITIAL_CONDITION
+  FLOW_CONDITION initial_pressure
+  REGION all
+END
+
+BOUNDARY_CONDITION influx
+  FLOW_CONDITION influx
+  REGION top_inf
+END
+
+
+#=========================== stratigraphy couplers ============================
+STRATA
+  REGION 1
+  MATERIAL soil1
+END
+
+STRATA
+  REGION 2
+  MATERIAL soil2
+END
+
+STRATA
+  REGION 3
+  MATERIAL soil3
+END
+
+STRATA
+  REGION 4
+  MATERIAL soil4
+END
+
+END_SUBSURFACE

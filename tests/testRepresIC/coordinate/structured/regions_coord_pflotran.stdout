@@ -1,0 +1,126 @@
+
+=================
+  PFLOTRAN v3.0
+=================
+
+ "grid_structured_type" set to default value.
+ pflotran card:: NUMERICAL_METHODS
+ pflotran card:: GRID
+ pflotran card:: MATERIAL_PROPERTY
+   Name :: soil1
+ "MATERIAL_PROPERTY,rock density units" set to default value.
+ pflotran card:: MATERIAL_PROPERTY
+   Name :: soil2
+ "MATERIAL_PROPERTY,rock density units" set to default value.
+ pflotran card:: CHARACTERISTIC_CURVES
+   Name :: cc1
+ pflotran card:: CHARACTERISTIC_CURVES
+   Name :: cc2
+ pflotran card:: OUTPUT
+ "OUTPUT,SNAPSHOT_FILE,FORMAT,HDF5" set to default value.
+ pflotran card:: TIME
+ pflotran card:: REGION
+ all
+ pflotran card:: REGION
+ 1
+ pflotran card:: REGION
+ 2
+ pflotran card:: FLOW_CONDITION
+ initial_pressure
+ pflotran card:: INITIAL_CONDITION
+ "Initial Condition name" set to default value.
+ pflotran card:: STRATA
+ pflotran card:: STRATA
+ pflotran card:: END_SUBSURFACE
+ Domain Bounds (x y z):
+     0.0000000000E+00  0.0000000000E+00  0.0000000000E+00
+     2.0000000000E+00  2.0000000000E+00  2.0000000000E+00
+ Extent of Gridded Domain
+  X: 0.0000000000000000 - 2.0000000000000000
+  Y: 0.0000000000000000 - 2.0000000000000000
+  Z: 0.0000000000000000 - 2.0000000000000000
+
+ Default HDF5 method is used in Initialization
+
+ Requested processors and decomposition =     1, npx,y,z=   -1  -1  -1
+ Actual decomposition: npx,y,z=    1   1   1
+
+   Beginning setup of FLOW SNES
+ number of dofs =   1, number of phases =   1
+ mode = Richards: p
+   Finished setting up FLOW SNES
+
+FLOW Time Stepper
+                 acceleration: on
+       acceleration threshold: 5
+       number of ramp entries: 5
+                ramp entry #1: 2.0000
+                ramp entry #2: 2.0000
+                ramp entry #3: 2.0000
+                ramp entry #4: 2.0000
+                ramp entry #5: 2.0000
+                ramp entry #6: 1.8000
+                ramp entry #7: 1.6000
+                ramp entry #8: 1.4000
+                ramp entry #9: 1.2000
+               ramp entry #10: 1.0000
+               ramp entry #11: 1.0000
+               ramp entry #12: 1.0000
+               ramp entry #13: 1.0000
+      maximum number of steps: 0
+constant time steps threshold: 5
+       maximum number of cuts: 16
+             reduction factor: 5.000000E-01
+        maximum growth factor: 2.000000E+00
+
+FLOW Newton Solver
+                         atol: 1.000000E-50
+                         rtol: 1.000000E-08
+                         stol: 1.000000E-08
+                         dtol: 1.000000E+04
+                      maxnorm: 1.000000E+20
+                    inftolres: -9.990000E+02
+                    inftolupd: -9.990000E+02
+                 inftolrelupd: -9.990000E+02
+                 inftolsclres: -9.990000E+02
+                     max iter: 50
+                     min iter: 1
+                         maxf: 10000
+                  matrix type: baij
+         precond. matrix type: baij
+               inexact newton: off
+            print convergence: on
+   print detailed convergence: off
+          check infinity norm: on
+
+FLOW Linear Solver
+                       solver: preonly
+               preconditioner: lu
+                         atol: 1.000000E-50
+                         rtol: 1.000000E-05
+                         dtol: 1.000000E+04
+            maximum iteration: 10000
+ --> creating hdf5 output file: regions_coord_pft.h5
+       0.02 Seconds to write HDF5 file.
+ --> write tecplot output file: regions_coord_pft-000.tec
+ max_local_size_saved:         8
+       0.00 Seconds to write to Tecplot file(s)
+ 
+ The maximum # of time steps (0), specified by TIMESTEPPER->MAX_STEPS, has been met.  Stopping....
+ 
+ 
+   Finished Initialization
+
+Maximum timestep exceeded.  Exiting!
+
+
+PMCSubsurfaceFlow
+ Total Time:   0.0000E+00 [sec]
+
+ FLOW TS BE steps =      0 newton =        0 linear =          0 cuts =      0
+FLOW TS BE Wasted Linear Iterations = 0
+FLOW TS BE Wasted Newton Iterations = 0
+ FLOW TS BE SNES time = 0.0 seconds
+----------
+
+ Wall Clock Time:  2.6097E-02 [sec]   4.3495E-04 [min]   7.2491E-06 [hr]

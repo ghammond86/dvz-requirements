@@ -1,0 +1,237 @@
+#Description: 1D transient - fully saturated flow problem: checking mass rate - permeability and volume scaled
+
+SIMULATION
+  SIMULATION_TYPE SUBSURFACE
+  PROCESS_MODELS
+    SUBSURFACE_FLOW flow
+      MODE RICHARDS
+    /
+  /
+END
+
+SUBSURFACE
+
+#=========================== numerical methods ================================
+NUMERICAL_METHODS FLOW
+
+  LINEAR_SOLVER
+    SOLVER DIRECT
+  /
+END
+
+#=========================== solver options ===================================
+
+#=========================== discretization ===================================
+GRID
+  TYPE UNSTRUCTURED_EXPLICIT ./irregular_1d_mesh.uge
+END
+
+#=========================== material properties ==============================
+MATERIAL_PROPERTY soil1
+  ID 1
+  POROSITY 0.25
+  ROCK_DENSITY 2500.0
+  PERMEABILITY
+    PERM_ISO 1e-14
+  /
+  CHARACTERISTIC_CURVES cc1
+END
+
+MATERIAL_PROPERTY soil2
+  ID 2
+  POROSITY 0.25
+  ROCK_DENSITY 2500.0
+  PERMEABILITY
+    PERM_ISO 2e-14
+  /
+  CHARACTERISTIC_CURVES cc1
+END
+
+MATERIAL_PROPERTY soil3
+  ID 3
+  POROSITY 0.25
+  ROCK_DENSITY 2500.0
+  PERMEABILITY
+    PERM_ISO 4e-14
+  /
+  CHARACTERISTIC_CURVES cc1
+END
+
+MATERIAL_PROPERTY soil4
+  ID 4
+  POROSITY 0.25
+  ROCK_DENSITY 2500.0
+  PERMEABILITY
+    PERM_ISO 0.5e-14
+  /
+  CHARACTERISTIC_CURVES cc1
+END
+
+#=========================== characteristic curves ============================
+CHARACTERISTIC_CURVES cc1
+  SATURATION_FUNCTION VAN_GENUCHTEN
+    ALPHA 1.d-4
+    M 0.5d0
+    LIQUID_RESIDUAL_SATURATION 0.1d0
+  /
+  PERMEABILITY_FUNCTION MUALEM_VG_LIQ
+    M 0.5d0
+    LIQUID_RESIDUAL_SATURATION 0.1d0
+  /
+END
+
+#=========================== eos ==============================================
+EOS WATER
+ DENSITY CONSTANT 1000.0
+ VISCOSITY CONSTANT 0.001017 Pa-s
+END
+
+#=========================== output options ===================================
+OUTPUT
+  MASS_BALANCE_FILE
+  	PERIODIC TIMESTEP 1
+  /
+  
+END
+
+#=========================== times ============================================
+TIME
+  FINAL_TIME 1.0 d
+  INITIAL_TIMESTEP_SIZE 0.1 d
+  MAXIMUM_TIMESTEP_SIZE 0.1 d
+END
+
+#=========================== regions ==========================================
+REGION all
+  COORDINATES
+    0.0 0.0 0.0
+    2.0 1.0 7.5
+  /
+END
+
+REGION injector
+  COORDINATES
+    0.0 0.0 0.0
+    1.0 1.0 7.5
+  /
+END
+
+REGION cell1
+	FILE cell_1_bc.ex
+END
+
+REGION cell2
+	FILE cell_2_bc.ex
+END
+
+REGION cell3
+	FILE cell_3_bc.ex
+END
+
+REGION cell4
+	FILE cell_4_bc.ex
+END
+
+REGION soil1
+    COORDINATES
+      0.0 0.0 0.0
+      2.0 1.0 1.0
+    /
+END
+
+REGION soil2
+    COORDINATES
+      0.0 0.0 1.0
+      2.0 1.0 3.0
+    /
+END
+
+REGION soil3
+    COORDINATES
+      0.0 0.0 3.0
+      2.0 1.0 7.0
+    /
+END
+
+REGION soil4
+    COORDINATES
+      0.0 0.0 7.0
+      2.0 1.0 7.5
+    /
+END
+
+#=========================== flow conditions ==================================
+FLOW_CONDITION initial_pressure
+  TYPE
+    PRESSURE DIRICHLET
+  /
+  PRESSURE 101325.0 Pa
+END
+
+FLOW_CONDITION right_face
+  TYPE
+    PRESSURE DIRICHLET
+  /
+  PRESSURE 101325.0 Pa
+END
+
+FLOW_CONDITION injector
+  TYPE
+    RATE SCALED_MASS_RATE PERM
+  / 
+  RATE 1.d-3 g/s
+END
+
+#=========================== condition couplers ===============================
+INITIAL_CONDITION
+  FLOW_CONDITION initial_pressure
+  REGION all
+END
+
+BOUNDARY_CONDITION cell1
+  FLOW_CONDITION right_face
+  REGION cell1
+END
+
+BOUNDARY_CONDITION cell2
+  FLOW_CONDITION right_face
+  REGION cell2
+END
+
+BOUNDARY_CONDITION cell3
+  FLOW_CONDITION right_face
+  REGION cell3
+END
+
+BOUNDARY_CONDITION cell4
+  FLOW_CONDITION right_face
+  REGION cell4
+END
+
+SOURCE_SINK injector
+  FLOW_CONDITION injector
+  REGION injector
+END
+
+#=========================== stratigraphy couplers ============================
+STRATA
+  REGION soil1
+  MATERIAL soil1
+END
+
+STRATA
+  REGION soil2
+  MATERIAL soil2
+END
+
+STRATA
+  REGION soil3
+  MATERIAL soil3
+END
+
+STRATA
+  REGION soil4
+  MATERIAL soil4
+END
+
+END_SUBSURFACE

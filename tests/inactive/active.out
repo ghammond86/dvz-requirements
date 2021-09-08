@@ -1,0 +1,870 @@
+
+=================
+  PFLOTRAN v3.0
+=================
+
+ Extent of Gridded Domain
+  X: 0.0000000000000000 - 10.000000000000000
+  Y: 0.0000000000000000 - 1.0000000000000000
+  Z: 0.0000000000000000 - 10.000000000000000
+
+
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+  Initial Condition
+
+--------------------------------------------------------------------------------
+          Flow Condition:   initial_pressure
+                  Region:   all
+--------------------------------------------------------------------------------
+
+  Flow Condition: initial_pressure
+    Synchronize time with update: no
+    Time units: yr
+    Length units: m
+      Datum:
+        Dataset: Unnamed Ascii Dataset
+          Type: dataset_ascii_type
+          Transient: no
+          Array Rank:  3
+
+    Sub Condition: pressure
+      Type: hydrostatic
+      Gradient:
+        Dataset: Unnamed Ascii Dataset
+          Type: dataset_ascii_type
+          Transient: no
+          Array Rank:  3
+      Data:
+        Dataset: Unnamed Ascii Dataset
+          Type: dataset_ascii_type
+          Transient: no
+          Array Rank:  1
+
+--------------------------------------------------------------------------------
+
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+  Boundary Condition
+
+--------------------------------------------------------------------------------
+          Flow Condition:   right_face
+                  Region:   right_face
+--------------------------------------------------------------------------------
+
+  Flow Condition: right_face
+    Synchronize time with update: no
+    Time units: yr
+    Length units: m
+      Datum:
+        Dataset: Unnamed Ascii Dataset
+          Type: dataset_ascii_type
+          Transient: no
+          Array Rank:  3
+
+    Sub Condition: pressure
+      Type: hydrostatic
+      Gradient:
+      Data:
+        Dataset: Unnamed Ascii Dataset
+          Type: dataset_ascii_type
+          Transient: no
+          Array Rank:  1
+
+--------------------------------------------------------------------------------
+
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+  Boundary Condition
+
+--------------------------------------------------------------------------------
+          Flow Condition:   left_face
+                  Region:   left_face
+--------------------------------------------------------------------------------
+
+  Flow Condition: left_face
+    Synchronize time with update: no
+    Time units: yr
+    Length units: m
+      Datum:
+        Dataset: Unnamed Ascii Dataset
+          Type: dataset_ascii_type
+          Transient: no
+          Array Rank:  3
+
+    Sub Condition: pressure
+      Type: hydrostatic
+      Gradient:
+      Data:
+        Dataset: Unnamed Ascii Dataset
+          Type: dataset_ascii_type
+          Transient: no
+          Array Rank:  1
+
+--------------------------------------------------------------------------------
+
+ Requested processors and decomposition =     1, npx,y,z=   -1  -1  -1
+ Actual decomposition: npx,y,z=    1   1   1
+
+
+FLOW Time Stepper
+                 acceleration: on
+       acceleration threshold: 5
+       number of ramp entries: 5
+                ramp entry #1: 2.0000
+                ramp entry #2: 2.0000
+                ramp entry #3: 2.0000
+                ramp entry #4: 2.0000
+                ramp entry #5: 2.0000
+                ramp entry #6: 1.8000
+                ramp entry #7: 1.6000
+                ramp entry #8: 1.4000
+                ramp entry #9: 1.2000
+               ramp entry #10: 1.0000
+               ramp entry #11: 1.0000
+               ramp entry #12: 1.0000
+               ramp entry #13: 1.0000
+      maximum number of steps: 999999
+constant time steps threshold: 5
+       maximum number of cuts: 16
+             reduction factor: 5.000000E-01
+        maximum growth factor: 2.000000E+00
+
+FLOW Newton Solver
+                         atol: 1.000000E-50
+                         rtol: 1.000000E-08
+                         stol: 1.000000E-08
+                         dtol: 1.000000E+04
+                      maxnorm: 1.000000E+20
+                    inftolres: -9.990000E+02
+                    inftolupd: -9.990000E+02
+                 inftolrelupd: -9.990000E+02
+                 inftolsclres: -9.990000E+02
+                     max iter: 50
+                     min iter: 1
+                         maxf: 10000
+                  matrix type: baij
+         precond. matrix type: baij
+               inexact newton: off
+            print convergence: on
+   print detailed convergence: off
+          check infinity norm: on
+
+FLOW Linear Solver
+                       solver: preonly
+               preconditioner: lu
+                         atol: 1.000000E-50
+                         rtol: 1.000000E-05
+                         dtol: 1.000000E+04
+            maximum iteration: 10000
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 3.83E-02 2x: 0.00E+00 2u: 0.00E+00 ir: 8.67E-03 iu: 0.00E+00 rsn:   0
+  1 2r: 3.57E-03 2x: 9.30E+05 2u: 1.16E+05 ir: 1.83E-03 iu: 4.51E+04 rsn:   0
+  2 2r: 2.73E-06 2x: 9.25E+05 2u: 1.08E+04 ir: 2.40E-06 iu: 6.72E+03 rsn:   0
+  3 2r: 1.13E-11 2x: 9.25E+05 2u: 2.33E-01 ir: 1.12E-11 iu: 1.75E-01 rsn: rtol
+ Step      1 Time=  1.00000E-04 Dt=  1.00000E-04 [d] snes_conv_reason:    3
+  newton =   3 [       3] linear =     3 [         3] cuts =  0 [   0]
+  --> max chng: dpmx=   4.4934E+04
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 3.32E-02 2x: 0.00E+00 2u: 0.00E+00 ir: 1.06E-02 iu: 0.00E+00 rsn:   0
+  1 2r: 1.45E-03 2x: 9.67E+05 2u: 5.60E+04 ir: 5.92E-04 iu: 1.80E+04 rsn:   0
+  2 2r: 4.51E-06 2x: 9.67E+05 2u: 5.00E+02 ir: 2.74E-06 iu: 3.31E+02 rsn:   0
+  3 2r: 7.02E-11 2x: 9.67E+05 2u: 1.97E+00 ir: 5.89E-11 iu: 1.54E+00 rsn: rtol
+ Step      2 Time=  3.00000E-04 Dt=  2.00000E-04 [d] snes_conv_reason:    3
+  newton =   3 [       6] linear =     3 [         6] cuts =  0 [   0]
+  --> max chng: dpmx=   1.8034E+04
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 3.25E-02 2x: 0.00E+00 2u: 0.00E+00 ir: 1.11E-02 iu: 0.00E+00 rsn:   0
+  1 2r: 2.79E-03 2x: 9.95E+05 2u: 3.70E+04 ir: 1.48E-03 iu: 1.07E+04 rsn:   0
+  2 2r: 6.44E-05 2x: 9.95E+05 2u: 1.29E+03 ir: 6.14E-05 iu: 7.73E+02 rsn:   0
+  3 2r: 1.29E-07 2x: 9.95E+05 2u: 1.61E+01 ir: 1.29E-07 iu: 9.23E+00 rsn:   0
+  4 2r: 5.70E-13 2x: 9.95E+05 2u: 1.99E-02 ir: 5.70E-13 iu: 1.93E-02 rsn: rtol
+ Step      3 Time=  7.00000E-04 Dt=  4.00000E-04 [d] snes_conv_reason:    3
+  newton =   4 [      10] linear =     4 [        10] cuts =  0 [   0]
+  --> max chng: dpmx=   1.0680E+04
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 3.14E-02 2x: 0.00E+00 2u: 0.00E+00 ir: 1.10E-02 iu: 0.00E+00 rsn:   0
+  1 2r: 8.01E-03 2x: 1.01E+06 2u: 2.81E+04 ir: 6.97E-03 iu: 1.08E+04 rsn:   0
+  2 2r: 1.05E-03 2x: 1.02E+06 2u: 2.76E+04 ir: 1.04E-03 iu: 2.64E+04 rsn:   0
+  3 2r: 6.32E-07 2x: 1.02E+06 2u: 7.70E+03 ir: 6.20E-07 iu: 6.08E+03 rsn:   0
+  4 2r: 2.09E-12 2x: 1.02E+06 2u: 1.18E-01 ir: 2.05E-12 iu: 1.06E-01 rsn: rtol
+ Step      4 Time=  1.50000E-03 Dt=  8.00000E-04 [d] snes_conv_reason:    3
+  newton =   4 [      14] linear =     4 [        14] cuts =  0 [   0]
+  --> max chng: dpmx=   3.0942E+04
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 2.85E-02 2x: 0.00E+00 2u: 0.00E+00 ir: 1.06E-02 iu: 0.00E+00 rsn:   0
+  1 2r: 8.77E-03 2x: 1.05E+06 2u: 4.42E+04 ir: 7.06E-03 iu: 1.86E+04 rsn:   0
+  2 2r: 1.78E-04 2x: 1.05E+06 2u: 2.87E+04 ir: 7.45E-05 iu: 2.69E+04 rsn:   0
+  3 2r: 2.79E-07 2x: 1.05E+06 2u: 1.71E+02 ir: 1.42E-07 iu: 7.65E+01 rsn:   0
+  4 2r: 8.15E-13 2x: 1.05E+06 2u: 2.83E-01 ir: 5.23E-13 iu: 1.44E-01 rsn: rtol
+ Step      5 Time=  3.10000E-03 Dt=  1.60000E-03 [d] snes_conv_reason:    3
+  newton =   4 [      18] linear =     4 [        18] cuts =  0 [   0]
+  --> max chng: dpmx=   3.1779E+04
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 2.52E-02 2x: 0.00E+00 2u: 0.00E+00 ir: 1.02E-02 iu: 0.00E+00 rsn:   0
+  1 2r: 6.15E-03 2x: 1.07E+06 2u: 3.45E+04 ir: 2.23E-03 iu: 1.19E+04 rsn:   0
+  2 2r: 3.35E-04 2x: 1.07E+06 2u: 5.41E+03 ir: 1.33E-04 iu: 2.04E+03 rsn:   0
+  3 2r: 4.62E-06 2x: 1.07E+06 2u: 3.60E+02 ir: 4.47E-06 iu: 1.52E+02 rsn:   0
+  4 2r: 5.95E-09 2x: 1.07E+06 2u: 5.87E+00 ir: 5.93E-09 iu: 5.49E+00 rsn:   0
+  5 2r: 1.05E-14 2x: 1.07E+06 2u: 7.64E-03 ir: 1.05E-14 iu: 7.29E-03 rsn: rtol
+ Step      6 Time=  6.30000E-03 Dt=  3.20000E-03 [d] snes_conv_reason:    3
+  newton =   5 [      23] linear =     5 [        23] cuts =  0 [   0]
+  --> max chng: dpmx=   1.1133E+04
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 2.24E-02 2x: 0.00E+00 2u: 0.00E+00 ir: 9.02E-03 iu: 0.00E+00 rsn:   0
+  1 2r: 6.98E-03 2x: 1.08E+06 2u: 8.19E+03 ir: 6.72E-03 iu: 4.68E+03 rsn:   0
+  2 2r: 1.57E-04 2x: 1.08E+06 2u: 2.63E+04 ir: 1.57E-04 iu: 2.54E+04 rsn:   0
+  3 2r: 2.80E-06 2x: 1.08E+06 2u: 6.99E+01 ir: 2.80E-06 iu: 6.81E+01 rsn:   0
+  4 2r: 9.70E-10 2x: 1.08E+06 2u: 1.30E+00 ir: 9.69E-10 iu: 1.26E+00 rsn:   0
+  5 2r: 3.11E-16 2x: 1.08E+06 2u: 4.49E-04 ir: 8.33E-17 iu: 4.38E-04 rsn: rtol
+ Step      7 Time=  7.35600E-03 Dt=  1.05600E-03 [d] snes_conv_reason:    3
+  newton =   5 [      28] linear =     5 [        28] cuts =  0 [   0]
+  --> max chng: dpmx=   3.0113E+04
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 2.06E-02 2x: 0.00E+00 2u: 0.00E+00 ir: 8.29E-03 iu: 0.00E+00 rsn:   0
+  1 2r: 3.75E-03 2x: 1.08E+06 2u: 5.11E+03 ir: 3.74E-03 iu: 4.30E+03 rsn:   0
+  2 2r: 2.26E-03 2x: 1.08E+06 2u: 7.38E+03 ir: 1.80E-03 iu: 7.23E+03 rsn:   0
+  3 2r: 3.65E-06 2x: 1.08E+06 2u: 6.66E+03 ir: 3.62E-06 iu: 6.53E+03 rsn:   0
+  4 2r: 5.00E-11 2x: 1.08E+06 2u: 3.93E-01 ir: 5.00E-11 iu: 3.85E-01 rsn: rtol
+ Step      8 Time=  7.70448E-03 Dt=  3.48480E-04 [d] snes_conv_reason:    3
+  newton =   4 [      32] linear =     4 [        32] cuts =  0 [   0]
+  --> max chng: dpmx=   1.5135E+04
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.95E-02 2x: 0.00E+00 2u: 0.00E+00 ir: 8.34E-03 iu: 0.00E+00 rsn:   0
+  1 2r: 6.50E-04 2x: 1.09E+06 2u: 1.71E+04 ir: 3.88E-04 iu: 1.62E+04 rsn:   0
+  2 2r: 6.15E-06 2x: 1.09E+06 2u: 1.45E+02 ir: 6.11E-06 iu: 8.67E+01 rsn:   0
+  3 2r: 1.64E-09 2x: 1.09E+06 2u: 1.59E+00 ir: 1.64E-09 iu: 1.41E+00 rsn:   0
+  4 2r: 5.31E-16 2x: 1.09E+06 2u: 4.20E-04 ir: 1.94E-16 iu: 3.78E-04 rsn: rtol
+ Step      9 Time=  8.40144E-03 Dt=  6.96960E-04 [d] snes_conv_reason:    3
+  newton =   4 [      36] linear =     4 [        36] cuts =  0 [   0]
+  --> max chng: dpmx=   1.6202E+04
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.91E-02 2x: 0.00E+00 2u: 0.00E+00 ir: 8.17E-03 iu: 0.00E+00 rsn:   0
+  1 2r: 1.61E-03 2x: 1.09E+06 2u: 6.93E+03 ir: 1.34E-03 iu: 2.09E+03 rsn:   0
+  2 2r: 8.68E-04 2x: 1.09E+06 2u: 2.20E+03 ir: 8.57E-04 iu: 1.92E+03 rsn:   0
+  3 2r: 4.99E-07 2x: 1.10E+06 2u: 5.06E+03 ir: 4.36E-07 iu: 4.53E+03 rsn:   0
+  4 2r: 2.27E-11 2x: 1.10E+06 2u: 3.24E-01 ir: 2.25E-11 iu: 2.17E-01 rsn: rtol
+ Step     10 Time=  9.79536E-03 Dt=  1.39392E-03 [d] snes_conv_reason:    3
+  newton =   4 [      40] linear =     4 [        40] cuts =  0 [   0]
+  --> max chng: dpmx=   8.1802E+03
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.82E-02 2x: 0.00E+00 2u: 0.00E+00 ir: 7.74E-03 iu: 0.00E+00 rsn:   0
+  1 2r: 2.59E-03 2x: 1.11E+06 2u: 1.96E+04 ir: 1.89E-03 iu: 1.33E+04 rsn:   0
+  2 2r: 1.09E-03 2x: 1.11E+06 2u: 5.00E+03 ir: 1.05E-03 iu: 3.12E+03 rsn:   0
+  3 2r: 1.90E-04 2x: 1.11E+06 2u: 4.93E+03 ir: 1.34E-04 iu: 4.82E+03 rsn:   0
+  4 2r: 3.62E-08 2x: 1.11E+06 2u: 5.20E+02 ir: 2.63E-08 iu: 5.05E+02 rsn:   0
+  5 2r: 4.38E-14 2x: 1.11E+06 2u: 5.97E-02 ir: 3.88E-14 iu: 5.41E-02 rsn: rtol
+ Step     11 Time=  1.25832E-02 Dt=  2.78784E-03 [d] snes_conv_reason:    3
+  newton =   5 [      45] linear =     5 [        45] cuts =  0 [   0]
+  --> max chng: dpmx=   1.3314E+04
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.60E-02 2x: 0.00E+00 2u: 0.00E+00 ir: 6.39E-03 iu: 0.00E+00 rsn:   0
+  1 2r: 4.49E-03 2x: 1.12E+06 2u: 2.00E+04 ir: 4.46E-03 iu: 1.89E+04 rsn:   0
+  2 2r: 1.10E-03 2x: 1.12E+06 2u: 2.04E+04 ir: 7.75E-04 iu: 2.00E+04 rsn:   0
+  3 2r: 8.80E-07 2x: 1.12E+06 2u: 2.96E+03 ir: 7.71E-07 iu: 2.90E+03 rsn:   0
+  4 2r: 2.66E-12 2x: 1.12E+06 2u: 2.69E-01 ir: 2.22E-12 iu: 1.80E-01 rsn: rtol
+ Step     12 Time=  1.35032E-02 Dt=  9.19987E-04 [d] snes_conv_reason:    3
+  newton =   4 [      49] linear =     4 [        49] cuts =  0 [   0]
+  --> max chng: dpmx=   1.9969E+04
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.47E-02 2x: 0.00E+00 2u: 0.00E+00 ir: 6.24E-03 iu: 0.00E+00 rsn:   0
+  1 2r: 7.39E-04 2x: 1.12E+06 2u: 8.81E+03 ir: 4.01E-04 iu: 5.44E+03 rsn:   0
+  2 2r: 5.21E-06 2x: 1.12E+06 2u: 3.63E+02 ir: 4.42E-06 iu: 1.60E+02 rsn:   0
+  3 2r: 5.90E-10 2x: 1.12E+06 2u: 2.30E+00 ir: 5.74E-10 iu: 1.68E+00 rsn:   0
+  4 2r: 2.19E-16 2x: 1.12E+06 2u: 2.63E-04 ir: 6.94E-17 iu: 2.19E-04 rsn: rtol
+ Step     13 Time=  1.53432E-02 Dt=  1.83997E-03 [d] snes_conv_reason:    3
+  newton =   4 [      53] linear =     4 [        53] cuts =  0 [   0]
+  --> max chng: dpmx=   5.4245E+03
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.39E-02 2x: 0.00E+00 2u: 0.00E+00 ir: 5.67E-03 iu: 0.00E+00 rsn:   0
+  1 2r: 2.98E-03 2x: 1.13E+06 2u: 1.35E+04 ir: 2.17E-03 iu: 4.36E+03 rsn:   0
+  2 2r: 1.43E-03 2x: 1.13E+06 2u: 1.12E+04 ir: 9.96E-04 iu: 9.98E+03 rsn:   0
+  3 2r: 9.70E-05 2x: 1.13E+06 2u: 5.79E+03 ir: 6.77E-05 iu: 4.19E+03 rsn:   0
+  4 2r: 6.01E-08 2x: 1.13E+06 2u: 2.82E+02 ir: 4.98E-08 iu: 2.65E+02 rsn:   0
+  5 2r: 1.52E-13 2x: 1.13E+06 2u: 1.49E-01 ir: 1.47E-13 iu: 1.13E-01 rsn: rtol
+ Step     14 Time=  1.90231E-02 Dt=  3.67995E-03 [d] snes_conv_reason:    3
+  newton =   5 [      58] linear =     5 [        58] cuts =  0 [   0]
+  --> max chng: dpmx=   1.3098E+04
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.13E-02 2x: 0.00E+00 2u: 0.00E+00 ir: 4.02E-03 iu: 0.00E+00 rsn:   0
+  1 2r: 4.00E-04 2x: 1.14E+06 2u: 2.09E+04 ir: 2.07E-04 iu: 1.24E+04 rsn:   0
+  2 2r: 1.09E-06 2x: 1.14E+06 2u: 1.66E+02 ir: 7.20E-07 iu: 1.07E+02 rsn:   0
+  3 2r: 1.28E-11 2x: 1.14E+06 2u: 4.96E-01 ir: 9.02E-12 iu: 3.35E-01 rsn: rtol
+ Step     15 Time=  2.02375E-02 Dt=  1.21438E-03 [d] snes_conv_reason:    3
+  newton =   3 [      61] linear =     3 [        61] cuts =  0 [   0]
+  --> max chng: dpmx=   1.2380E+04
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.11E-02 2x: 0.00E+00 2u: 0.00E+00 ir: 4.15E-03 iu: 0.00E+00 rsn:   0
+  1 2r: 1.00E-03 2x: 1.15E+06 2u: 9.63E+03 ir: 6.39E-04 iu: 3.43E+03 rsn:   0
+  2 2r: 4.90E-05 2x: 1.15E+06 2u: 8.24E+02 ir: 4.34E-05 iu: 4.28E+02 rsn:   0
+  3 2r: 2.97E-07 2x: 1.15E+06 2u: 5.26E+01 ir: 2.94E-07 iu: 3.42E+01 rsn:   0
+  4 2r: 1.38E-11 2x: 1.15E+06 2u: 3.07E-01 ir: 1.38E-11 iu: 2.34E-01 rsn: rtol
+ Step     16 Time=  2.26663E-02 Dt=  2.42877E-03 [d] snes_conv_reason:    3
+  newton =   4 [      65] linear =     4 [        65] cuts =  0 [   0]
+  --> max chng: dpmx=   3.5458E+03
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.02E-02 2x: 0.00E+00 2u: 0.00E+00 ir: 3.48E-03 iu: 0.00E+00 rsn:   0
+  1 2r: 4.00E-03 2x: 1.16E+06 2u: 2.23E+04 ir: 2.28E-03 iu: 1.10E+04 rsn:   0
+  2 2r: 4.01E-04 2x: 1.17E+06 2u: 1.59E+04 ir: 2.21E-04 iu: 9.38E+03 rsn:   0
+  3 2r: 1.63E-06 2x: 1.17E+06 2u: 1.22E+03 ir: 1.15E-06 iu: 8.73E+02 rsn:   0
+  4 2r: 1.00E-10 2x: 1.17E+06 2u: 4.37E+00 ir: 9.14E-11 iu: 2.89E+00 rsn: rtol
+ Step     17 Time=  2.75238E-02 Dt=  4.85753E-03 [d] snes_conv_reason:    3
+  newton =   4 [      69] linear =     4 [        69] cuts =  0 [   0]
+  --> max chng: dpmx=   1.2711E+04
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 8.74E-03 2x: 0.00E+00 2u: 0.00E+00 ir: 3.28E-03 iu: 0.00E+00 rsn:   0
+  1 2r: 3.37E-03 2x: 1.19E+06 2u: 4.01E+04 ir: 1.98E-03 iu: 1.82E+04 rsn:   0
+  2 2r: 7.66E-04 2x: 1.20E+06 2u: 1.79E+04 ir: 4.00E-04 iu: 1.04E+04 rsn:   0
+  3 2r: 1.05E-05 2x: 1.20E+06 2u: 4.62E+03 ir: 1.03E-05 iu: 2.50E+03 rsn:   0
+  4 2r: 1.25E-08 2x: 1.20E+06 2u: 5.15E+01 ir: 1.25E-08 iu: 4.85E+01 rsn:   0
+  5 2r: 1.84E-14 2x: 1.20E+06 2u: 6.08E-02 ir: 1.84E-14 iu: 5.88E-02 rsn: rtol
+ Step     18 Time=  3.72389E-02 Dt=  9.71506E-03 [d] snes_conv_reason:    3
+  newton =   5 [      74] linear =     5 [        74] cuts =  0 [   0]
+  --> max chng: dpmx=   1.6752E+04
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 7.37E-03 2x: 0.00E+00 2u: 0.00E+00 ir: 2.86E-03 iu: 0.00E+00 rsn:   0
+  1 2r: 1.02E-03 2x: 1.21E+06 2u: 1.83E+04 ir: 9.14E-04 iu: 6.52E+03 rsn:   0
+  2 2r: 5.24E-04 2x: 1.21E+06 2u: 2.24E+03 ir: 4.87E-04 iu: 1.84E+03 rsn:   0
+  3 2r: 3.80E-07 2x: 1.21E+06 2u: 2.95E+03 ir: 3.78E-07 iu: 2.61E+03 rsn:   0
+  4 2r: 2.46E-12 2x: 1.21E+06 2u: 2.59E-01 ir: 2.45E-12 iu: 2.30E-01 rsn: rtol
+ Step     19 Time=  4.04448E-02 Dt=  3.20597E-03 [d] snes_conv_reason:    3
+  newton =   4 [      78] linear =     4 [        78] cuts =  0 [   0]
+  --> max chng: dpmx=   6.7691E+03
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 7.04E-03 2x: 0.00E+00 2u: 0.00E+00 ir: 2.68E-03 iu: 0.00E+00 rsn:   0
+  1 2r: 8.27E-04 2x: 1.23E+06 2u: 2.18E+04 ir: 3.26E-04 iu: 1.08E+04 rsn:   0
+  2 2r: 2.23E-05 2x: 1.23E+06 2u: 1.66E+03 ir: 1.90E-05 iu: 7.09E+02 rsn:   0
+  3 2r: 1.42E-07 2x: 1.23E+06 2u: 6.30E+01 ir: 1.40E-07 iu: 4.04E+01 rsn:   0
+  4 2r: 7.98E-12 2x: 1.23E+06 2u: 4.37E-01 ir: 7.86E-12 iu: 3.02E-01 rsn: rtol
+ Step     20 Time=  4.68568E-02 Dt=  6.41194E-03 [d] snes_conv_reason:    3
+  newton =   4 [      82] linear =     4 [        82] cuts =  0 [   0]
+  --> max chng: dpmx=   1.0576E+04
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 6.55E-03 2x: 0.00E+00 2u: 0.00E+00 ir: 2.47E-03 iu: 0.00E+00 rsn:   0
+  1 2r: 2.13E-03 2x: 1.25E+06 2u: 3.00E+04 ir: 1.20E-03 iu: 1.34E+04 rsn:   0
+  2 2r: 3.71E-04 2x: 1.25E+06 2u: 1.16E+04 ir: 2.35E-04 iu: 7.80E+03 rsn:   0
+  3 2r: 1.84E-06 2x: 1.25E+06 2u: 1.55E+03 ir: 1.51E-06 iu: 1.23E+03 rsn:   0
+  4 2r: 3.25E-10 2x: 1.25E+06 2u: 1.06E+01 ir: 3.04E-10 iu: 7.23E+00 rsn:   0
+  5 2r: 3.62E-17 2x: 1.25E+06 2u: 1.88E-03 ir: 9.54E-18 iu: 1.45E-03 rsn: rtol
+ Step     21 Time=  5.96807E-02 Dt=  1.28239E-02 [d] snes_conv_reason:    3
+  newton =   5 [      87] linear =     5 [        87] cuts =  0 [   0]
+  --> max chng: dpmx=   1.1184E+04
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 5.65E-03 2x: 0.00E+00 2u: 0.00E+00 ir: 2.06E-03 iu: 0.00E+00 rsn:   0
+  1 2r: 6.03E-04 2x: 1.26E+06 2u: 9.54E+03 ir: 4.34E-04 iu: 3.31E+03 rsn:   0
+  2 2r: 7.53E-05 2x: 1.26E+06 2u: 1.09E+03 ir: 6.91E-05 iu: 7.07E+02 rsn:   0
+  3 2r: 1.29E-05 2x: 1.26E+06 2u: 2.33E+02 ir: 1.17E-05 iu: 1.74E+02 rsn:   0
+  4 2r: 1.74E-10 2x: 1.26E+06 2u: 8.04E+01 ir: 1.64E-10 iu: 6.58E+01 rsn:   0
+  5 2r: 9.32E-17 2x: 1.26E+06 2u: 2.25E-04 ir: 2.78E-17 iu: 1.70E-04 rsn: rtol
+ Step     22 Time=  6.39125E-02 Dt=  4.23188E-03 [d] snes_conv_reason:    3
+  newton =   5 [      92] linear =     5 [        92] cuts =  0 [   0]
+  --> max chng: dpmx=   3.4071E+03
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 5.37E-03 2x: 0.00E+00 2u: 0.00E+00 ir: 1.87E-03 iu: 0.00E+00 rsn:   0
+  1 2r: 7.10E-04 2x: 1.26E+06 2u: 9.22E+03 ir: 6.87E-04 iu: 6.97E+03 rsn:   0
+  2 2r: 2.25E-04 2x: 1.26E+06 2u: 5.20E+03 ir: 1.59E-04 iu: 4.78E+03 rsn:   0
+  3 2r: 5.51E-08 2x: 1.26E+06 2u: 8.95E+02 ir: 3.87E-08 iu: 8.23E+02 rsn:   0
+  4 2r: 2.48E-14 2x: 1.26E+06 2u: 2.54E-02 ir: 2.42E-14 iu: 1.97E-02 rsn: rtol
+ Step     23 Time=  6.53091E-02 Dt=  1.39652E-03 [d] snes_conv_reason:    3
+  newton =   4 [      96] linear =     4 [        96] cuts =  0 [   0]
+  --> max chng: dpmx=   6.9607E+03
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 5.44E-03 2x: 0.00E+00 2u: 0.00E+00 ir: 2.06E-03 iu: 0.00E+00 rsn:   0
+  1 2r: 4.06E-04 2x: 1.27E+06 2u: 6.89E+03 ir: 3.28E-04 iu: 2.85E+03 rsn:   0
+  2 2r: 2.17E-05 2x: 1.27E+06 2u: 4.43E+02 ir: 2.15E-05 iu: 3.22E+02 rsn:   0
+  3 2r: 1.35E-07 2x: 1.27E+06 2u: 3.22E+01 ir: 1.35E-07 iu: 2.49E+01 rsn:   0
+  4 2r: 5.40E-12 2x: 1.27E+06 2u: 2.02E-01 ir: 5.38E-12 iu: 1.57E-01 rsn: rtol
+ Step     24 Time=  6.81021E-02 Dt=  2.79304E-03 [d] snes_conv_reason:    3
+  newton =   4 [     100] linear =     4 [       100] cuts =  0 [   0]
+  --> max chng: dpmx=   2.8608E+03
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 5.30E-03 2x: 0.00E+00 2u: 0.00E+00 ir: 2.01E-03 iu: 0.00E+00 rsn:   0
+  1 2r: 1.19E-03 2x: 1.28E+06 2u: 1.19E+04 ir: 1.01E-03 iu: 3.95E+03 rsn:   0
+  2 2r: 2.91E-05 2x: 1.28E+06 2u: 7.34E+03 ir: 2.21E-05 iu: 5.70E+03 rsn:   0
+  3 2r: 3.36E-07 2x: 1.28E+06 2u: 9.73E+01 ir: 2.96E-07 iu: 5.31E+01 rsn:   0
+  4 2r: 5.76E-11 2x: 1.28E+06 2u: 1.16E+00 ir: 5.60E-11 iu: 7.30E-01 rsn:   0
+  5 2r: 7.05E-17 2x: 1.28E+06 2u: 2.07E-04 ir: 2.08E-17 iu: 1.38E-04 rsn: rtol
+ Step     25 Time=  7.36882E-02 Dt=  5.58608E-03 [d] snes_conv_reason:    3
+  newton =   5 [     105] linear =     5 [       105] cuts =  0 [   0]
+  --> max chng: dpmx=   8.8553E+03
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 5.08E-03 2x: 0.00E+00 2u: 0.00E+00 ir: 2.02E-03 iu: 0.00E+00 rsn:   0
+  1 2r: 7.35E-04 2x: 1.28E+06 2u: 4.87E+03 ir: 5.10E-04 iu: 1.53E+03 rsn:   0
+  2 2r: 3.79E-05 2x: 1.28E+06 2u: 5.16E+03 ir: 2.68E-05 iu: 3.46E+03 rsn:   0
+  3 2r: 1.72E-09 2x: 1.28E+06 2u: 1.52E+02 ir: 1.57E-09 iu: 1.40E+02 rsn:   0
+  4 2r: 2.35E-16 2x: 1.28E+06 2u: 1.86E-03 ir: 6.94E-17 iu: 1.35E-03 rsn: rtol
+ Step     26 Time=  7.55316E-02 Dt=  1.84341E-03 [d] snes_conv_reason:    3
+  newton =   4 [     109] linear =     4 [       109] cuts =  0 [   0]
+  --> max chng: dpmx=   4.4368E+03
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 5.15E-03 2x: 0.00E+00 2u: 0.00E+00 ir: 2.03E-03 iu: 0.00E+00 rsn:   0
+  1 2r: 2.22E-04 2x: 1.29E+06 2u: 7.86E+03 ir: 1.38E-04 iu: 2.62E+03 rsn:   0
+  2 2r: 9.84E-07 2x: 1.29E+06 2u: 2.72E+02 ir: 8.85E-07 iu: 1.95E+02 rsn:   0
+  3 2r: 3.67E-11 2x: 1.29E+06 2u: 1.39E+00 ir: 3.65E-11 iu: 1.26E+00 rsn: rtol
+ Step     27 Time=  7.92184E-02 Dt=  3.68682E-03 [d] snes_conv_reason:    3
+  newton =   3 [     112] linear =     3 [       112] cuts =  0 [   0]
+  --> max chng: dpmx=   2.4269E+03
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 4.97E-03 2x: 0.00E+00 2u: 0.00E+00 ir: 1.93E-03 iu: 0.00E+00 rsn:   0
+  1 2r: 3.91E-04 2x: 1.30E+06 2u: 1.38E+04 ir: 2.23E-04 iu: 4.51E+03 rsn:   0
+  2 2r: 4.38E-06 2x: 1.30E+06 2u: 8.17E+02 ir: 3.46E-06 iu: 4.53E+02 rsn:   0
+  3 2r: 9.99E-10 2x: 1.30E+06 2u: 9.97E+00 ir: 8.44E-10 iu: 7.24E+00 rsn:   0
+  4 2r: 7.93E-17 2x: 1.30E+06 2u: 2.27E-03 ir: 5.03E-17 iu: 1.77E-03 rsn: rtol
+ Step     28 Time=  8.65920E-02 Dt=  7.37363E-03 [d] snes_conv_reason:    3
+  newton =   4 [     116] linear =     4 [       116] cuts =  0 [   0]
+  --> max chng: dpmx=   4.2438E+03
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 4.54E-03 2x: 0.00E+00 2u: 0.00E+00 ir: 1.77E-03 iu: 0.00E+00 rsn:   0
+  1 2r: 1.18E-03 2x: 1.31E+06 2u: 2.76E+04 ir: 7.11E-04 iu: 1.03E+04 rsn:   0
+  2 2r: 2.39E-04 2x: 1.32E+06 2u: 1.30E+04 ir: 1.71E-04 iu: 6.10E+03 rsn:   0
+  3 2r: 1.36E-06 2x: 1.32E+06 2u: 1.17E+03 ir: 1.35E-06 iu: 9.85E+02 rsn:   0
+  4 2r: 2.48E-10 2x: 1.32E+06 2u: 6.64E+00 ir: 2.48E-10 iu: 5.79E+00 rsn:   0
+  5 2r: 2.94E-17 2x: 1.32E+06 2u: 1.12E-03 ir: 8.67E-18 iu: 1.03E-03 rsn: rtol
+ Step     29 Time=  1.01339E-01 Dt=  1.47473E-02 [d] snes_conv_reason:    3
+  newton =   5 [     121] linear =     5 [       121] cuts =  0 [   0]
+  --> max chng: dpmx=   1.0158E+04
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 3.98E-03 2x: 0.00E+00 2u: 0.00E+00 ir: 1.63E-03 iu: 0.00E+00 rsn:   0
+  1 2r: 4.42E-04 2x: 1.33E+06 2u: 1.52E+04 ir: 2.61E-04 iu: 5.26E+03 rsn:   0
+  2 2r: 3.20E-05 2x: 1.33E+06 2u: 9.39E+02 ir: 2.52E-05 iu: 4.63E+02 rsn:   0
+  3 2r: 4.71E-07 2x: 1.33E+06 2u: 1.07E+02 ir: 4.29E-07 iu: 5.86E+01 rsn:   0
+  4 2r: 1.26E-10 2x: 1.33E+06 2u: 1.60E+00 ir: 1.23E-10 iu: 9.98E-01 rsn:   0
+  5 2r: 9.47E-17 2x: 1.33E+06 2u: 4.18E-04 ir: 2.78E-17 iu: 2.81E-04 rsn: rtol
+ Step     30 Time=  1.06206E-01 Dt=  4.86660E-03 [d] snes_conv_reason:    3
+  newton =   5 [     126] linear =     5 [       126] cuts =  0 [   0]
+  --> max chng: dpmx=   5.2616E+03
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 4.04E-03 2x: 0.00E+00 2u: 0.00E+00 ir: 1.57E-03 iu: 0.00E+00 rsn:   0
+  1 2r: 7.62E-04 2x: 1.34E+06 2u: 3.98E+03 ir: 5.26E-04 iu: 1.31E+03 rsn:   0
+  2 2r: 7.88E-05 2x: 1.34E+06 2u: 5.85E+03 ir: 6.43E-05 iu: 3.26E+03 rsn:   0
+  3 2r: 1.17E-08 2x: 1.34E+06 2u: 4.59E+02 ir: 1.10E-08 iu: 4.23E+02 rsn:   0
+  4 2r: 3.21E-15 2x: 1.34E+06 2u: 2.46E-02 ir: 3.21E-15 iu: 2.14E-02 rsn: rtol
+ Step     31 Time=  1.07812E-01 Dt=  1.60598E-03 [d] snes_conv_reason:    3
+  newton =   4 [     130] linear =     4 [       130] cuts =  0 [   0]
+  --> max chng: dpmx=   4.5714E+03
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 4.26E-03 2x: 0.00E+00 2u: 0.00E+00 ir: 1.80E-03 iu: 0.00E+00 rsn:   0
+  1 2r: 2.60E-04 2x: 1.34E+06 2u: 7.56E+03 ir: 1.81E-04 iu: 2.09E+03 rsn:   0
+  2 2r: 4.03E-06 2x: 1.34E+06 2u: 2.79E+02 ir: 3.95E-06 iu: 1.58E+02 rsn:   0
+  3 2r: 2.35E-09 2x: 1.34E+06 2u: 4.93E+00 ir: 2.33E-09 iu: 3.74E+00 rsn:   0
+  4 2r: 8.22E-16 2x: 1.34E+06 2u: 2.88E-03 ir: 8.12E-16 iu: 2.21E-03 rsn: rtol
+ Step     32 Time=  1.11024E-01 Dt=  3.21195E-03 [d] snes_conv_reason:    3
+  newton =   4 [     134] linear =     4 [       134] cuts =  0 [   0]
+  --> max chng: dpmx=   2.0413E+03
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 4.23E-03 2x: 0.00E+00 2u: 0.00E+00 ir: 1.80E-03 iu: 0.00E+00 rsn:   0
+  1 2r: 6.41E-04 2x: 1.35E+06 2u: 1.15E+04 ir: 5.34E-04 iu: 3.18E+03 rsn:   0
+  2 2r: 2.24E-06 2x: 1.35E+06 2u: 3.80E+03 ir: 1.98E-06 iu: 3.03E+03 rsn:   0
+  3 2r: 1.92E-10 2x: 1.35E+06 2u: 4.23E+00 ir: 1.82E-10 iu: 2.67E+00 rsn:   0
+  4 2r: 6.49E-17 2x: 1.35E+06 2u: 3.33E-04 ir: 1.73E-17 iu: 2.45E-04 rsn: rtol
+ Step     33 Time=  1.17448E-01 Dt=  6.42391E-03 [d] snes_conv_reason:    3
+  newton =   4 [     138] linear =     4 [       138] cuts =  0 [   0]
+  --> max chng: dpmx=   5.2572E+03
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 4.08E-03 2x: 0.00E+00 2u: 0.00E+00 ir: 1.75E-03 iu: 0.00E+00 rsn:   0
+  1 2r: 5.62E-04 2x: 1.37E+06 2u: 2.13E+04 ir: 2.76E-04 iu: 6.30E+03 rsn:   0
+  2 2r: 8.97E-06 2x: 1.37E+06 2u: 1.94E+03 ir: 4.85E-06 iu: 7.48E+02 rsn:   0
+  3 2r: 2.82E-09 2x: 1.37E+06 2u: 4.45E+01 ir: 1.64E-09 iu: 3.01E+01 rsn:   0
+  4 2r: 4.60E-16 2x: 1.37E+06 2u: 1.55E-02 ir: 3.59E-16 iu: 1.18E-02 rsn: rtol
+ Step     34 Time=  1.30296E-01 Dt=  1.28478E-02 [d] snes_conv_reason:    3
+  newton =   4 [     142] linear =     4 [       142] cuts =  0 [   0]
+  --> max chng: dpmx=   5.5424E+03
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 3.71E-03 2x: 0.00E+00 2u: 0.00E+00 ir: 1.63E-03 iu: 0.00E+00 rsn:   0
+  1 2r: 1.08E-03 2x: 1.39E+06 2u: 3.70E+04 ir: 5.77E-04 iu: 1.46E+04 rsn:   0
+  2 2r: 8.68E-05 2x: 1.39E+06 2u: 5.65E+03 ir: 6.36E-05 iu: 2.41E+03 rsn:   0
+  3 2r: 4.72E-07 2x: 1.39E+06 2u: 5.49E+02 ir: 4.08E-07 iu: 2.40E+02 rsn:   0
+  4 2r: 2.94E-11 2x: 1.39E+06 2u: 2.90E+00 ir: 2.85E-11 iu: 2.06E+00 rsn: rtol
+ Step     35 Time=  1.55991E-01 Dt=  2.56956E-02 [d] snes_conv_reason:    3
+  newton =   4 [     146] linear =     4 [       146] cuts =  0 [   0]
+  --> max chng: dpmx=   1.2005E+04
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 3.11E-03 2x: 0.00E+00 2u: 0.00E+00 ir: 1.19E-03 iu: 0.00E+00 rsn:   0
+  1 2r: 7.96E-03 2x: 1.43E+06 2u: 7.03E+04 ir: 4.48E-03 iu: 2.50E+04 rsn:   0
+  2 2r: 2.38E-03 2x: 1.43E+06 2u: 3.76E+04 ir: 1.93E-03 iu: 2.04E+04 rsn:   0
+  3 2r: 1.81E-03 2x: 1.44E+06 2u: 3.67E+04 ir: 1.54E-03 iu: 2.55E+04 rsn:   0
+  4 2r: 4.38E-04 2x: 1.44E+06 2u: 8.30E+03 ir: 3.22E-04 iu: 5.21E+03 rsn:   0
+  5 2r: 2.68E-05 2x: 1.44E+06 2u: 4.53E+03 ir: 2.63E-05 iu: 3.92E+03 rsn:   0
+  6 2r: 1.71E-07 2x: 1.44E+06 2u: 1.56E+02 ir: 1.41E-07 iu: 1.07E+02 rsn:   0
+  7 2r: 5.72E-12 2x: 1.44E+06 2u: 1.38E+00 ir: 5.20E-12 iu: 1.11E+00 rsn: rtol
+ Step     36 Time=  2.07382E-01 Dt=  5.13913E-02 [d] snes_conv_reason:    3
+  newton =   7 [     153] linear =     7 [       153] cuts =  0 [   0]
+  --> max chng: dpmx=   1.9344E+04
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 2.60E-03 2x: 0.00E+00 2u: 0.00E+00 ir: 1.17E-03 iu: 0.00E+00 rsn:   0
+  1 2r: 2.49E-04 2x: 1.45E+06 2u: 2.06E+04 ir: 1.22E-04 iu: 5.64E+03 rsn:   0
+  2 2r: 1.51E-06 2x: 1.45E+06 2u: 1.00E+03 ir: 1.18E-06 iu: 5.81E+02 rsn:   0
+  3 2r: 2.46E-10 2x: 1.45E+06 2u: 8.65E+00 ir: 2.39E-10 iu: 6.63E+00 rsn:   0
+  4 2r: 3.38E-17 2x: 1.45E+06 2u: 1.36E-03 ir: 1.04E-17 iu: 1.32E-03 rsn: rtol
+ Step     37 Time=  2.24342E-01 Dt=  1.69591E-02 [d] snes_conv_reason:    3
+  newton =   4 [     157] linear =     4 [       157] cuts =  0 [   0]
+  --> max chng: dpmx=   5.5490E+03
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 2.47E-03 2x: 0.00E+00 2u: 0.00E+00 ir: 1.09E-03 iu: 0.00E+00 rsn:   0
+  1 2r: 2.13E-03 2x: 1.47E+06 2u: 3.52E+04 ir: 1.26E-03 iu: 1.33E+04 rsn:   0
+  2 2r: 1.76E-04 2x: 1.48E+06 2u: 1.17E+04 ir: 9.52E-05 iu: 4.94E+03 rsn:   0
+  3 2r: 3.04E-06 2x: 1.48E+06 2u: 2.68E+03 ir: 2.82E-06 iu: 2.36E+03 rsn:   0
+  4 2r: 1.47E-09 2x: 1.48E+06 2u: 5.01E+01 ir: 1.04E-09 iu: 4.67E+01 rsn:   0
+  5 2r: 8.76E-16 2x: 1.48E+06 2u: 4.22E-02 ir: 8.70E-16 iu: 4.16E-02 rsn: rtol
+ Step     38 Time=  2.58260E-01 Dt=  3.39182E-02 [d] snes_conv_reason:    3
+  newton =   5 [     162] linear =     5 [       162] cuts =  0 [   0]
+  --> max chng: dpmx=   1.5462E+04
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 2.21E-03 2x: 0.00E+00 2u: 0.00E+00 ir: 1.04E-03 iu: 0.00E+00 rsn:   0
+  1 2r: 1.05E-03 2x: 1.49E+06 2u: 1.67E+04 ir: 8.06E-04 iu: 5.72E+03 rsn:   0
+  2 2r: 6.03E-05 2x: 1.49E+06 2u: 8.11E+03 ir: 4.94E-05 iu: 4.96E+03 rsn:   0
+  3 2r: 6.09E-08 2x: 1.49E+06 2u: 3.42E+02 ir: 5.57E-08 iu: 2.78E+02 rsn:   0
+  4 2r: 2.54E-12 2x: 1.49E+06 2u: 2.80E-01 ir: 2.47E-12 iu: 2.20E-01 rsn: rtol
+ Step     39 Time=  2.69453E-01 Dt=  1.11930E-02 [d] snes_conv_reason:    3
+  newton =   4 [     166] linear =     4 [       166] cuts =  0 [   0]
+  --> max chng: dpmx=   8.9281E+03
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 2.34E-03 2x: 0.00E+00 2u: 0.00E+00 ir: 1.22E-03 iu: 0.00E+00 rsn:   0
+  1 2r: 4.47E-04 2x: 1.50E+06 2u: 2.44E+04 ir: 2.89E-04 iu: 1.12E+04 rsn:   0
+  2 2r: 1.51E-05 2x: 1.50E+06 2u: 2.79E+03 ir: 1.31E-05 iu: 1.33E+03 rsn:   0
+  3 2r: 2.42E-08 2x: 1.50E+06 2u: 1.56E+02 ir: 2.37E-08 iu: 1.33E+02 rsn:   0
+  4 2r: 7.87E-14 2x: 1.50E+06 2u: 1.27E-01 ir: 7.57E-14 iu: 9.01E-02 rsn: rtol
+ Step     40 Time=  2.91839E-01 Dt=  2.23860E-02 [d] snes_conv_reason:    3
+  newton =   4 [     170] linear =     4 [       170] cuts =  0 [   0]
+  --> max chng: dpmx=   9.8053E+03
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 2.05E-03 2x: 0.00E+00 2u: 0.00E+00 ir: 9.65E-04 iu: 0.00E+00 rsn:   0
+  1 2r: 2.00E-03 2x: 1.52E+06 2u: 4.10E+04 ir: 1.51E-03 iu: 2.09E+04 rsn:   0
+  2 2r: 5.55E-04 2x: 1.52E+06 2u: 1.37E+04 ir: 4.89E-04 iu: 9.05E+03 rsn:   0
+  3 2r: 2.85E-05 2x: 1.52E+06 2u: 1.58E+04 ir: 2.51E-05 iu: 1.47E+04 rsn:   0
+  4 2r: 7.37E-07 2x: 1.52E+06 2u: 1.91E+03 ir: 7.37E-07 iu: 1.90E+03 rsn:   0
+  5 2r: 6.57E-10 2x: 1.52E+06 2u: 5.90E+01 ir: 6.57E-10 iu: 5.90E+01 rsn:   0
+  6 2r: 5.22E-16 2x: 1.52E+06 2u: 5.27E-02 ir: 5.22E-16 iu: 5.27E-02 rsn: rtol
+ Step     41 Time=  3.36611E-01 Dt=  4.47721E-02 [d] snes_conv_reason:    3
+  newton =   6 [     176] linear =     6 [       176] cuts =  0 [   0]
+  --> max chng: dpmx=   1.7962E+04
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.69E-03 2x: 0.00E+00 2u: 0.00E+00 ir: 8.83E-04 iu: 0.00E+00 rsn:   0
+  1 2r: 3.68E-04 2x: 1.53E+06 2u: 1.29E+04 ir: 2.56E-04 iu: 5.99E+03 rsn:   0
+  2 2r: 3.55E-06 2x: 1.53E+06 2u: 2.27E+03 ir: 2.61E-06 iu: 1.51E+03 rsn:   0
+  3 2r: 3.22E-09 2x: 1.53E+06 2u: 2.89E+01 ir: 2.59E-09 iu: 2.52E+01 rsn:   0
+  4 2r: 2.57E-16 2x: 1.53E+06 2u: 1.58E-02 ir: 1.91E-16 iu: 1.48E-02 rsn: rtol
+ Step     42 Time=  3.51386E-01 Dt=  1.47748E-02 [d] snes_conv_reason:    3
+  newton =   4 [     180] linear =     4 [       180] cuts =  0 [   0]
+  --> max chng: dpmx=   5.9361E+03
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.70E-03 2x: 0.00E+00 2u: 0.00E+00 ir: 8.67E-04 iu: 0.00E+00 rsn:   0
+  1 2r: 1.45E-03 2x: 1.54E+06 2u: 2.65E+04 ir: 1.06E-03 iu: 1.47E+04 rsn:   0
+  2 2r: 1.03E-04 2x: 1.54E+06 2u: 8.41E+03 ir: 9.84E-05 iu: 3.83E+03 rsn:   0
+  3 2r: 1.99E-06 2x: 1.54E+06 2u: 2.09E+03 ir: 1.98E-06 iu: 1.96E+03 rsn:   0
+  4 2r: 7.49E-10 2x: 1.54E+06 2u: 2.42E+01 ir: 7.48E-10 iu: 1.87E+01 rsn:   0
+  5 2r: 1.14E-16 2x: 1.54E+06 2u: 5.72E-03 ir: 1.10E-16 iu: 4.82E-03 rsn: rtol
+ Step     43 Time=  3.80935E-01 Dt=  2.95496E-02 [d] snes_conv_reason:    3
+  newton =   5 [     185] linear =     5 [       185] cuts =  0 [   0]
+  --> max chng: dpmx=   1.2526E+04
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.59E-03 2x: 0.00E+00 2u: 0.00E+00 ir: 8.34E-04 iu: 0.00E+00 rsn:   0
+  1 2r: 9.78E-05 2x: 1.55E+06 2u: 8.17E+03 ir: 7.62E-05 iu: 3.90E+03 rsn:   0
+  2 2r: 5.32E-07 2x: 1.55E+06 2u: 3.55E+02 ir: 4.79E-07 iu: 2.51E+02 rsn:   0
+  3 2r: 1.97E-11 2x: 1.55E+06 2u: 2.22E+00 ir: 1.81E-11 iu: 1.57E+00 rsn:   0
+  4 2r: 4.53E-17 2x: 1.55E+06 2u: 7.98E-05 ir: 1.04E-17 iu: 5.78E-05 rsn: rtol
+ Step     44 Time=  3.90687E-01 Dt=  9.75136E-03 [d] snes_conv_reason:    3
+  newton =   4 [     189] linear =     4 [       189] cuts =  0 [   0]
+  --> max chng: dpmx=   3.6466E+03
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.54E-03 2x: 0.00E+00 2u: 0.00E+00 ir: 7.92E-04 iu: 0.00E+00 rsn:   0
+  1 2r: 2.14E-04 2x: 1.55E+06 2u: 1.48E+04 ir: 1.43E-04 iu: 8.36E+03 rsn:   0
+  2 2r: 4.37E-06 2x: 1.55E+06 2u: 1.45E+03 ir: 3.92E-06 iu: 1.18E+03 rsn:   0
+  3 2r: 3.96E-09 2x: 1.55E+06 2u: 4.38E+01 ir: 3.91E-09 iu: 3.62E+01 rsn:   0
+  4 2r: 3.32E-15 2x: 1.55E+06 2u: 3.48E-02 ir: 3.32E-15 iu: 3.47E-02 rsn: rtol
+ Step     45 Time=  4.10189E-01 Dt=  1.95027E-02 [d] snes_conv_reason:    3
+  newton =   4 [     193] linear =     4 [       193] cuts =  0 [   0]
+  --> max chng: dpmx=   7.1403E+03
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.40E-03 2x: 0.00E+00 2u: 0.00E+00 ir: 7.33E-04 iu: 0.00E+00 rsn:   0
+  1 2r: 7.39E-04 2x: 1.56E+06 2u: 3.07E+04 ir: 5.83E-04 iu: 1.74E+04 rsn:   0
+  2 2r: 3.80E-05 2x: 1.56E+06 2u: 5.08E+03 ir: 2.31E-05 iu: 3.69E+03 rsn:   0
+  3 2r: 4.25E-07 2x: 1.56E+06 2u: 5.44E+02 ir: 3.11E-07 iu: 4.12E+02 rsn:   0
+  4 2r: 1.85E-11 2x: 1.56E+06 2u: 4.73E+00 ir: 1.75E-11 iu: 3.81E+00 rsn:   0
+  5 2r: 2.16E-17 2x: 1.56E+06 2u: 3.36E-04 ir: 5.20E-18 iu: 3.29E-04 rsn: rtol
+ Step     46 Time=  4.49195E-01 Dt=  3.90054E-02 [d] snes_conv_reason:    3
+  newton =   5 [     198] linear =     5 [       198] cuts =  0 [   0]
+  --> max chng: dpmx=   1.6365E+04
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.23E-03 2x: 0.00E+00 2u: 0.00E+00 ir: 6.59E-04 iu: 0.00E+00 rsn:   0
+  1 2r: 2.69E-04 2x: 1.57E+06 2u: 7.99E+03 ir: 2.03E-04 iu: 5.08E+03 rsn:   0
+  2 2r: 2.73E-07 2x: 1.57E+06 2u: 1.64E+03 ir: 1.88E-07 iu: 1.11E+03 rsn:   0
+  3 2r: 9.57E-12 2x: 1.57E+06 2u: 2.20E+00 ir: 8.56E-12 iu: 2.01E+00 rsn: rtol
+ Step     47 Time=  4.62067E-01 Dt=  1.28718E-02 [d] snes_conv_reason:    3
+  newton =   3 [     201] linear =     3 [       201] cuts =  0 [   0]
+  --> max chng: dpmx=   4.7378E+03
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.23E-03 2x: 0.00E+00 2u: 0.00E+00 ir: 6.82E-04 iu: 0.00E+00 rsn:   0
+  1 2r: 3.34E-04 2x: 1.57E+06 2u: 1.56E+04 ir: 2.07E-04 iu: 1.12E+04 rsn:   0
+  2 2r: 4.83E-06 2x: 1.57E+06 2u: 2.01E+03 ir: 3.43E-06 iu: 1.70E+03 rsn:   0
+  3 2r: 8.05E-09 2x: 1.57E+06 2u: 5.14E+01 ir: 6.59E-09 iu: 4.78E+01 rsn:   0
+  4 2r: 3.63E-15 2x: 1.57E+06 2u: 5.49E-02 ir: 3.38E-15 iu: 5.24E-02 rsn: rtol
+ Step     48 Time=  4.87810E-01 Dt=  2.57436E-02 [d] snes_conv_reason:    3
+  newton =   4 [     205] linear =     4 [       205] cuts =  0 [   0]
+  --> max chng: dpmx=   9.4521E+03
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.16E-03 2x: 0.00E+00 2u: 0.00E+00 ir: 6.83E-04 iu: 0.00E+00 rsn:   0
+  1 2r: 1.48E-03 2x: 1.58E+06 2u: 2.50E+04 ir: 1.11E-03 iu: 1.80E+04 rsn:   0
+  2 2r: 8.88E-05 2x: 1.59E+06 2u: 9.78E+03 ir: 8.73E-05 iu: 5.03E+03 rsn:   0
+  3 2r: 1.28E-06 2x: 1.59E+06 2u: 7.65E+02 ir: 1.27E-06 iu: 6.52E+02 rsn:   0
+  4 2r: 3.17E-10 2x: 1.59E+06 2u: 1.23E+01 ir: 3.15E-10 iu: 1.01E+01 rsn:   0
+  5 2r: 2.73E-17 2x: 1.59E+06 2u: 2.98E-03 ir: 1.91E-17 iu: 2.46E-03 rsn: rtol
+ Step     49 Time=  5.39297E-01 Dt=  5.14872E-02 [d] snes_conv_reason:    3
+  newton =   5 [     210] linear =     5 [       210] cuts =  0 [   0]
+  --> max chng: dpmx=   1.2285E+04
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.07E-03 2x: 0.00E+00 2u: 0.00E+00 ir: 6.49E-04 iu: 0.00E+00 rsn:   0
+  1 2r: 8.72E-05 2x: 1.59E+06 2u: 6.95E+03 ir: 6.11E-05 iu: 2.80E+03 rsn:   0
+  2 2r: 4.91E-06 2x: 1.59E+06 2u: 2.59E+02 ir: 3.50E-06 iu: 1.43E+02 rsn:   0
+  3 2r: 2.45E-10 2x: 1.59E+06 2u: 2.83E+01 ir: 1.77E-10 iu: 2.49E+01 rsn:   0
+  4 2r: 2.86E-17 2x: 1.59E+06 2u: 1.01E-03 ir: 6.94E-18 iu: 5.69E-04 rsn: rtol
+ Step     50 Time=  5.56288E-01 Dt=  1.69908E-02 [d] snes_conv_reason:    3
+  newton =   4 [     214] linear =     4 [       214] cuts =  0 [   0]
+  --> max chng: dpmx=   2.6575E+03
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.04E-03 2x: 0.00E+00 2u: 0.00E+00 ir: 6.97E-04 iu: 0.00E+00 rsn:   0
+  1 2r: 1.76E-04 2x: 1.60E+06 2u: 1.04E+04 ir: 1.43E-04 iu: 4.82E+03 rsn:   0
+  2 2r: 6.88E-05 2x: 1.60E+06 2u: 1.36E+03 ir: 5.04E-05 iu: 8.35E+02 rsn:   0
+  3 2r: 2.26E-08 2x: 1.60E+06 2u: 6.54E+02 ir: 2.11E-08 iu: 4.25E+02 rsn:   0
+  4 2r: 1.52E-14 2x: 1.60E+06 2u: 1.06E-01 ir: 1.21E-14 iu: 8.97E-02 rsn: rtol
+ Step     51 Time=  5.90270E-01 Dt=  3.39815E-02 [d] snes_conv_reason:    3
+  newton =   4 [     218] linear =     4 [       218] cuts =  0 [   0]
+  --> max chng: dpmx=   4.8126E+03
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 9.58E-04 2x: 0.00E+00 2u: 0.00E+00 ir: 7.56E-04 iu: 0.00E+00 rsn:   0
+  1 2r: 2.23E-04 2x: 1.61E+06 2u: 1.76E+04 ir: 1.57E-04 iu: 6.74E+03 rsn:   0
+  2 2r: 6.13E-05 2x: 1.61E+06 2u: 8.53E+03 ir: 6.13E-05 iu: 3.24E+03 rsn:   0
+  3 2r: 3.79E-13 2x: 1.61E+06 2u: 1.92E+03 ir: 2.98E-13 iu: 9.17E+02 rsn: rtol
+ Step     52 Time=  6.58233E-01 Dt=  6.79631E-02 [d] snes_conv_reason:    3
+  newton =   3 [     221] linear =     3 [       221] cuts =  0 [   0]
+  --> max chng: dpmx=   1.0558E+04
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 5.23E-04 2x: 0.00E+00 2u: 0.00E+00 ir: 4.11E-04 iu: 0.00E+00 rsn:   0
+  1 2r: 2.87E-11 2x: 1.63E+06 2u: 2.52E+04 ir: 1.70E-11 iu: 9.80E+03 rsn:   0
+  2 2r: 1.75E-17 2x: 1.63E+06 2u: 3.00E-03 ir: 3.90E-18 iu: 8.43E-04 rsn: rtol
+ Step     53 Time=  7.94159E-01 Dt=  1.35926E-01 [d] snes_conv_reason:    3
+  newton =   2 [     223] linear =     2 [       223] cuts =  0 [   0]
+  --> max chng: dpmx=   9.7999E+03
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 8.94E-07 2x: 0.00E+00 2u: 0.00E+00 ir: 3.47E-07 iu: 0.00E+00 rsn:   0
+  1 2r: 2.45E-16 2x: 1.63E+06 2u: 1.36E+02 ir: 7.69E-17 iu: 2.97E+01 rsn: rtol
+ Step     54 Time=  1.06601E+00 Dt=  2.71852E-01 [d] snes_conv_reason:    3
+  newton =   1 [     224] linear =     1 [       224] cuts =  0 [   0]
+  --> max chng: dpmx=   2.9717E+01
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 2.41E-09 2x: 0.00E+00 2u: 0.00E+00 ir: 5.27E-10 iu: 0.00E+00 rsn:   0
+  1 2r: 2.07E-17 2x: 1.63E+06 2u: 4.29E-01 ir: 5.04E-18 iu: 7.52E-02 rsn: rtol
+ Step     55 Time=  1.60972E+00 Dt=  5.43704E-01 [d] snes_conv_reason:    3
+  newton =   1 [     225] linear =     1 [       225] cuts =  0 [   0]
+  --> max chng: dpmx=   7.5187E-02
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 3.80E-12 2x: 0.00E+00 2u: 0.00E+00 ir: 6.66E-13 iu: 0.00E+00 rsn:   0
+  1 2r: 1.75E-17 2x: 1.63E+06 2u: 7.03E-04 ir: 4.45E-18 iu: 1.10E-04 rsn: stol
+ Step     56 Time=  2.69712E+00 Dt=  1.08741E+00 [d] snes_conv_reason:    4
+  newton =   1 [     226] linear =     1 [       226] cuts =  0 [   0]
+  --> max chng: dpmx=   1.1036E-04
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 3.12E-15 2x: 0.00E+00 2u: 0.00E+00 ir: 4.89E-16 iu: 0.00E+00 rsn:   0
+  1 2r: 1.74E-17 2x: 1.63E+06 2u: 5.81E-07 ir: 4.82E-18 iu: 8.62E-08 rsn: stol
+ Step     57 Time=  4.87194E+00 Dt=  2.17482E+00 [d] snes_conv_reason:    4
+  newton =   1 [     227] linear =     1 [       227] cuts =  0 [   0]
+  --> max chng: dpmx=   8.6162E-08
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.74E-17 2x: 0.00E+00 2u: 0.00E+00 ir: 4.78E-18 iu: 0.00E+00 rsn:   0
+  1 2r: 1.75E-17 2x: 1.63E+06 2u: 2.51E-10 ir: 4.78E-18 iu: 4.70E-11 rsn: stol
+ Step     58 Time=  9.22158E+00 Dt=  4.34964E+00 [d] snes_conv_reason:    4
+  newton =   1 [     228] linear =     1 [       228] cuts =  0 [   0]
+  --> max chng: dpmx=   5.8208E-11
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.75E-17 2x: 0.00E+00 2u: 0.00E+00 ir: 4.78E-18 iu: 0.00E+00 rsn:   0
+  1 2r: 1.75E-17 2x: 1.63E+06 2u: 7.15E-11 ir: 4.78E-18 iu: 1.43E-11 rsn: stol
+ Step     59 Time=  1.42216E+01 Dt=  5.00000E+00 [d] snes_conv_reason:    4
+  newton =   1 [     229] linear =     1 [       229] cuts =  0 [   0]
+  --> max chng: dpmx=   0.0000E+00
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.75E-17 2x: 0.00E+00 2u: 0.00E+00 ir: 4.78E-18 iu: 0.00E+00 rsn:   0
+  1 2r: 1.75E-17 2x: 1.63E+06 2u: 7.15E-11 ir: 4.78E-18 iu: 1.43E-11 rsn: stol
+ Step     60 Time=  1.92216E+01 Dt=  5.00000E+00 [d] snes_conv_reason:    4
+  newton =   1 [     230] linear =     1 [       230] cuts =  0 [   0]
+  --> max chng: dpmx=   0.0000E+00
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.75E-17 2x: 0.00E+00 2u: 0.00E+00 ir: 4.78E-18 iu: 0.00E+00 rsn:   0
+  1 2r: 1.75E-17 2x: 1.63E+06 2u: 7.15E-11 ir: 4.78E-18 iu: 1.43E-11 rsn: stol
+ Step     61 Time=  2.42216E+01 Dt=  5.00000E+00 [d] snes_conv_reason:    4
+  newton =   1 [     231] linear =     1 [       231] cuts =  0 [   0]
+  --> max chng: dpmx=   0.0000E+00
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.75E-17 2x: 0.00E+00 2u: 0.00E+00 ir: 4.78E-18 iu: 0.00E+00 rsn:   0
+  1 2r: 1.75E-17 2x: 1.63E+06 2u: 7.15E-11 ir: 4.78E-18 iu: 1.43E-11 rsn: stol
+ Step     62 Time=  2.92216E+01 Dt=  5.00000E+00 [d] snes_conv_reason:    4
+  newton =   1 [     232] linear =     1 [       232] cuts =  0 [   0]
+  --> max chng: dpmx=   0.0000E+00
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.75E-17 2x: 0.00E+00 2u: 0.00E+00 ir: 4.78E-18 iu: 0.00E+00 rsn:   0
+  1 2r: 1.75E-17 2x: 1.63E+06 2u: 7.15E-11 ir: 4.78E-18 iu: 1.43E-11 rsn: stol
+ Step     63 Time=  3.42216E+01 Dt=  5.00000E+00 [d] snes_conv_reason:    4
+  newton =   1 [     233] linear =     1 [       233] cuts =  0 [   0]
+  --> max chng: dpmx=   0.0000E+00
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.75E-17 2x: 0.00E+00 2u: 0.00E+00 ir: 4.78E-18 iu: 0.00E+00 rsn:   0
+  1 2r: 1.75E-17 2x: 1.63E+06 2u: 7.15E-11 ir: 4.78E-18 iu: 1.43E-11 rsn: stol
+ Step     64 Time=  3.92216E+01 Dt=  5.00000E+00 [d] snes_conv_reason:    4
+  newton =   1 [     234] linear =     1 [       234] cuts =  0 [   0]
+  --> max chng: dpmx=   0.0000E+00
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.75E-17 2x: 0.00E+00 2u: 0.00E+00 ir: 4.78E-18 iu: 0.00E+00 rsn:   0
+  1 2r: 1.75E-17 2x: 1.63E+06 2u: 7.15E-11 ir: 4.78E-18 iu: 1.43E-11 rsn: stol
+ Step     65 Time=  4.42216E+01 Dt=  5.00000E+00 [d] snes_conv_reason:    4
+  newton =   1 [     235] linear =     1 [       235] cuts =  0 [   0]
+  --> max chng: dpmx=   0.0000E+00
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.75E-17 2x: 0.00E+00 2u: 0.00E+00 ir: 4.78E-18 iu: 0.00E+00 rsn:   0
+  1 2r: 1.75E-17 2x: 1.63E+06 2u: 7.15E-11 ir: 4.78E-18 iu: 1.43E-11 rsn: stol
+ Step     66 Time=  4.92216E+01 Dt=  5.00000E+00 [d] snes_conv_reason:    4
+  newton =   1 [     236] linear =     1 [       236] cuts =  0 [   0]
+  --> max chng: dpmx=   0.0000E+00
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.75E-17 2x: 0.00E+00 2u: 0.00E+00 ir: 4.78E-18 iu: 0.00E+00 rsn:   0
+  1 2r: 1.75E-17 2x: 1.63E+06 2u: 7.15E-11 ir: 4.78E-18 iu: 1.43E-11 rsn: stol
+ Step     67 Time=  5.42216E+01 Dt=  5.00000E+00 [d] snes_conv_reason:    4
+  newton =   1 [     237] linear =     1 [       237] cuts =  0 [   0]
+  --> max chng: dpmx=   0.0000E+00
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.75E-17 2x: 0.00E+00 2u: 0.00E+00 ir: 4.78E-18 iu: 0.00E+00 rsn:   0
+  1 2r: 1.75E-17 2x: 1.63E+06 2u: 7.15E-11 ir: 4.78E-18 iu: 1.43E-11 rsn: stol
+ Step     68 Time=  5.92216E+01 Dt=  5.00000E+00 [d] snes_conv_reason:    4
+  newton =   1 [     238] linear =     1 [       238] cuts =  0 [   0]
+  --> max chng: dpmx=   0.0000E+00
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.75E-17 2x: 0.00E+00 2u: 0.00E+00 ir: 4.78E-18 iu: 0.00E+00 rsn:   0
+  1 2r: 1.75E-17 2x: 1.63E+06 2u: 7.15E-11 ir: 4.78E-18 iu: 1.43E-11 rsn: stol
+ Step     69 Time=  6.42216E+01 Dt=  5.00000E+00 [d] snes_conv_reason:    4
+  newton =   1 [     239] linear =     1 [       239] cuts =  0 [   0]
+  --> max chng: dpmx=   0.0000E+00
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.75E-17 2x: 0.00E+00 2u: 0.00E+00 ir: 4.78E-18 iu: 0.00E+00 rsn:   0
+  1 2r: 1.75E-17 2x: 1.63E+06 2u: 7.15E-11 ir: 4.78E-18 iu: 1.43E-11 rsn: stol
+ Step     70 Time=  6.92216E+01 Dt=  5.00000E+00 [d] snes_conv_reason:    4
+  newton =   1 [     240] linear =     1 [       240] cuts =  0 [   0]
+  --> max chng: dpmx=   0.0000E+00
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.75E-17 2x: 0.00E+00 2u: 0.00E+00 ir: 4.78E-18 iu: 0.00E+00 rsn:   0
+  1 2r: 1.75E-17 2x: 1.63E+06 2u: 7.15E-11 ir: 4.78E-18 iu: 1.43E-11 rsn: stol
+ Step     71 Time=  7.42216E+01 Dt=  5.00000E+00 [d] snes_conv_reason:    4
+  newton =   1 [     241] linear =     1 [       241] cuts =  0 [   0]
+  --> max chng: dpmx=   0.0000E+00
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.75E-17 2x: 0.00E+00 2u: 0.00E+00 ir: 4.78E-18 iu: 0.00E+00 rsn:   0
+  1 2r: 1.75E-17 2x: 1.63E+06 2u: 7.15E-11 ir: 4.78E-18 iu: 1.43E-11 rsn: stol
+ Step     72 Time=  7.92216E+01 Dt=  5.00000E+00 [d] snes_conv_reason:    4
+  newton =   1 [     242] linear =     1 [       242] cuts =  0 [   0]
+  --> max chng: dpmx=   0.0000E+00
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.75E-17 2x: 0.00E+00 2u: 0.00E+00 ir: 4.78E-18 iu: 0.00E+00 rsn:   0
+  1 2r: 1.75E-17 2x: 1.63E+06 2u: 7.15E-11 ir: 4.78E-18 iu: 1.43E-11 rsn: stol
+ Step     73 Time=  8.42216E+01 Dt=  5.00000E+00 [d] snes_conv_reason:    4
+  newton =   1 [     243] linear =     1 [       243] cuts =  0 [   0]
+  --> max chng: dpmx=   0.0000E+00
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.75E-17 2x: 0.00E+00 2u: 0.00E+00 ir: 4.78E-18 iu: 0.00E+00 rsn:   0
+  1 2r: 1.75E-17 2x: 1.63E+06 2u: 7.15E-11 ir: 4.78E-18 iu: 1.43E-11 rsn: stol
+ Step     74 Time=  8.92216E+01 Dt=  5.00000E+00 [d] snes_conv_reason:    4
+  newton =   1 [     244] linear =     1 [       244] cuts =  0 [   0]
+  --> max chng: dpmx=   0.0000E+00
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.75E-17 2x: 0.00E+00 2u: 0.00E+00 ir: 4.78E-18 iu: 0.00E+00 rsn:   0
+  1 2r: 1.75E-17 2x: 1.63E+06 2u: 7.15E-11 ir: 4.78E-18 iu: 1.43E-11 rsn: stol
+ Step     75 Time=  9.42216E+01 Dt=  5.00000E+00 [d] snes_conv_reason:    4
+  newton =   1 [     245] linear =     1 [       245] cuts =  0 [   0]
+  --> max chng: dpmx=   0.0000E+00
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.75E-17 2x: 0.00E+00 2u: 0.00E+00 ir: 4.78E-18 iu: 0.00E+00 rsn:   0
+  1 2r: 1.75E-17 2x: 1.63E+06 2u: 7.15E-11 ir: 4.78E-18 iu: 1.43E-11 rsn: stol
+ Step     76 Time=  9.92216E+01 Dt=  5.00000E+00 [d] snes_conv_reason:    4
+  newton =   1 [     246] linear =     1 [       246] cuts =  0 [   0]
+  --> max chng: dpmx=   0.0000E+00
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 1.75E-17 2x: 0.00E+00 2u: 0.00E+00 ir: 4.77E-18 iu: 0.00E+00 rsn:   0
+  1 2r: 1.75E-17 2x: 1.63E+06 2u: 7.18E-11 ir: 4.77E-18 iu: 1.44E-11 rsn: stol
+ Step     77 Time=  1.00000E+02 Dt=  7.78423E-01 [d] snes_conv_reason:    4
+  newton =   1 [     247] linear =     1 [       247] cuts =  0 [   0]
+  --> max chng: dpmx=   0.0000E+00
+
+ Wall Clock Time:  6.1964E-02 [sec]   1.0327E-03 [min]   1.7212E-05 [hr]
