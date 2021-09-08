@@ -35,6 +35,7 @@
 \item \label{testRepICRegUnstruc} Representation of initial conditions by location using regions on unstructured grid
 \item \label{testRepICIJKStruc} Representation of initial conditions with IJK indices on structured grid
 \item \label{testRepICGridStruc} Representation of initial conditions by location using gridded datasets on structured grid
+\item \label{testRepBCGridStruc} Representation of boundary conditions by location using gridded datasets on structured grid (shortcourse example  and comparison available at www.pflotran.org/qa)
 \end{enumerate}
 
 \subsection{Test matrix for Constitutive Relations}
@@ -181,12 +182,11 @@
 	\hline
 	\hline
 	\ref{repBCRegions}& \ref{testScaledMassRateVol}, \ref{testScaledMassRatePerm}, 
-	\ref {testScaledVolRateVol}, \ref{testScaledVolRatePerm} & No \\
+	\ref {testScaledVolRateVol}, \ref{testScaledVolRatePerm} & Yes \\
 	\hline
-	\ref{repBCLocation} & \ref{testMassRate}, \ref{testVolRate} & No \\
+	\ref{repBCLocation} & \ref{testRepBCGridStruc} & Yes \\
 	\hline
 \end{tabular}
-\todo{We don't use a dataset for applying BCs}
 
 \subsection{Test matrix for User Interaction}
 \begin{tabular}{|l|l|l|l|}
