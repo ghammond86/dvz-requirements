@@ -36,6 +36,9 @@
 \item \label{testRepICIJKStruc} Representation of initial conditions with IJK indices on structured grid
 \item \label{testRepICGridStruc} Representation of initial conditions by location using gridded datasets on structured grid
 \item \label{testRepBCGridStruc} Representation of boundary conditions by location using gridded datasets on structured grid (shortcourse example  and comparison available at www.pflotran.org/qa)
+\item \label{testTimeStepGrowth} Test time step variablity following the growth factor until it reaches the maximum time step size.
+\item \label{testTimeStepReductCut} Test time step variablity following the reduction factor until it reaches the maximum number of consecutive cuts.
+\item \label{testTimeStepReduct} Test time step variablity following the reduction factor until it reaches the minimum time step size.
 \end{enumerate}
 
 \subsection{Test matrix for Constitutive Relations}
@@ -67,7 +70,7 @@
 \subsection{Test matrix for Physics and Chemistry}
 \begin{tabular}{|l|l|l|l|}
 	\hline
-		Requirement & Test(s) & Check implementation \\
+		Requirement & Tests that use capability & Tests that verify capability \\
 	\hline
 	\hline
 		\ref{sngVarSatFlow} &  \ref{testMassRate} to \ref{testNonContMaterialIDS} & Yes \\
@@ -77,7 +80,7 @@
 \subsection{Test matrix for Forcing Requirements}
 \begin{tabular}{|l|l|l|l|}
 	\hline
-	Requirement & Test(s) & Check implementation \\
+	Requirement & Tests that use capability & Tests that verify capability \\
 	\hline
 	\hline
 		\ref{dirichlet} & \ref{test1DSatDirBC}, \ref{test2DSatDirNeumBC}, \ref{test1DVarSatCelia} & Yes\\
@@ -107,10 +110,10 @@
 \subsection{Test matrix for Numerical Methods}
 \begin{tabular}{|l|l|l|l|}
 	\hline
-	Requirement & Test(s) & Check implementation \\
+	Requirement & Tests that use capability & Tests that verify capability \\
 	\hline
 	\hline
-		\ref{NMvarTS} & \ref{testa} & \\
+		\ref{NMvarTS} & \ref{testTimeStepGrowth}, \ref{testTimeStepReductCut}, \ref{testTimeStepReduct} & Yes\\
 	\hline
 		\ref{TSbyCFL} & \ref{testa}& \\
 	\hline
@@ -150,7 +153,7 @@
 \subsection{Test matrix for Representation of Material Properties}
 \begin{tabular}{|l|l|l|l|}
 	\hline
-	Requirement & Test(s) & Check implementation \\
+	Requirement & Tests that use capability & Tests that verify capability \\
 	\hline
 	\hline
 	\ref{repMatPropRegions} & \ref{testRepMatRegStruc}, \ref{testRepMatRegUnstruc}, \ref{testRepMatIJKStruc}  & Yes\\
@@ -164,7 +167,7 @@
 \subsection{Test matrix for Representation of Initial Conditions}
 \begin{tabular}{|l|l|l|l|}
 	\hline
-	Requirement & Test(s) & Check implementation \\
+	Requirement & Tests that use capability & Tests that verify capability \\
 	\hline
 	\hline
 	\ref{repICRegions} & \ref{testRepICRegStruc}, \ref{testRepICRegUnstruc}, \ref{testRepICIJKStruc}  & Yes \\
@@ -178,7 +181,7 @@
 \subsection{Test matrix for Representation of Boundary Conditions and Source/Sink terms}
 \begin{tabular}{|l|l|l|l|}
 	\hline
-	Requirement & Test(s) & Check implementation \\
+	Requirement & Tests that use capability & Tests that verify capability \\
 	\hline
 	\hline
 	\ref{repBCRegions}& \ref{testScaledMassRateVol}, \ref{testScaledMassRatePerm}, 
@@ -191,7 +194,7 @@
 \subsection{Test matrix for User Interaction}
 \begin{tabular}{|l|l|l|l|}
 	\hline
-	Requirement & Test(s) & Check implementation \\
+	Requirement & Tests that use capability & Tests that verify capability \\
 	\hline
 	\hline
 		\ref{inputFile} & \ref{testa} \\
@@ -219,7 +222,7 @@
 \subsection{Test matrix for Non-Functional Requirements}
 \begin{tabular}{|l|l|l|l|}
 	\hline
-	Requirement & Test(s) & Check implementation \\
+	Requirement & Tests that use capability & Tests that verify capability \\
 	\hline
 	\hline
 		\ref{versionControl} & \ref{testa} \\

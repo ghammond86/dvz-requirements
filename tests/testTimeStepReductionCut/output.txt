@@ -1,0 +1,178 @@
+
+=================
+  PFLOTRAN v3.0
+=================
+
+ "grid_structured_type" set to default value.
+ pflotran card:: NUMERICAL_METHODS
+ pflotran card:: GRID
+ pflotran card:: MATERIAL_PROPERTY
+   Name :: soil1
+ pflotran card:: CHARACTERISTIC_CURVES
+   Name :: cc1
+ pflotran card:: OUTPUT
+ pflotran card:: TIME
+ pflotran card:: REGION
+ all
+ pflotran card:: REGION
+ top
+ pflotran card:: REGION
+ bottom
+ pflotran card:: FLOW_CONDITION
+ initial_pressure
+ pflotran card:: FLOW_CONDITION
+ recharge
+ pflotran card:: INITIAL_CONDITION
+ "Initial Condition name" set to default value.
+ pflotran card:: BOUNDARY_CONDITION
+ pflotran card:: BOUNDARY_CONDITION
+ pflotran card:: STRATA
+ pflotran card:: END_SUBSURFACE
+ Domain Bounds (x y z):
+     0.0000000000E+00  0.0000000000E+00  0.0000000000E+00
+     1.0000000000E+00  1.0000000000E+00  1.0000000000E+01
+ Extent of Gridded Domain
+  X: 0.0000000000000000 - 1.0000000000000000
+  Y: 0.0000000000000000 - 1.0000000000000000
+  Z: 0.0000000000000000 - 10.000000000000000
+
+ Default HDF5 method is used in Initialization
+
+ Requested processors and decomposition =     1, npx,y,z=   -1  -1  -1
+ Actual decomposition: npx,y,z=    1   1   1
+
+   Beginning setup of FLOW SNES
+ number of dofs =   1, number of phases =   1
+ mode = Richards: p
+   Finished setting up FLOW SNES
+
+FLOW Time Stepper
+                 acceleration: on
+       acceleration threshold: 5
+       number of ramp entries: 5
+                ramp entry #1: 2.0000
+                ramp entry #2: 2.0000
+                ramp entry #3: 2.0000
+                ramp entry #4: 2.0000
+                ramp entry #5: 2.0000
+                ramp entry #6: 1.8000
+                ramp entry #7: 1.6000
+                ramp entry #8: 1.4000
+                ramp entry #9: 1.2000
+               ramp entry #10: 1.0000
+               ramp entry #11: 1.0000
+               ramp entry #12: 1.0000
+               ramp entry #13: 1.0000
+      maximum number of steps: 999999
+constant time steps threshold: 5
+       maximum number of cuts: 5
+             reduction factor: 5.000000E-01
+        maximum growth factor: 2.000000E+00
+
+FLOW Newton Solver
+                         atol: 1.000000E-50
+                         rtol: 1.000000E-08
+                         stol: 1.000000E-08
+                         dtol: 1.000000E+04
+                      maxnorm: 1.000000E+20
+                    inftolres: -9.990000E+02
+                    inftolupd: -9.990000E+02
+                 inftolrelupd: -9.990000E+02
+                 inftolsclres: -9.990000E+02
+                     max iter: 15
+                     min iter: 1
+                         maxf: 10000
+                  matrix type: baij
+         precond. matrix type: baij
+               inexact newton: off
+            print convergence: on
+   print detailed convergence: off
+          check infinity norm: on
+
+FLOW Linear Solver
+                       solver: preonly
+               preconditioner: lu
+                         atol: 1.000000E-50
+                         rtol: 1.000000E-05
+                         dtol: 1.000000E+04
+            maximum iteration: 10000
+ --> write tecplot output file: vsat_flow-000.tec
+       0.00 Seconds to write to Tecplot file(s)
+ 
+   Finished Initialization
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 6.41E-04 2x: 0.00E+00 2u: 0.00E+00 ir: 6.41E-04 iu: 0.00E+00 rsn:   0
+  1 2r: 1.52E+01 2x: 2.65E+07 2u: 2.65E+07 ir: 1.20E+01 iu: 2.56E+07 rsn:  -9
+ -> Cut time step: snes= -9 icut=  1[  1] t=  0.00000E+00 dt=  5.00000E-01
+ Newton solver reason: SNES_DIVERGED_DTOL
+  0 2r: 6.41E-04 2x: 0.00E+00 2u: 0.00E+00 ir: 6.41E-04 iu: 0.00E+00 rsn:   0
+  1 2r: 9.95E+00 2x: 1.47E+07 2u: 1.47E+07 ir: 7.58E+00 iu: 1.45E+07 rsn:  -9
+ -> Cut time step: snes= -9 icut=  2[  2] t=  0.00000E+00 dt=  2.50000E-01
+ Newton solver reason: SNES_DIVERGED_DTOL
+  0 2r: 6.41E-04 2x: 0.00E+00 2u: 0.00E+00 ir: 6.41E-04 iu: 0.00E+00 rsn:   0
+  1 2r: 5.98E+00 2x: 7.92E+06 2u: 7.87E+06 ir: 4.42E+00 iu: 7.84E+06 rsn:   0
+  2 2r: 3.16E+00 2x: 2.66E+06 2u: 8.02E+06 ir: 2.64E+00 iu: 7.60E+06 rsn:   0
+  3 2r: 2.34E+00 2x: 2.26E+06 2u: 2.91E+06 ir: 1.96E+00 iu: 2.13E+06 rsn:   0
+  4 2r: 1.17E+00 2x: 1.65E+06 2u: 1.94E+06 ir: 9.86E-01 iu: 1.59E+06 rsn:   0
+  5 2r: 1.98E-01 2x: 1.22E+06 2u: 8.89E+05 ir: 1.42E-01 iu: 7.90E+05 rsn:   0
+  6 2r: 6.38E-04 2x: 6.98E+05 2u: 8.70E+05 ir: 6.38E-04 iu: 2.46E+05 rsn:   0
+  7 2r: 2.33E+00 2x: 3.75E+06 2u: 3.64E+06 ir: 1.80E+00 iu: 3.57E+06 rsn:   0
+  8 2r: 1.12E+00 2x: 3.43E+06 2u: 3.39E+06 ir: 9.00E-01 iu: 2.14E+06 rsn:   0
+  9 2r: 1.69E+00 2x: 2.21E+06 2u: 2.73E+06 ir: 1.42E+00 iu: 1.53E+06 rsn:   0
+ 10 2r: 7.41E-01 2x: 1.59E+06 2u: 1.48E+06 ir: 6.23E-01 iu: 1.17E+06 rsn:   0
+ 11 2r: 5.80E-02 2x: 9.13E+05 2u: 9.19E+05 ir: 4.24E-02 iu: 6.01E+05 rsn:   0
+ 12 2r: 6.46E-04 2x: 1.34E+06 2u: 1.76E+06 ir: 6.46E-04 iu: 4.66E+05 rsn:   0
+ 13 2r: 1.65E+02 2x: 1.81E+08 2u: 1.81E+08 ir: 1.17E+02 iu: 1.81E+08 rsn:  -9
+ -> Cut time step: snes= -9 icut=  3[  3] t=  0.00000E+00 dt=  1.25000E-01
+ Newton solver reason: SNES_DIVERGED_DTOL
+  0 2r: 6.41E-04 2x: 0.00E+00 2u: 0.00E+00 ir: 6.41E-04 iu: 0.00E+00 rsn:   0
+  1 2r: 3.34E+00 2x: 4.18E+06 2u: 4.11E+06 ir: 2.42E+00 iu: 4.11E+06 rsn:   0
+  2 2r: 1.30E+00 2x: 3.39E+06 2u: 3.37E+06 ir: 9.91E-01 iu: 2.21E+06 rsn:   0
+  3 2r: 3.93E-01 2x: 1.85E+06 2u: 2.18E+06 ir: 3.19E-01 iu: 1.15E+06 rsn:   0
+  4 2r: 6.81E-02 2x: 7.53E+05 2u: 1.44E+06 ir: 4.82E-02 iu: 6.42E+05 rsn:   0
+  5 2r: 6.49E-04 2x: 7.64E+05 2u: 6.63E+05 ir: 6.49E-04 iu: 2.40E+05 rsn:   0
+  6 2r: 2.40E+01 2x: 2.76E+07 2u: 2.77E+07 ir: 1.70E+01 iu: 2.77E+07 rsn:  -9
+ -> Cut time step: snes= -9 icut=  4[  4] t=  0.00000E+00 dt=  6.25000E-02
+ Newton solver reason: SNES_DIVERGED_DTOL
+  0 2r: 6.41E-04 2x: 0.00E+00 2u: 0.00E+00 ir: 6.41E-04 iu: 0.00E+00 rsn:   0
+  1 2r: 1.80E+00 2x: 2.23E+06 2u: 2.11E+06 ir: 1.28E+00 iu: 2.11E+06 rsn:   0
+  2 2r: 7.96E-01 2x: 9.46E+05 2u: 2.06E+06 ir: 6.49E-01 iu: 1.97E+06 rsn:   0
+  3 2r: 6.09E-04 2x: 6.96E+05 2u: 5.64E+05 ir: 6.03E-04 iu: 5.49E+05 rsn:   0
+  4 2r: 1.94E-01 2x: 7.77E+05 2u: 2.85E+05 ir: 1.49E-01 iu: 2.80E+05 rsn:   0
+  5 2r: 1.17E-01 2x: 7.71E+05 2u: 2.37E+05 ir: 8.30E-02 iu: 1.48E+05 rsn:   0
+  6 2r: 6.18E-04 2x: 6.94E+05 2u: 2.48E+05 ir: 6.16E-04 iu: 1.41E+05 rsn:   0
+  7 2r: 3.61E-01 2x: 8.77E+05 2u: 4.83E+05 ir: 2.71E-01 iu: 4.80E+05 rsn:   0
+  8 2r: 2.35E-01 2x: 8.90E+05 2u: 4.21E+05 ir: 1.66E-01 iu: 2.83E+05 rsn:   0
+  9 2r: 6.19E-04 2x: 6.92E+05 2u: 4.70E+05 ir: 6.17E-04 iu: 2.71E+05 rsn:   0
+ 10 2r: 3.97E-01 2x: 9.00E+05 2u: 5.22E+05 ir: 2.95E-01 iu: 5.19E+05 rsn:   0
+ 11 2r: 3.51E-01 2x: 7.70E+05 2u: 5.33E+05 ir: 2.85E-01 iu: 4.59E+05 rsn:   0
+ 12 2r: 6.19E-04 2x: 6.92E+05 2u: 2.69E+05 ir: 6.17E-04 iu: 2.55E+05 rsn:   0
+ 13 2r: 3.88E-01 2x: 8.94E+05 2u: 5.12E+05 ir: 2.89E-01 iu: 5.10E+05 rsn:   0
+ 14 2r: 3.57E-01 2x: 7.73E+05 2u: 5.27E+05 ir: 2.91E-01 iu: 4.49E+05 rsn:   0
+ 15 2r: 6.19E-04 2x: 6.92E+05 2u: 2.75E+05 ir: 6.17E-04 iu: 2.61E+05 rsn:   0
+ -> Cut time step: snes= -5 icut=  5[  5] t=  0.00000E+00 dt=  3.12500E-02
+ Newton solver reason: SNES_DIVERGED_MAX_IT
+  0 2r: 6.41E-04 2x: 0.00E+00 2u: 0.00E+00 ir: 6.41E-04 iu: 0.00E+00 rsn:   0
+  1 2r: 9.27E-01 2x: 1.28E+06 2u: 1.07E+06 ir: 6.55E-01 iu: 1.07E+06 rsn:   0
+  2 2r: 2.11E-01 2x: 7.83E+05 2u: 8.48E+05 ir: 1.49E-01 iu: 8.13E+05 rsn:   0
+  3 2r: 6.78E-04 2x: 7.40E+05 2u: 6.47E+05 ir: 6.76E-04 iu: 4.36E+05 rsn:   0
+  4 2r: 8.74E+00 2x: 1.04E+07 2u: 1.05E+07 ir: 6.19E+00 iu: 1.05E+07 rsn:  -9
+  Stopping: Time step cut criteria exceeded.
+     icut =  6, max_time_step_cuts=  5
+ --> write tecplot output file: flow_cut_to_failure.tec
+       0.00 Seconds to write to Tecplot file(s)
+
+Simulation failed.  Exiting!
+
+
+PMCSubsurfaceFlow
+ Total Time:   9.1970E-03 [sec]
+
+ FLOW TS BE steps =      0 newton =        0 linear =          0 cuts =      0
+FLOW TS BE Wasted Linear Iterations = 0
+FLOW TS BE Wasted Newton Iterations = 0
+ FLOW TS BE SNES time = 0.0 seconds
+----------
+
+ Wall Clock Time:  2.3629E-02 [sec]   3.9382E-04 [min]   6.5636E-06 [hr]
