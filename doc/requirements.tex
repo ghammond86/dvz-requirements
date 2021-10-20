@@ -11,31 +11,31 @@ Constitutive relations employ mathematical equations to approximate the observed
 \subsubsection{Equations of State}
 Equations of state calculate fluid density, enthalpy, and viscosity as a function of temperature and pressure. The following equations of state shall be implemented in the code:
 \begin{enumerate}
-	\item IFC67: \label{ifc67} \pft shall implement the IFC67 (International Formulation Committee, 1967) equations of state for calculating the density, enthalpy, and viscosity of water as a function of pressure and temperature.
-	\item IF97: \label{if97} \pft shall implement the IF97 from the International Association for the Properties of Water and Steam (Wagner et al, 2000) equations of state for calculating the density and enthalpy of water and steam as a function of pressure and temperature.
+	\item \label{eos_water_ifc67} \pft shall implement the IFC67 (International Formulation Committee, 1967) equations of state for calculating the density, enthalpy, and viscosity of water as a function of pressure and temperature.
+	\item \label{eos_water_eos_water_if97} \pft shall implement the IF97 from the International Association for the Properties of Water and Steam (Wagner et al, 2000) equations of state for calculating the density and enthalpy of water and steam as a function of pressure and temperature.
+	\item \label{eos_water_constant} \pft shall implement an equation of state for water that holds the density, viscosity and enthalpy of water and steam constant regardless of pressure or temperature.
 \end{enumerate}
 
 \subsubsection{Capillary Pressure/Saturation Functions}
 In variably saturated or multiphase flow in porous media it is essential to establish a relation between capillary pressure and saturation. This relation is set forth by several empirical models, and two of the more common are implemented in \pft:
 \begin{enumerate}[resume]
-	\item van Genuchten: \label{vanGen} \pft shall implement the van Genuchten function (van Genuchten, 1980) to calculate the saturation on a cell given its capillary pressure value.
-	\item Brooks-Corey: \label{brCorey} The simulator may use the Brooks-Corey function (Brooks and Corey,  1964) to calculate the saturation on a cell given its capillary pressure value.
+	\item \label{vanGen} \pft shall implement the van Genuchten function (van Genuchten, 1980) to calculate the saturation on a cell given its capillary pressure value.
+	\item \label{brCorey} \pft shall implement the Brooks-Corey function (Brooks and Corey,  1964) to calculate the saturation on a cell given its capillary pressure value.
 \end{enumerate}
 
 \subsubsection{Relative Permeability Functions}
 
-Relative permeability functions establish a relationship between liquid relative permeability [-] (which varies from 0 to 1) and saturation. The simulator shall implement the following relative permeability functions: 
-
+Relative permeability functions establish a relationship between liquid relative permeability [-] (which varies from 0 to 1) and saturation.  
 \begin{enumerate}[resume]
-	\item Mualem: \label{mualem} The simulator calculates relative permeability as a function of saturation using either the Mualem-van Genuchten or the Mualem-Brooks-Corey functions (Chen et al. 1990). 
-	\item Burdine: \label{burdine} The simulator calculates relative permeability as a function of saturation using either the Burdine-van Genuchten or the Burdine-Brooks-Corey functions (Chen et al. 1990). 
+	\item \label{mualem} \pft shall calculate relative permeability as a function of saturation using either the Mualem-van Genuchten or the Mualem-Brooks-Corey functions (Chen et al. 1990). 
+	\item \label{burdine} \pft shall calculate relative permeability as a function of saturation using either the Burdine-van Genuchten or the Burdine-Brooks-Corey functions (Chen et al. 1990). 
 \end{enumerate}
 
 \subsubsection{Soil Compressibility Functions}
-The storage of fluids in porous media change according to compaction or expansion of fluids and porous media. While compaction (or expansion) of fluids is governed by the fluid compressibility, the changes in porous media volume is set forth by soil compressibility functions. These functions relate changes in porosity with changes in pressure. \pft shall implement two soil compressibility functions:
+The storage of fluid in porous media change according to compaction or expansion of fluids and porous media. While compaction (or expansion) of fluids is governed by the fluid compressibility, the changes in porous media volume is set forth by soil compressibility functions. These functions relate changes in porosity with changes in pressure. \pft shall implement the following soil compressibility functions:
 \begin{enumerate}[resume]
-	\item Leijnse: \label{leijnse} Leijnse function (Leijnse 1992) is the default soil compressibility function considered by the simulator. It calculates the current porosity as a function of pressure, given soil matrix compressibility coefficient, a reference pressure, and reference porosity.
-	\item Exponential: \label{exponential} An exponential soil compressibility function establishes an exponential relationship between changes in pressure and porosity, given a soil matrix compressibility coefficient, a reference pressure, and reference porosity. (Low - easy)
+	\item \label{leijnse} \pft shall calculate soil compressibility through the Leijnse function (Leijnse 1992). It calculates the current porosity as a function of pressure, given soil matrix compressibility coefficient, a reference pressure, and reference porosity.
+	\item \label{exponential} \pft shall calculate soil compressibility through an exponential relationship between changes in pressure and porosity, given a soil matrix compressibility coefficient, a reference pressure, and reference porosity. (Low - easy)
 \end{enumerate}
 \subsubsection{Constitutive Relation Coupling by Region}
 \begin{enumerate}[resume]
@@ -57,7 +57,7 @@ The storage of fluids in porous media change according to compaction or expansio
 \subsubsection{Biogeochemical Reaction}
 \begin{enumerate}[resume]
 	\item \label{PCRxnKD} \pft shall simulate sorption using a linear isotherm $\left(\text{K}_\text{D}\right)$. 
-	\item \label{PCRxnKD} \pft shall simulate first-order radioactive decay in the aqueous and sorbed phases. 
+	\item \label{PCRxnDecay} \pft shall simulate first-order radioactive decay in the aqueous and sorbed phases. 
 \end{enumerate}
 \subsubsection{Geophysics}
 \begin{enumerate}[resume]
@@ -77,17 +77,25 @@ The storage of fluids in porous media change according to compaction or expansio
 	\hydrostatictext
 \end{enumerate}
 
+\vspace{0.25cm}
+\noindent\pft shall assign heterogeneous initial pressures to the domain by:
+\begin{enumerate}[resume]
+	\assignbyregion\label{fluidICRegion}
+	\assignbycoordinate\label{fluidICLocation}
+	\assignbycellid\label{fluidICCellID}
+\end{enumerate}
+
 \paragraph{Dirichlet Boundary Conditions}
 \begin{enumerate}[resume]
 	\item \label{fluidDirichletBC} \pft shall assign boundary pressures to boundary cell faces. 
 	\item \label{fluidHydrostaticBC} \pft shall map boundary pressures to cell faces from a hydrostatic fluid column.
 	\hydrostatictext
+	\item \label{FRnoFlow} \pft shall assume a no flow (zero flux) condition when no boundary condition is assigned to a boundary face.
 \end{enumerate}
 
 \paragraph{Neumann Bouondary Conditions}
 \begin{enumerate}[resume]
 	\item \label{fluidNeumannBC} \pft shall prescribe Darcy fluxes across boundary cell faces.
-
 \end{enumerate}
 
 \paragraph{Source/Sinks}
@@ -96,156 +104,173 @@ The storage of fluids in porous media change according to compaction or expansio
 	\item \label{fluidScaledMassRateVolSS} \pft shall add/remove fluid mass from cells in a region using a mass rate equation that is scaled by the ratio of the volume of the cell to the sum of cell volumes in the region.
 	\item \label{fluidScaledMassRatePermSS} \pft shall add/remove fluid mass from cells in a region using a mass rate equation that is scaled by the ratio of the product of cell volume and intrinsic permeability to the sum of cell volumes and permeabilities in the region.
 	\item \label{fluidVolRateSS} \pft shall add/remove fluid mass from cells using a volumetric rate equation.
-	\item \label{scaledVolRateVol} \pft shall add/remove fluid mass from cells in a region using a volumetric rate equation that is scaled by the ratio of the volume of the cell to the sum of cell volumes in the region.
+	\item \label{fluidScaledVolRateVolSS} \pft shall add/remove fluid mass from cells in a region using a volumetric rate equation that is scaled by the ratio of the volume of the cell to the sum of cell volumes in the region.
 	\item \label{fluidScaledVolRatePermSS} \pft shall add/remove fluid mass from cells in a region using a volumetric rate equation that is scaled by the ratio of the product of cell volume and intrinsic permeability to the sum of cell volumes and permeabilities in the region.
 \end{enumerate}
 
+\paragraph{General}
 \begin{enumerate}[resume]
-	\item The values applied to flow boundary conditions and source/sink terms may vary in time. 
-\label{FRvaryTime}
-	\item If no boundary condition is specified, a no-flux condition is assumed. \label{FRnoFlow}
+    \item \label{FRvaryTime} \pft shall support time-varying boundary conditions and source/sinks.
 \end{enumerate}
 
 \setlist[enumerate]{label=NM \arabic*.,ref=NM \arabic*}
 \subsection{Numerical Methods}
 
-\subsubsection{Time Stepping}
+\subsubsection{Finite volume implementation}
 \begin{enumerate}
-	\item Variable Time Stepping: \label{NMvarTS} \pft shall have the ability to vary the time stepping. The time stepping will depend on the initial time step size, the minimal and maximum time step size, and the maximum growth and reduction factor. The maximum time step size may change during the simulation time. Time steps are increased or reduced according to growth and reduction factor as a function of the number of iterations needed for convergence. HIGH - medium
-	\item Time Step Restriction by CFL: \label{TSbyCFL} \pft shall have the ability to restrict time steps as a function of the maximum flow velocity and grid discretization such that CFL (Courant–Friedrichs–Lewy) number is not exceeded. HIGH - easy
-	\item Variable Time Step Size by Process Model: \label{TSbyModel} \pft shall allow different process models, such as flow and transport, to comply with different time step settings. MEDIUM - easy
+	\item \label{FVmethod} \pft shall employ the cell-centered finite volume method with the two-point flux approximation to discretize the governing mass and heat conservation equations.
+\end{enumerate}
+
+\subsubsection{Time Stepping}
+\begin{enumerate}[resume]
+	\item \label{NMvarTS} \pft shall have the ability to vary the time step size. 
+	The time stepping will depend on an initial time step size, a minimum and maximum time step size, and a maximum growth and reduction factor. 
+	The maximum time step size shall have the ability to change during the simulation time. 
+	Time step size shall increase or decrease according to growth and reduction factor as a function of the number of iterations needed for convergence. HIGH - medium
+	\item \label{TSbyCFL} \pft shall have the ability to restrict time steps as a function of the maximum flow velocity and grid discretization such that CFL (Courant–Friedrichs–Lewy) number is not exceeded. HIGH - easy
+	\item \label{TSbyModel} \pft shall allow different process models, such as flow and transport, to comply with different time step settings. MEDIUM - easy
 \end{enumerate}
 
 \subsubsection{Nonlinear solvers}
 \begin{enumerate}[resume]
 	\item \pft shall implement a Newton-Raphson strategy to solve the set of nonlinear governing equations and iteratively drive the norm of the residual vector to below a desired convergence tolerance. \label{nonlinearSolver} LOW - easy
-	\item The software shall report convergence failure and cut the timesetp size if the maximum number of Newton iterations is reached. \label{nonlinearReport} LOW-easy
+	\item \pft shall report convergence failure and cut the timesetp size if the maximum number of Newton iterations is reached. \label{nonlinearReport} LOW-easy
 \end{enumerate}
-
-Convergence may be verified by five different convergence criteria, named as follows:
+\vspace{0.25cm}
+\pft shall support the following Newton-Raphson convergence criteria:
 \begin{enumerate}[resume]
-	\item ATOL: \label{nonlinearATOL} Convergence is met when the 2-norm of residual is less than ATOL.
-	\item DTOL:\label{nonlinearDTOL} DTOL establishes divergence when the 2-norm of the residual is greater than DTOL multiplied by the 2-norm of the initial residual (relative to the first Newton iteration).
-	\item ITOL\_UPDATE:\label{nonlinearITOL} Convergence is met when the infinity norm update (difference between the current and previous solution) is less than ITOL\_UPDATE.
-	\item RTOL:\label{nonlinearRTOL} Convergence is met when the 2-norm of residual is less than RTOL multiplied by the 2-norm of the residual from the first Newton iteration.
-	\item STOL:\label{nonlinearSTOL} Convergence is met when the 2-norm of the update (difference between the current and the previous iteration solution) is less than STOL multiplied by the 2-norm of the previous iteration solution.
+	\item \label{nonlinearATOL} Convergence is met when the 2-norm of residual is less than ATOL.
+	\item \label{nonlinearRTOL} Convergence is met when the 2-norm of residual is less than RTOL multiplied by the 2-norm of the residual from the first Newton iteration.
+	\item \label{nonlinearSTOL} Convergence is met when the 2-norm of the update (difference between the current and the previous iteration solution) is less than STOL multiplied by the 2-norm of the previous iteration solution.
+	\item \label{nonlinearITOL} Convergence is met when the infinity norm of the Newton update (difference between the current and previous solution) is less than ITOL\_UPDATE.
+	\item \label{nonlinearDTOL} The solver diverges (fails) when the 2-norm of the residual for the current Newton iteration is greater than DTOL multiplied by the 2-norm of the relative from the first iteration.
 \end{enumerate}
 MEDIUM - easy
 
 \subsubsection{Linear solvers}
-The set of nonlinear governing equations is solved using Newton-Raphson’s method, which uses a sequence of linearized problems to find the solution. To solve this system of linear equations, \pft allows the use of two solvers: direct and iterative solvers. The direct solver uses an LU decomposition and iterative solver options are: Bi-CGStab (default), and GMRES. \pft allows the specification of the maximum number iterations. 
-For iterative solvers, three types of convergence criteria shall be implemented:
+The Newton Raphson method iteratively solves linear systems of equations for updates to the solution.
+
+\vspace{0.25cm}
+\noindent\pft shall support the following linear system solvers:
 \begin{enumerate}[resume]
-	\item ATOL: \label{linearATOL} Convergence is met when the 2-norm of residual is less than ATOL.
-	\item DTOL:\label{linearDTOL} DTOL establishes divergence when the 2-norm of the residual is greater than DTOL multiplied by the 2-norm of the initial residual (relative to the first linear iteration).
-	\item RTOL:\label{linearRTOL} Convergence is met when the 2-norm of residual is less than RTOL multiplied by the 2-norm of the residual from the first linear iteration.
+	\item \label{linearDirect} Direct LU Decomposition
+	\item \label{linearIterative} Iterative BiCGSTAB and GMRES Krylov solvers
+\end{enumerate}
+\vspace{0.25cm}
+\pft shall implement the following Krylov solver convergence criteria:
+\begin{enumerate}[resume]
+	\item \label{linearATOL} Convergence is met when the 2-norm of residual is less than ATOL.
+	\item \label{linearRTOL} Convergence is met when the 2-norm of residual is less than RTOL multiplied by the 2-norm of the residual from the first linear iteration.
+	\item \label{linearMaxIt} The solver fails once a prescribed maximum number of iterations (MAXIT) is met.
+	\item \label{linearDTOL} The solver diverges (fails) when the 2-norm of the residual for the current linear iteration is greater than DTOL multiplied by the 2-norm of the relative from the first iteration.
 \end{enumerate}
 MEDIUM - easy
 
-\subsubsection{Finite volume implementation}
-\begin{enumerate}[resume]
-	\item The governing equations are discretized in \pft using a cell-centered finite volume approach, and a two-point flux approximation (TPFA) scheme is employed to discretize the mass flux between two grid cells. \label{FVmethod} 
-\end{enumerate}
-
 \subsubsection{Gridding}
-\pft shall accept the following type of grids:
+\pft shall support the following types of grids:
 \begin{enumerate}[resume]
-	\item Structured grids:  \label{structGrid} \pft has the capacity of creating structured cartesian grids of hexahedron cells with varying grid spacing.
-	\item Implicit unstructured grids: \label{impStructGrid} An implicit unstructured grid allows the domain to be discretized with the following types of cells: tetrahedron (4 vertices), pyramid (5 vertices), wedge (6 vertices), and hexahedron (8 vertices). The implicit grid cells are defined by a list of vertices numbers and the vertices are defined by their coordinates.
-	\item Explicitly unstructured grids: \label{expStructGrid} An explicit unstructured grid allows the domain to be discretized with all types of cells, including Voronoi cells. The grid is described by a list of cells and connectivity. Cells are defined by an id, the cell-center coordinates, and the cell volume. The connectivity between two cells is composed by the id for each cell, the area that connects the cells and the face-center coordinates.
+	\item Structured grids:  \label{structGrid} Cartesian grids of hexahedron cells with variable grid spacing.
+	\item Implicit unstructured grids: \label{impStructGrid} Unstructured grids defined by vertices (x,y,z coordinates) and cells (lists of vertices). 
+	This approach is similar to finite element grids composed of nodes and elements. Implicit unstructured grids shall support the following types of cells: tetrahedron (4 vertices), pyramid (5 vertices), wedge (6 vertices), and hexahedron (8 vertices). 
+	Grid cells are defined by a list of vertex ids and vertices are defined by a coordinate.
+	\item Explicitly unstructured grids: \label{expStructGrid} Unstructured grids defined by volumes and connectivity (between volumes). 
+	Cells are defined by an id, the cell-center coordinates, and the cell volume.
+	Connectivity between two cells is composed by the id for each cell, the area that connects the cells and the face-center coordinates.
+\end{enumerate}
+\vspace{0.25cm}
+\begin{enumerate}[resume]
+	\item \pft shall allow for a non-zero structured grid origin (i.e. origin != $<0,0,0>$).
 \end{enumerate}
 
-
-
-\todo{We have a test that checks if structured irregular grids with a shifted origin is well built. Do we need a requirement for that?}
 \setlist[enumerate]{label=RMP \arabic*.,ref=RMP \arabic*}
 \subsection{Representation of Material Properties}
-\pft easily handles highly heterogenous data. \pft has the capability of assigining material properties such as permeability and porosity on a cell by cell basis.
-
 \begin{enumerate}
-	\item \pft has the capability of inactiving cells in a determined region.
-	\item Material properties are assembled within groups and an integer  material ID is assigned to each group for identification. Material IDs can be non-contiguous integers numbers.
+	\item \pft shall have the ability to inactivate grid cells based on material ID.
+	\item \pft shall have the ability to assign material properties by material ID.
+	\item \pft shall support non-contiguous material IDs (e.g. 1,2,5).
 \end{enumerate}
-
-\pft shall assign material properties and constitutive relationship on a heterogeneous domain using the following strategies:
+\vspace{0.25cm}
+\noindent\pft shall assign heterogeneous electrical conductivity, intrinsic permeability, porosity, soil particle density and tortuosity by:
 \begin{enumerate}[resume]
-	\item By region: \label{repMatPropRegions} \pft allows the definitions of different regions in the domain. Each region can be linked with a material property.
-	\item  By location (x,y,z coodinates): \label{repMatPropLocation} \pft allows the specification of different material properties based on the cells coordinates.
-	\item  By cell IDs: \label{repMatPropCellID} \pft allows the specification of different material properties based on the cells ID numbers.
+	\assignbyregion  \label{repMatPropRegions}
+	\assignbycoordinate \label{repMatPropLocation}
+	\assignbycellid \label{repMatPropCellID}
 \end{enumerate}
 
 
 \setlist[enumerate]{label=RIC \arabic*.,ref=RIC \arabic*}
 \subsection{Representation of Initial Conditions}
-\pft has the capability of assigining different initial conditions on a cell by cell basis.
-
-\pft shall assign heterogeneous initial conditions across the domain using the following strategies:
+\pft shall assign heterogeneous initial conditions across the domain by:
 \begin{enumerate}
-	\item By region: \label{repICRegions} Several initial conditions are attributed based on the definition of different domain regions.
-	\item By location (x,y,z coodinates): \label{repICLocation} Varying initial conditions are specified based on the location of the cells (and their coordinates).
-	\item By cell IDs: \label{repICCellID} Initial conditions are set up based on cells IDs.
+    \assignbyregion \label{repICRegions}
+	\assignbycoordinate \label{repICLocation}
+	\assignbycellid \label{repICCellID}
 \end{enumerate}
 HIGH - easy
 
 \setlist[enumerate]{label=RBC \arabic*.,ref=RBC \arabic*}
 \subsection{Representation of Boundary Conditions and Source/Sink terms}
-\pft has the capability of assigining different boundary conditions and source-sink terms on a cell by cell basis.
-
 \pft shall allow the specification of various boundary conditions and source-sink terms using the following strategies:
 \begin{enumerate}
-	\item By region: \label{repBCRegions} Boundary conditions may be linked with different domain regions.
-	\item  By location (x,y,z coodinates): \label{repBCLocation} Boundary conditions may vary along the boundaries based on the cells coordinates.
+	\assignbyregion \label{repBCRegions}
+	\assignbycoordinate \label{repBCLocation}
 \end{enumerate}
 
 \setlist[enumerate]{label=UI \arabic*.,ref=UI \arabic*}
 \subsection{User Interaction}
 \subsubsection{Input format}
 \begin{enumerate}
-	\item \pft reads an ASCII file as input. The input file is divided into blocks and sub-blocks. The block that specifies the type of simulation to run (e.g.: subsurface) and the process model to use (e.g.: subsurface flow or subsurface transport) is called the simulation block. The simulation block is required in every input file. The remaining blocks define numerical methods, solver options, domain discretization, material properties, constitutive relations, time step options, output options, initial and boundary conditions and regions within the domain. \label{inputFile} LOW - easy
-	\item \pft allows the definition of regions within the domain, which can be cuboids, rectangles or points. These regions may be linked with different material properties, initial and boundary conditions, allowing those to be linked on a cell by cell basis. \label{inputRegions} HIGH - easy
-	\item Except for temperature (C), default units and values shall be assumed when no specification is inserted in the input file. \label{inputUnitsValues} LOW - hard
-	\item If any required keyword, block, sub-block, or property is missing, the simulation will throw an error message informing the user about their mistake. \label{inputErrors} LOW - hard
+	\item \pft shall read an ASCII file as input. The input file shall be divided into blocks and sub-blocks. The block that specifies the type of simulation to run (e.g.: subsurface) and the process model to use (e.g.: subsurface flow or subsurface transport) shall be called the simulation block. The simulation block shall be required in every input file. The remaining blocks shall define numerical methods, solver options, domain discretization, material properties, constitutive relations, time step options, output options, initial and boundary conditions and regions within the domain. \label{inputFile} LOW - easy
+	\item \pft shall allow for the definition of regions within the domain, which can be cuboids, rectangles or points. \label{inputRegions} HIGH - easy
+	\item Except for \textit{Celsius} for temperature and \textit{bars} for gas partial pressures in chemical constraints, \pft shall default to SI units when units are not specified in the input file. \label{inputUnitsValues} LOW - hard
+	\item \pft shall use default units of molarity [moles per liter or M] for concentration.
+	\item \pft shall print a descriptive error message to the screen and terminate simulation execution when any required keyword, block, sub-block or property is missing. \label{inputErrors} LOW - hard
 \end{enumerate}
 
 \subsubsection{Output format}
 \begin{enumerate}[resume]
-	\item Output files may be generated for specific moments in time or for periodic times or time steps. \label{outputSpecs} HIGH - easy
-	\item Output results are printed in screen for specified periodic time steps. Screen output may show the 2-norm of the residual, solution, update, and the infinity norm of the residual and update for every Newton iteration. It also shows the number of linear and non-linear iterations needed to reach convergence. \label{outputPrintScreen} LOW - easy
-	\item The screen output is saved in an ASCII file, which also contains a summary of all parameters and problem setup inputs. \label{outputFile} HIGH - easy
+	\item \pft shall print simulator performance metrics (e.g. time step number, time, time step size, norms calculated for convergence calculations, solver iteration numbers, time step cuts, etc.) to the screen for specific time steps. The user may specify a frequency for printing such data to the screen, or they may deactivate the printing. \label{outputPrintScreen} LOW - easy
+%	\item The screen output is saved in an ASCII file, which also contains a summary of all parameters and problem setup inputs. \label{outputFile} HIGH - easy
+	\item \pft shall write state variables to files at specific times. \label{outputSpecs} HIGH - easy
 \end{enumerate}
 
-\pft outputs the following results: 
-
+\noindent\pft shall support the following output file formats: 
 \begin{enumerate}[resume]
-	\item Snapshot file: \label{outSnapshot}A snapshot file outputs the value of specified variables over the entire domain at a specific time. Several file formats shall serve as snapshot files: Tecplot block, Tecplot point, VTK, and HDF5 (default). HIGH - easy
-	\item Observation file: \label{outObservation}An observation file outputs the values of specified variables at a determined point over prescribed times. The observation file format in ASCII columns.HIGH - easy
-	\item Mass balance file: \label{outMassBalance}A mass balance output file returns the global mass balance and the fluxes at all boundaries for water at specified times using an ASCII file.HIGH - easy
+	\item Snapshot file: \label{outSnapshot} A snapshot file shall store the value of specific state variables over the entire domain at a specific time. \pft shall support the following formats: Tecplot block, Tecplot point and HDF5. HIGH - easy
+	\item Observation file: \label{outObservation} An observation file shall store the value of specific state variables at specified cells throughout time. The observation file shall have a column-delimited ASCII format. HIGH - easy
+	\item Mass balance file: \label{outMassBalance} A mass balance file shall store the global mass balance and instantaneous and cumulative fluxes at all boundaries and source/sinks for fluids and solutes throughout time. The mass balance file shall have a column-delimited ASCII format. HIGH - easy
+	\item Checkpoint file: \label{outCheckpoint} A binary file that stores all information necessary to restart a simulation at a point in time prior to the final simulation time and match the final simulation results.
 \end{enumerate}
 
 \setlist[enumerate]{label=NFR \arabic*.,ref=NFR \arabic*}
 \section{Non-Functional Requirements}
 \subsection{Runtime Performance}
+\noindent At the end of a simulation, \pft shall report:
 \begin{enumerate}
-	\item The code shall report the total run time at the end of simulation and record the number of processes employed to run the problem. LOW - easy
+	\item Total wall clock run time.
+	\item Wall clock time spent in each process model.
+	\item Total number of linear and nonlinear solver iterations.
+	\item Number of time step cuts and wasted solver iterations due to time step cuts.
 \end{enumerate}
 
 \subsection{Software Maintenance}
 \begin{enumerate}[resume]
-	\item \pft shall use a distributed version control to promote a collaborative environment for software development. The collaborative environment is facilitated by the possibility to have remote repositories, which encourages developers to work using several workflow configurations. Distributed version control tracks changes in the code and allows developers to have the full history record.\label{versionControl}
-	\item All code shall meet the standards provided in the Developer’s guide. \label{codeStandard}
-	\item \pft developers’ guide shall provide instructions for reporting bugs.\label{reportBugs}
-	\item Automated testing shall be implemented for any new capability added.\label{autTesting}
-	\item Any user may contribute to \pft code. Changes to the code must undergo peer review before being accepted and must pass all unit and regression tests.\label{contribution}
+	\item \label{versionControl} \pft source code shall be tracked using a distributed version control system.
+	\item \label{codeStandard} \pft source code shall meet the coding standards specified within the \pft Developer’s guide. 
+	\item \label{reportBugs} \pft bug reporting shall adhere to the approach specified within the \pft Developer’s guide. 
+	\item \label{autTesting} \pft source code development branches shall pass automated regression and units testing prior to being merged with the master branch.
+	\item \label{codeReview} \pft source code shall be peer reviewed for consistency with the coding standards specified in the \pft Developer's guide prior to being merged with the master branch.
 \end{enumerate}
 
 \subsection{User support}
 \begin{enumerate}[resume]
-	\item \pft shall provide a channel to support to users. This channel may be used for reporting bugs, asking and answering questions, as well as creating a connected community.\label{userSupport}
+	\item \label{userSupport} The \pft project shall maintain separate user and developer mailing lists to provide users with a means of reporting bugs, discussing questions and supporting community needs.
 \end{enumerate}
 
 \subsection{Code Availability}
 \begin{enumerate}[resume]
-	\item \pft is a free software and available in an open access repository.\label{codeAvail}
+	\item \label{codeLicensing} \pft shall be licensed as open source (GNU LGPL).
+	\item \label{codeAvailability} \pft shall be stored in an online repository with open access (no username/password required).
 \end{enumerate}
 
 

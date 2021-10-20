@@ -1,0 +1,240 @@
+\subsection{Test matrix for Constitutive Relations}
+\begin{tabular}{|l|l|l|l|}
+	\hline
+	Requirement & Tests that use capability & Tests that verify capability \\
+	\hline
+	\hline
+	\ref{eos_water_ifc67} & \ref{testEOSIFC67} & Yes\\
+	\hline
+	\ref{eos_water_eos_water_if97} & \ref{testEOSIF97} & Yes \\
+	\hline
+	\ref{eos_water_constant} & ? & Yes \\
+\hline
+	\ref{vanGen} & \ref{test1DVarSatCelia}, \ref{test2DVarSat}, \ref{testRepMatCellIDStruc}, doc-dev & Yes\\
+	\hline
+	\ref{brCorey} & doc-dev & Yes\\
+	\hline
+	\ref{mualem} & \ref{test1DVarSatCelia}, \ref{test2DVarSat},  \ref{testRepMatCellIDStruc}, doc-dev & Yes\\
+	\hline
+	\ref{burdine} & doc-dev & Yes\\
+	\hline
+	\ref{leijnse} &  \ref{test2DVarSat},  \ref{testRepMatCellIDStruc} & No \\
+	\hline
+	\ref{exponential} & \ref{testa} & No \\
+	\hline
+	\ref{CRbyRegion} & \ref{testa} & No \\
+	\hline
+\end{tabular}
+
+\subsection{Test matrix for Physics and Chemistry}
+\begin{tabular}{|l|l|l|l|}
+	\hline
+	Requirement & Tests that use capability & Tests that verify capability \\
+	\hline
+	\hline
+	\ref{PCSngVarSatFlow} &  \ref{testMassRate} to \ref{testNonContMaterialIDS} & Yes \\
+	\hline
+	\ref{PCTranConservative} &  & \\
+	\hline
+	\ref{PCRxnKD} &  & \\
+	\hline
+	\ref{PCRxnDecay} &  & \\
+	\hline
+	\ref{PCERT} &  & \\
+	\hline
+\end{tabular}
+
+\subsection{Test matrix for Flow Initial Conditions}
+\begin{tabular}{|l|l|l|l|}
+	\hline
+	Requirement & Tests that use capability & Tests that verify capability \\
+	\hline
+	\hline
+	\ref{fluidDirichletIC} &  & \\
+	\hline
+	\ref{fluidHydrostaticIC} &  & \\
+	\hline
+	{\Huge \color{red}Start here.} Sort out why the ICXXX is duplicated.
+	\ref{fluidICRegion} &  & \\
+    \hline
+	\ref{fluidICLocation} &  & \\
+    \hline
+	\ref{fluidICCellID} &  & \\
+    \hline
+	\ref{} &  & \\
+    \hline
+	\ref{} &  & \\
+    \hline
+	\ref{} &  & \\
+	\hline
+\end{tabular}
+
+\subsection{Test matrix for Flow Forcing Requirements}
+\begin{tabular}{|l|l|l|l|}
+	\hline
+	Requirement & Tests that use capability & Tests that verify capability \\
+	\hline
+	\hline
+	\ref{fluidDirichletBC} & \ref{test1DSatDirBC}, \ref{test2DSatDirNeumBC}, \ref{test1DVarSatCelia} & Yes\\
+	\hline
+	\ref{fluidHydrostaticBC} & \ref{test1DSatHyd}, \ref{testInactive} & Yes \\
+	\hline
+	\ref{fluidNeumannBC} & \ref{test1DSatNeumBC}, \ref{test2DVarSat} & Yes\\
+	\hline
+	\ref{fluidMassRateSS} & \ref{testMassRate} & Yes\\
+	\hline
+	\ref{fluidScaledMassRateVolSS} & \ref{testScaledMassRateVol}& Yes \\
+	\hline
+	\ref{fluidScaledMassRatePermSS} & \ref{testScaledMassRatePerm} & Yes\\
+	\hline
+	\ref{fluidVolRateSS} & \ref{testVolRate} & Yes \\
+	\hline
+	\ref{fluidScaledVolRateVolSS} & \ref{testScaledVolRateVol} & Yes\\
+	\hline
+	\ref{fluidScaledVolRatePermSS} & \ref{testScaledVolRatePerm} & Yes\\
+	\hline
+	\ref{FRvaryTime} & \ref{test1DSatNeumBC} & Yes \\
+	\hline
+	\ref{FRnoFlow} & \ref{test2DVarSat}, \ref{testRepMatCellIDStruc} & Yes \\
+	\hline
+\end{tabular}
+
+\subsection{Test matrix for Numerical Methods}
+\begin{tabular}{|l|l|l|l|}
+	\hline
+	Requirement & Tests that use capability & Tests that verify capability \\
+	\hline
+	\hline
+	\ref{FVmethod} & \ref{testa} & \\
+	\hline
+	\ref{NMvarTS} & \ref{testTimeStepGrowth}, \ref{testTimeStepReductCut}, \ref{testTimeStepReduct} & Yes\\
+	\hline
+	\ref{TSbyCFL} & \ref{testa}& \\
+	\hline
+	\ref{TSbyModel} & \ref{testa} & \\
+	\hline
+	\ref{nonlinearSolver} & \ref{testa} &\\
+	\hline
+	\ref{nonlinearReport} & \ref{testa} &\\
+	\hline
+	\ref{nonlinearATOL} & \ref{testa} & \\
+	\hline
+	\ref{nonlinearRTOL} & \ref{testa} &\\
+	\hline
+	\ref{nonlinearSTOL} & \ref{testa} & \\
+	\hline
+	\ref{nonlinearITOL} & \ref{testa} &\\
+	\hline
+	\ref{nonlinearDTOL} & \ref{testa} &\\
+	\hline
+	\ref{linearDirect} &  &\\
+	\hline
+	\ref{linearIterative} &  &\\
+	\hline
+	\ref{linearATOL} & \ref{testa} &\\
+	\hline
+	\ref{linearRTOL} & \ref{testa} &\\
+	\hline
+	\ref{linearMaxIt} & \ref{testa} &\\
+	\hline
+	\ref{linearDTOL} & \ref{testa} &\\
+	\hline
+	\ref{structGrid} & \ref{test1DSatHyd} to \ref{test2DVarSat}, \ref{testStructIrregGrid} & Yes \\
+	\hline
+	\ref{impStructGrid} & \ref{testRepMatCellIDUnstruc}, \ref{testRepMatGridUnstruc} & Yes \\
+	\hline
+	\ref{expStructGrid} & \ref{testScaledMassRateVol}, \ref{testScaledMassRatePerm}, 
+	\ref {testScaledVolRateVol}, \ref{testScaledVolRatePerm} & Yes\\
+	\hline
+\end{tabular}
+
+\subsection{Test matrix for Representation of Material Properties}
+\begin{tabular}{|l|l|l|l|}
+	\hline
+	Requirement & Tests that use capability & Tests that verify capability \\
+	\hline
+	\hline
+	\ref{repMatPropRegions} & \ref{testRepMatRegStruc}, \ref{testRepMatRegUnstruc}, \ref{testRepMatIJKStruc}  & Yes\\
+	\hline
+	\ref{repMatPropLocation} & \ref{testRepMatGridStruc}, \ref{testRepMatGridUnstruc} & Yes \\
+	\hline
+	\ref{repMatPropCellID} & \ref{testRepMatCellIDStruc}, \ref{testRepMatCellIDUnstruc} & Yes \\
+	\hline
+\end{tabular}
+
+\subsection{Test matrix for Representation of Initial Conditions}
+\begin{tabular}{|l|l|l|l|}
+	\hline
+	Requirement & Tests that use capability & Tests that verify capability \\
+	\hline
+	\hline
+	\ref{repICRegions} & \ref{testRepICRegStruc}, \ref{testRepICRegUnstruc}, \ref{testRepICIJKStruc}  & Yes \\
+	\hline
+	\ref{repICLocation} &  \ref{testRepICGridStruc} & Yes \\
+	\hline
+	\ref{repICCellID} & \ref{testRepICCellIDStruc}, \ref{testRepICCellIDStruc16}, \ref{testRepICCellIDUnstruc}, & Yes\\
+	\hline
+\end{tabular}
+
+\subsection{Test matrix for Representation of Boundary Conditions and Source/Sink terms}
+\begin{tabular}{|l|l|l|l|}
+	\hline
+	Requirement & Tests that use capability & Tests that verify capability \\
+	\hline
+	\hline
+	\ref{repBCRegions}& \ref{testScaledMassRateVol}, \ref{testScaledMassRatePerm}, 
+	\ref {testScaledVolRateVol}, \ref{testScaledVolRatePerm} & Yes \\
+	\hline
+	\ref{repBCLocation} & \ref{testRepBCGridStruc} & Yes \\
+	\hline
+\end{tabular}
+
+\subsection{Test matrix for User Interaction}
+\begin{tabular}{|l|l|l|l|}
+	\hline
+	Requirement & Tests that use capability & Tests that verify capability \\
+	\hline
+	\hline
+	\ref{inputFile} & \ref{testa} \\
+	\hline
+	\ref{inputRegions} & \ref{testa} \\
+	\hline
+	\ref{inputUnitsValues} & \ref{testa} \\
+	\hline
+	\ref{inputErrors} & \ref{testa} \\
+	\hline
+	\ref{outputSpecs} & \ref{testa} \\
+	\hline
+	\ref{outputPrintScreen} & \ref{testa} \\
+	\hline
+	\ref{outputFile} & \ref{testa} \\
+	\hline
+	\ref{outSnapshot} & \ref{testa} \\
+	\hline
+	\ref{outObservation} & \ref{testa} \\
+	\hline
+	\ref{outMassBalance} & \ref{testa} \\
+	\hline
+\end{tabular}
+
+\subsection{Test matrix for Non-Functional Requirements}
+\begin{tabular}{|l|l|l|l|}
+	\hline
+	Requirement & Tests that use capability & Tests that verify capability \\
+	\hline
+	\hline
+	\ref{versionControl} & \ref{testa} \\
+	\hline
+	\ref{codeStandard} & \ref{testa} \\
+	\hline
+	\ref{reportBugs} & \ref{testa} \\
+	\hline
+	\ref{autTesting} & \ref{testa} \\
+	\hline
+	\ref{contribution} & \ref{testa} \\
+	\hline
+	\ref{userSupport} & \ref{testa} \\
+	\hline
+	\ref{codeAvail} & \ref{testa} \\
+	\hline
+\end{tabular}
