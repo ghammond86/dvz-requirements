@@ -4,12 +4,20 @@
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage[letterpaper, portrait, margin=1in]{geometry}
 \usepackage{xspace}
+\usepackage{hyperref}
 
-\setlist{nosep,align=left}
+\setlist{nosep,
+ labelsep=0pt,
+% labelindent=0.5\parindent,
+% itemindent=5pt, % indention of item label
+% itemsep=0pt, % verticl spacing
+ align=left}
 
 \newcommand{\pft}{PFLOTRAN\xspace}
-\newcommand{\assignbyregion}{\item region. Regions are defined by points, lines, planes, volumes or lists of cell IDs.}
-\newcommand{\assignbycoordinate}{\item xyz coordinate. This approach shall assign a value based on interpolation within a regularly spaced dataset.}
-\newcommand{\assignbycellid}{\item cell ID. This approach assigns an externally generated dataset on a cell by cell basis.}
+\newcommand{\assignbyregion}{\item Region. Regions are defined by points, lines, planes, volumes or lists of cell IDs.}
+\newcommand{\assignbycoordinate}{\item XYZ coordinate. This approach shall assign a value based on interpolation within a regularly spaced dataset.}
+\newcommand{\assignbycellid}{\item Cell ID. This approach assigns an externally generated dataset on a cell by cell basis.}
+
+\newcommand{\pftitemlabel}{--}
 
 

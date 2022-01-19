@@ -1,42 +1,95 @@
 \section{Introduction}
-This specification documents features required by \pft to simulate physical and chemical processes within the subsurface environment. These required features are divided into functional and non-functional requirements. Functional requirements consist of physical or chemical processes, numerical methods, user interfaces, etc.  Non-functional requirements include runtime performance metrics (e.g. scalability,  performance), software maintenance and code availability. The specification maps these features to tests designed to verify their accuracy and robustness.
+This specification documents features required by \pft to simulate physical and chemical processes within the subsurface environment. These required features are divided into functional and non-functional requirements. Functional requirements consist of physical or chemical processes, numerical methods, user interfaces, etc.  Non-functional requirements include runtime performance metrics (e.g. scalability,  performance), software maintenance and code availability. The specification maps these features to tests designed to verify feature accuracy.
 
 \section{Functional Requirements}
-\pft’s functional requirements are divided into the following categories: constitutive relations, physics and chemistry, numerical methods, and user interaction.
-\subsection{Constitutive Relations}
+{\Huge \color{red} Fix indentation of lists.}\newline
+\pft’s functional requirements are divided into the following categories:
+\begin{itemize}[label=\pftitemlabel]
+	\item Material properties
+	\item Constitutive relations
+	\item Physic and chemistry
+	\item Forcing
+	\item Numerical methods
+	\item Assignment of processes and properties to regions
+	\item User interaction.
+\end{itemize}
 
-Constitutive relations employ mathematical equations to approximate the observed physical response of a material or fluid under conditions of interest. For instance, an equation of state calculates a fluid density as a function of input parameters pressure and temperature.
+\setlist[enumerate]{label=MP \arabic*.,ref=MP \arabic*}
+\subsection{Material Properties}
+\pft shall assign the following soil material properties to each grid cell:
+\begin{enumerate}
+	\item \label{mp_electrical_conductivity} Electical conductivity
+	\item \label{mp_heat_capacity} Heat capacity
+	\item \label{mp_permeability} Intrinsic permeability
+	\item \label{mp_porosity} Porosity
+	\item \label{mp_soil_particle_density} Soil particle density
+	\item \label{mp_thermal_conductivity} Thermal conductivity
+	\item \label{mp_tortuosity} Tortuosity
+\end{enumerate}
+
+
+\subsubsection{Assignment of Material Properties}
+\begin{enumerate} [resume]
+	\item \pft shall assign each grid cell a material ID.
+	\item \pft shall support non-contiguous material IDs (e.g. 1,2,5).
+	\item \pft shall have the ability to inactivate grid cells based on material ID.
+	\item \pft shall have the ability to assign material properties by material ID.
+\end{enumerate}
+\vspace{0.25cm}
+\noindent\pft shall assign the following heterogeneous material properties:
+\begin{itemize}[label=\pftitemlabel]
+	\item \label{mp_electrical_conductivity} Electical conductivity
+	\item \label{mp_permeability} Permeability
+	\item \label{mp_porosity} Porosity
+	\item \label{mp_soil_particle_density} Soil particle density
+	\item \label{mp_tortuosity} Tortuosity
+\end{itemize}
+by:
+\begin{enumerate}[resume]
+	\assignbyregion  \label{repMatPropRegions}
+	\assignbycoordinate \label{repMatPropLocation}
+	\assignbycellid \label{repMatPropCellID}
+\end{enumerate}
+
+\subsection{Constitutive Relations}
+Constitutive relations employ mathematical equations to approximate the observed physical response of a material or fluid under conditions of interest. 
+For instance, an equation of state calculates a fluid density as a function of input parameters pressure and temperature.
 
 \setlist[enumerate]{label=CR \arabic*.,ref=CR \arabic*}
 \subsubsection{Equations of State}
-Equations of state calculate fluid density, enthalpy, and viscosity as a function of temperature and pressure. The following equations of state shall be implemented in the code:
+\pft shall incorporate the following equations of state:
 \begin{enumerate}
 	\item \label{eos_water_ifc67} \pft shall implement the IFC67 (International Formulation Committee, 1967) equations of state for calculating the density, enthalpy, and viscosity of water as a function of pressure and temperature.
 	\item \label{eos_water_eos_water_if97} \pft shall implement the IF97 from the International Association for the Properties of Water and Steam (Wagner et al, 2000) equations of state for calculating the density and enthalpy of water and steam as a function of pressure and temperature.
 	\item \label{eos_water_constant} \pft shall implement an equation of state for water that holds the density, viscosity and enthalpy of water and steam constant regardless of pressure or temperature.
 \end{enumerate}
 
-\subsubsection{Capillary Pressure/Saturation Functions}
-In variably saturated or multiphase flow in porous media it is essential to establish a relation between capillary pressure and saturation. This relation is set forth by several empirical models, and two of the more common are implemented in \pft:
+\subsubsection{Saturation Functions}
+In variably saturated or multiphase flow in porous media, it is essential to establish a relation between capillary pressure and saturation.
+A saturation  function calculates the liquid or gas saturation as a function of capillary pressure and vice versa. 
+\pft shall incorporate the following and saturation functions:
 \begin{enumerate}[resume]
 	\item \label{vanGen} \pft shall implement the van Genuchten function (van Genuchten, 1980) to calculate the saturation on a cell given its capillary pressure value.
 	\item \label{brCorey} \pft shall implement the Brooks-Corey function (Brooks and Corey,  1964) to calculate the saturation on a cell given its capillary pressure value.
 \end{enumerate}
 
 \subsubsection{Relative Permeability Functions}
-
-Relative permeability functions establish a relationship between liquid relative permeability [-] (which varies from 0 to 1) and saturation.  
+Relative permeability functions establish a relationship between fluid phase's  relative permeability, which ranges between 0 and 1, and its saturation. 
+\pft shall incorporate the following relative permeability functions:
 \begin{enumerate}[resume]
-	\item \label{mualem} \pft shall calculate relative permeability as a function of saturation using either the Mualem-van Genuchten or the Mualem-Brooks-Corey functions (Chen et al. 1990). 
-	\item \label{burdine} \pft shall calculate relative permeability as a function of saturation using either the Burdine-van Genuchten or the Burdine-Brooks-Corey functions (Chen et al. 1990). 
+	\item \label{mualem_vg} Mualem-van Genuchten 
+	\item \label{mualem_bc} Mualem-Brooks-Corey 
+	\item \label{burdine_vg} Burdine-van Genuchten
+	\item \label{burdine_bc} Burdine-Brooks-Corey.
 \end{enumerate}
 
 \subsubsection{Soil Compressibility Functions}
-The storage of fluid in porous media change according to compaction or expansion of fluids and porous media. While compaction (or expansion) of fluids is governed by the fluid compressibility, the changes in porous media volume is set forth by soil compressibility functions. These functions relate changes in porosity with changes in pressure. \pft shall implement the following soil compressibility functions:
+The volume of fluid stored in porous media can change due to pore compaction and fluid expansion. While compaction (or expansion) of fluids is governed by the fluid compressibility (e.g., through an equation of state), change in pore volume is set forth by soil compressibility functions, which relate porosity change to a shift in pressure. \pft shall implement the following soil compressibility functions:
 \begin{enumerate}[resume]
-	\item \label{leijnse} \pft shall calculate soil compressibility through the Leijnse function (Leijnse 1992). It calculates the current porosity as a function of pressure, given soil matrix compressibility coefficient, a reference pressure, and reference porosity.
-	\item \label{exponential} \pft shall calculate soil compressibility through an exponential relationship between changes in pressure and porosity, given a soil matrix compressibility coefficient, a reference pressure, and reference porosity. (Low - easy)
+	\item \label{leijnse} Leijnse function (Leijnse 1992)
+	\item \label{exponential} An Exponential relationship.
 \end{enumerate}
+
 \subsubsection{Constitutive Relation Coupling by Region}
 \begin{enumerate}[resume]
 	\item \pft shall allow for capillary pressure/saturation functions, relative permeability functions and soil compressibility functions to be specified by region. \label{CRbyRegion} (HIGH - easy)
@@ -52,7 +105,9 @@ The storage of fluid in porous media change according to compaction or expansion
 
 \subsubsection{Multicomponent Solute Transport}
 \begin{enumerate}[resume]
-	\item \label{PCTranConservative} \pft shall simulate conservative solute transport through the advection--dispersion equation. 
+	\item \label{PCAdvection} \pft shall simulate solute advection. 
+	\item \label{PCDiffusion} \pft shall simulate solute molecular diffusion.
+	\item \label{PCMechanicalDispersion} \pft shall simulate solute mechanical dispersion (through a diagonal dispersion tensor).
 \end{enumerate}
 \subsubsection{Biogeochemical Reaction}
 \begin{enumerate}[resume]
@@ -64,25 +119,17 @@ The storage of fluid in porous media change according to compaction or expansion
 	\item \label{PCERT} \pft shall simulate electrical resistivity tomography (ERT). 
 \end{enumerate}
 
-\subsection{Forcing Requirements (Boundary conditions, initial conditions and source/sinks)}
+\subsection{Forcing Requirements (Boundary Conditions and Source/Sinks)}
 \pft shall allow the specification of the following flow boundary conditions and source/sinks:
 
 \setlist[enumerate]{label=FR \arabic*.,ref=FR \arabic*}
 \subsubsection{Fluid Flow}
-\newcommand{\hydrostatictext}{	The column shall be calculated as a function of a pressure defined at a reference surface, the vertical distance from the reference surface, fluid density and gravity. Note that fluid density shall not be constant when calculated using an equation of state other than CONSTANT.}
+\newcommand{\hydrostatictext}{ The column shall be calculated as a function of a pressure defined at a reference surface, the vertical distance from the reference surface, fluid density and gravity. Note that fluid density shall not be constant when calculated using an equation of state other than CONSTANT.}
 \paragraph{Initial Conditions}
 \begin{enumerate}
 	\item \label{fluidDirichletIC} \pft shall assign initial pressures to cells. 
 	\item \label{fluidHydrostaticIC} \pft shall map initial pressures to cells from a hydrostatic fluid column.
 	\hydrostatictext
-\end{enumerate}
-
-\vspace{0.25cm}
-\noindent\pft shall assign heterogeneous initial pressures to the domain by:
-\begin{enumerate}[resume]
-	\assignbyregion\label{fluidICRegion}
-	\assignbycoordinate\label{fluidICLocation}
-	\assignbycellid\label{fluidICCellID}
 \end{enumerate}
 
 \paragraph{Dirichlet Boundary Conditions}
@@ -111,6 +158,24 @@ The storage of fluid in porous media change according to compaction or expansion
 \paragraph{General}
 \begin{enumerate}[resume]
     \item \label{FRvaryTime} \pft shall support time-varying boundary conditions and source/sinks.
+\end{enumerate}
+
+\setlist[enumerate]{label=RIC \arabic*.,ref=RIC \arabic*}
+\subsubsection{Representation of Initial Conditions}
+\pft shall assign heterogeneous initial conditions across the domain by:
+\begin{enumerate}
+	\assignbyregion \label{repICRegions}
+	\assignbycoordinate \label{repICLocation}
+	\assignbycellid \label{repICCellID}
+\end{enumerate}
+HIGH - easy
+
+\setlist[enumerate]{label=RBC \arabic*.,ref=RBC \arabic*}
+\subsubsection{Representation of Boundary Conditions and Source/Sink terms}
+\pft shall allow the specification of various boundary conditions and source-sink terms using the following strategies:
+\begin{enumerate}
+	\assignbyregion \label{repBCRegions}
+	\assignbycoordinate \label{repBCLocation}
 \end{enumerate}
 
 \setlist[enumerate]{label=NM \arabic*.,ref=NM \arabic*}
@@ -180,40 +245,6 @@ MEDIUM - easy
 \vspace{0.25cm}
 \begin{enumerate}[resume]
 	\item \pft shall allow for a non-zero structured grid origin (i.e. origin != $<0,0,0>$).
-\end{enumerate}
-
-\setlist[enumerate]{label=RMP \arabic*.,ref=RMP \arabic*}
-\subsection{Representation of Material Properties}
-\begin{enumerate}
-	\item \pft shall have the ability to inactivate grid cells based on material ID.
-	\item \pft shall have the ability to assign material properties by material ID.
-	\item \pft shall support non-contiguous material IDs (e.g. 1,2,5).
-\end{enumerate}
-\vspace{0.25cm}
-\noindent\pft shall assign heterogeneous electrical conductivity, intrinsic permeability, porosity, soil particle density and tortuosity by:
-\begin{enumerate}[resume]
-	\assignbyregion  \label{repMatPropRegions}
-	\assignbycoordinate \label{repMatPropLocation}
-	\assignbycellid \label{repMatPropCellID}
-\end{enumerate}
-
-
-\setlist[enumerate]{label=RIC \arabic*.,ref=RIC \arabic*}
-\subsection{Representation of Initial Conditions}
-\pft shall assign heterogeneous initial conditions across the domain by:
-\begin{enumerate}
-    \assignbyregion \label{repICRegions}
-	\assignbycoordinate \label{repICLocation}
-	\assignbycellid \label{repICCellID}
-\end{enumerate}
-HIGH - easy
-
-\setlist[enumerate]{label=RBC \arabic*.,ref=RBC \arabic*}
-\subsection{Representation of Boundary Conditions and Source/Sink terms}
-\pft shall allow the specification of various boundary conditions and source-sink terms using the following strategies:
-\begin{enumerate}
-	\assignbyregion \label{repBCRegions}
-	\assignbycoordinate \label{repBCLocation}
 \end{enumerate}
 
 \setlist[enumerate]{label=UI \arabic*.,ref=UI \arabic*}
