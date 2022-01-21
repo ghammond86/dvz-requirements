@@ -1,0 +1,244 @@
+\section{Tests}
+\begin{enumerate}[label=Test \alph*.,ref=Test \alph*,nosep]
+	\item \label{testMassRate} Source/sink test: Mass rate
+	\item \label{testScaledMassRateVol} Source/sink test: Scaled mass rate by volume
+	\item \label{testScaledMassRatePerm} Source/sink test: Scaled mass rate by permeability
+	\item \label{testVolRate} Source/sink test: Volume rate
+	\item \label{testScaledVolRateVol} Source/sink test: Scaled volume rate by volume
+	\item \label{testScaledVolRatePerm} Source/sink test: Scaled volume rate by permeability
+	\item \label{test1DSatHyd} 1D fully saturated hydrostatic initial condition: Problem 2.2.6 from Kolditz et al. 2015
+	\item \label{test1DSatDirBC} 1D fully saturated Dirichlet BC: Problem 2.2.7 from Kolditz et al. 2015
+	\item \label{test1DSatNeumBC} 1D fully saturated Neumann BC: Problem 2.2.8 from Kolditz et al. 2015
+	\item \label{test2DSatDirNeumBC} 2D fully saturated Dirichlet and Neumann BC:Problem 2.2.10 from Kolditz et al. 2015
+	\item \label{test1DVarSatCelia} 1D variably saturated from Celia et al. 1990
+	\item \label{test2DVarSat} 2D variably saturated: Infiltration in a large caisson: problem 10.13.3 from Feflow's manual
+	\item \label{testEOSIFC67} EOS test for IFC67: compare density calculations between PFLOTRAN and python script from STOMP documentation
+	\item \label{testEOSIF97} EOS test for IF97: compare density calculations between PFLOTRAN and online calculator
+	\item \label{testRepMatCellIDStruc} Representation of material properties by cell ID on structured grid (with a 2x2x2 cube)
+	\item \label{testRepMatCellIDStruc16} Representation of material properties by cell ID on structured grid using random correlated fields of porosity and permeability
+	\item \label{testRepMatCellIDUnstruc} Representation of material properties by cell ID on unstructured grid (with a 2x2x2 cube)
+	\item \label{testRepMatGridStruc} Representation of material properties by location using gridded datasets on structured grid
+	\item \label{testRepMatGridUnstruc} Representation of material properties by location using gridded datasets on unstructured grid
+	\item \label{testRepMatRegStruc} Representation of material properties by location using regions on structured grid
+	\item \label{testRepMatRegUnstruc} Representation of material properties by location using regions on unstructured grid
+	\item \label{testRepMatIJKStruc} Representation of material properties with IJK indices on structured grid
+	\item \label{testInactive} Test capability of inactivating cells
+	\item \label{testNonContMaterialIDS} Test non-contiguous material IDs
+	\item \label{testStructIrregGrid} Test the ability to create structured grids with irregular spacing.
+	\item \label{testRepICCellIDStruc} Representation of initial conditions by cell ID on structured grid (with a 2x2x2 cube)
+\end{enumerate}
+
+\begin{enumerate}[label=Test \greek*.,ref=Test \greek*,nosep]
+\item \label{testRepICCellIDUnstruc} Representation of initial conditions by cell ID on unstructured grid (with a 2x2x2 cube)
+\item \label{testRepICCellIDStruc16} Representation of initial conditions by cell ID on structured grid using random correlated fields of porosity, permeability, and initial pressure.
+\item \label{testRepICRegStruc} Representation of initial conditions by location using regions on structured grid
+\item \label{testRepICRegUnstruc} Representation of initial conditions by location using regions on unstructured grid
+\item \label{testRepICIJKStruc} Representation of initial conditions with IJK indices on structured grid
+\item \label{testRepICGridStruc} Representation of initial conditions by location using gridded datasets on structured grid
+\item \label{testRepBCGridStruc} Representation of boundary conditions by location using gridded datasets on structured grid (shortcourse example  and comparison available at www.pflotran.org/qa)
+\item \label{testTimeStepGrowth} Test time step variablity following the growth factor until it reaches the maximum time step size.
+\item \label{testTimeStepReductCut} Test time step variablity following the reduction factor until it reaches the maximum number of consecutive cuts.
+\item \label{testTimeStepReduct} Test time step variablity following the reduction factor until it reaches the minimum time step size.
+\end{enumerate}
+
+\subsection{Test matrix for Constitutive Relations}
+\begin{tabular}{|l|l|l|l|}
+	\hline
+	Requirement & Tests that use capability & Tests that verify capability \\
+	\hline
+	\hline
+	\ref{ifc67} & \ref{testEOSIFC67} & Yes\\
+	\hline
+	\ref{if97} & \ref{testEOSIF97} & Yes \\
+	\hline
+		\ref{vanGen} & \ref{test1DVarSatCelia}, \ref{test2DVarSat}, \ref{testRepMatCellIDStruc}, doc-dev & Yes\\
+	\hline
+		\ref{brCorey} & doc-dev & Yes\\
+	\hline
+		\ref{mualem} & \ref{test1DVarSatCelia}, \ref{test2DVarSat},  \ref{testRepMatCellIDStruc}, doc-dev & Yes\\
+	\hline
+		\ref{burdine} & doc-dev & Yes\\
+	\hline
+		\ref{leijnse} &  \ref{test2DVarSat},  \ref{testRepMatCellIDStruc} & No \\
+	\hline
+		\ref{exponential} & \ref{testa} & No \\
+	\hline
+		\ref{CRbyRegion} & \ref{testa} & No \\
+	\hline
+\end{tabular}
+
+\subsection{Test matrix for Physics and Chemistry}
+\begin{tabular}{|l|l|l|l|}
+	\hline
+		Requirement & Tests that use capability & Tests that verify capability \\
+	\hline
+	\hline
+		\ref{sngVarSatFlow} &  \ref{testMassRate} to \ref{testNonContMaterialIDS} & Yes \\
+	\hline
+\end{tabular}
+
+\subsection{Test matrix for Forcing Requirements}
+\begin{tabular}{|l|l|l|l|}
+	\hline
+	Requirement & Tests that use capability & Tests that verify capability \\
+	\hline
+	\hline
+		\ref{dirichlet} & \ref{test1DSatDirBC}, \ref{test2DSatDirNeumBC}, \ref{test1DVarSatCelia} & Yes\\
+	\hline
+		\ref{presHyd} & \ref{test1DSatHyd}, \ref{testInactive} & Yes \\
+	\hline
+		\ref{neumann} & \ref{test1DSatNeumBC}, \ref{test2DVarSat} & Yes\\
+	\hline
+		\ref{massRate} & \ref{testMassRate} & Yes\\
+	\hline
+		\ref{scaledMassRateVol} & \ref{testScaledMassRateVol}& Yes \\
+	\hline
+		\ref{scaledMassRatePerm} & \ref{testScaledMassRatePerm} & Yes\\
+	\hline
+		\ref{volRate} & \ref{testVolRate} & Yes \\
+	\hline
+		\ref{scaledVolRateVol} & \ref{testScaledVolRateVol} & Yes\\
+	\hline
+		\ref{scaledVolRatePerm} & \ref{testScaledVolRatePerm} & Yes\\
+	\hline
+		\ref{FRvaryTime} & \ref{test1DSatNeumBC} & Yes \\
+	\hline
+	\ref{FRnoFlow} & \ref{test2DVarSat}, \ref{testRepMatCellIDStruc} & Yes \\
+	\hline
+\end{tabular}
+
+\subsection{Test matrix for Numerical Methods}
+\begin{tabular}{|l|l|l|l|}
+	\hline
+	Requirement & Tests that use capability & Tests that verify capability \\
+	\hline
+	\hline
+		\ref{NMvarTS} & \ref{testTimeStepGrowth}, \ref{testTimeStepReductCut}, \ref{testTimeStepReduct} & Yes\\
+	\hline
+		\ref{TSbyCFL} & \ref{testa}& \\
+	\hline
+	\ref{TSbyModel} & \ref{testa} & \\
+	\hline
+	\ref{nonlinearSolver} & \ref{testa} &\\
+	\hline
+	\ref{nonlinearReport} & \ref{testa} &\\
+	\hline
+	\ref{nonlinearATOL} & \ref{testa} & \\
+	\hline
+	\ref{nonlinearDTOL} & \ref{testa} &\\
+	\hline
+	\ref{nonlinearITOL} & \ref{testa} &\\
+	\hline
+	\ref{nonlinearRTOL} & \ref{testa} &\\
+	\hline
+	\ref{nonlinearSTOL} & \ref{testa} & \\
+	\hline
+	\ref{linearATOL} & \ref{testa} &\\
+	\hline
+	\ref{linearDTOL} & \ref{testa} &\\
+	\hline
+	\ref{linearRTOL} & \ref{testa} &\\
+	\hline
+	\ref{FVmethod} & \ref{testa} &\\
+	\hline
+	\ref{structGrid} & \ref{test1DSatHyd} to \ref{test2DVarSat}, \ref{testStructIrregGrid} & Yes \\
+	\hline
+	\ref{impStructGrid} & \ref{testRepMatCellIDUnstruc}, \ref{testRepMatGridUnstruc} & Yes \\
+	\hline
+	\ref{expStructGrid} & \ref{testScaledMassRateVol}, \ref{testScaledMassRatePerm}, 
+										\ref {testScaledVolRateVol}, \ref{testScaledVolRatePerm} & Yes\\
+	\hline
+\end{tabular}
+
+\subsection{Test matrix for Representation of Material Properties}
+\begin{tabular}{|l|l|l|l|}
+	\hline
+	Requirement & Tests that use capability & Tests that verify capability \\
+	\hline
+	\hline
+	\ref{repMatPropRegions} & \ref{testRepMatRegStruc}, \ref{testRepMatRegUnstruc}, \ref{testRepMatIJKStruc}  & Yes\\
+	\hline
+	\ref{repMatPropLocation} & \ref{testRepMatGridStruc}, \ref{testRepMatGridUnstruc} & Yes \\
+	\hline
+	\ref{repMatPropCellID} & \ref{testRepMatCellIDStruc}, \ref{testRepMatCellIDUnstruc} & Yes \\
+	\hline
+\end{tabular}
+
+\subsection{Test matrix for Representation of Initial Conditions}
+\begin{tabular}{|l|l|l|l|}
+	\hline
+	Requirement & Tests that use capability & Tests that verify capability \\
+	\hline
+	\hline
+	\ref{repICRegions} & \ref{testRepICRegStruc}, \ref{testRepICRegUnstruc}, \ref{testRepICIJKStruc}  & Yes \\
+	\hline
+	\ref{repICLocation} &  \ref{testRepICGridStruc} & Yes \\
+	\hline
+	\ref{repICCellID} & \ref{testRepICCellIDStruc}, \ref{testRepICCellIDStruc16}, \ref{testRepICCellIDUnstruc}, & Yes\\
+	\hline
+\end{tabular}
+
+\subsection{Test matrix for Representation of Boundary Conditions and Source/Sink terms}
+\begin{tabular}{|l|l|l|l|}
+	\hline
+	Requirement & Tests that use capability & Tests that verify capability \\
+	\hline
+	\hline
+	\ref{repBCRegions}& \ref{testScaledMassRateVol}, \ref{testScaledMassRatePerm}, 
+	\ref {testScaledVolRateVol}, \ref{testScaledVolRatePerm} & Yes \\
+	\hline
+	\ref{repBCLocation} & \ref{testRepBCGridStruc} & Yes \\
+	\hline
+\end{tabular}
+
+\subsection{Test matrix for User Interaction}
+\begin{tabular}{|l|l|l|l|}
+	\hline
+	Requirement & Tests that use capability & Tests that verify capability \\
+	\hline
+	\hline
+		\ref{inputFile} & \ref{testa} \\
+	\hline
+		\ref{inputRegions} & \ref{testa} \\
+	\hline
+		\ref{inputUnitsValues} & \ref{testa} \\
+	\hline
+		\ref{inputErrors} & \ref{testa} \\
+	\hline
+		\ref{outputSpecs} & \ref{testa} \\
+	\hline
+		\ref{outputPrintScreen} & \ref{testa} \\
+	\hline
+		\ref{outputFile} & \ref{testa} \\
+	\hline
+		\ref{outSnapshot} & \ref{testa} \\
+	\hline
+		\ref{outObservation} & \ref{testa} \\
+	\hline
+		\ref{outMassBalance} & \ref{testa} \\
+	\hline
+\end{tabular}
+
+\subsection{Test matrix for Non-Functional Requirements}
+\begin{tabular}{|l|l|l|l|}
+	\hline
+	Requirement & Tests that use capability & Tests that verify capability \\
+	\hline
+	\hline
+		\ref{versionControl} & \ref{testa} \\
+	\hline
+		\ref{codeStandard} & \ref{testa} \\
+	\hline
+		\ref{reportBugs} & \ref{testa} \\
+	\hline
+		\ref{autTesting} & \ref{testa} \\
+	\hline
+		\ref{contribution} & \ref{testa} \\
+	\hline
+		\ref{userSupport} & \ref{testa} \\
+	\hline
+		\ref{codeAvail} & \ref{testa} \\
+	\hline
+\end{tabular}
+
+	

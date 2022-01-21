@@ -1,0 +1,50 @@
+%\documentclass{scrreprt}
+\documentclass{report}
+\usepackage{enumitem}
+
+\begin{document}
+
+\section{Functional Requirements}
+PFLOTRAN’s functional requirements are divided into the following categories: constitutive relations, physics and chemistry, numerical methods, and user interaction.
+\subsubsection{Constitutive Relations}
+Constitutive relations employ mathematical equations to approximate the observed physical response of a material or fluid under conditions of interest. For instance, an equation of state calculates a fluid density as a function of input parameters pressure and temperature.
+\subsubsection{Equations of State}
+Equations of state calculate fluid density, enthalpy, and viscosity as a function of temperature and pressure. The following equations of state shall be implemented in the code:
+\begin{enumerate}[label=EOS \arabic*.,ref=EOS \arabic*,nosep]
+	\item IFC67: \label{ifc67} PFLOTRAN shall implement the IFC67 (International Formulation Committee, 1967) equations of state for calculating the density, enthalpy, and viscosity of water as a function of pressure and temperature.
+	\item IF97: \label{if97} PFLOTRAN shall implement the IF97 from the International Association for the Properties of Water and Steam (Wagner et al, 2000) equations of state for calculating the density and enthalpy of water and steam as a function of pressure and temperature.
+\end{enumerate}
+\subsubsection{Saturation Functions}
+Equations of state calculate fluid density, enthalpy, and viscosity as a function of temperature and pressure. The following equations of state shall be implemented in the code:
+\begin{enumerate}[label=EOS \arabic*.,ref=EOS \arabic*,nosep,resume]
+	\item IFC67B: \label{ifc67b} PFLOTRAN shall implement the IFC67 (International Formulation Committee, 1967) equations of state for calculating the density, enthalpy, and viscosity of water as a function of pressure and temperature.
+	\item IF97B: \label{if97b} PFLOTRAN shall implement the IF97 from the International Association for the Properties of Water and Steam (Wagner et al, 2000) equations of state for calculating the density and enthalpy of water and steam as a function of pressure and temperature.
+\end{enumerate}
+
+\section{Tests}
+\begin{enumerate}[label=Test\alph*.,ref=Test\alph*,nosep]
+	\item \label{testa} A test
+	\item \label{testb} Another test
+\end{enumerate}
+
+\begin{tabular}{|l|l|l|}
+	\hline
+	Requirement & Test(s) \\
+	\hline
+	\hline
+	\ref{ifc67} & \ref{testb}, \ref{testa} \\
+	\hline
+	\ref{if97} & \ref{testa} \\
+	\hline
+\end{tabular}
+
+
+
+
+
+\begin{enumerate} [label=X\arabic*.,ref=X\arabic*,nosep]
+\item 
+\item test2 \label{test2}
+\end{enumerate}
+Item~\ref{test2}
+\end{document}	
