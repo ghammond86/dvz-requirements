@@ -23,7 +23,8 @@ In variably saturated or multiphase flow in porous media it is essential to esta
 
 \subsubsection{Relative Permeability Functions}
 
-Relative permeability functions establish a relationship between liquid relative permeability [-] (which varies from 0 to 1) and saturation. The simulator shall implement the following relative permeability functions: 
+Relative permeability functions establish a relationship between liquid relative permeability [-] (which varies from 0 to 1) and saturation. The simulator shall implement the following relative permeability functions: 
+
 \begin{enumerate}[label=CR \arabic*.,ref=CR \arabic*,nosep, resume]
 	\item Mualem: \label{mualem} The simulator calculates relative permeability as a function of saturation using either the Mualem-van Genuchten or the Mualem-Brooks-Corey functions (Chen et al. 1990). 
 	\item Burdine: \label{burdine} The simulator calculates relative permeability as a function of saturation using either the Burdine-van Genuchten or the Burdine-Brooks-Corey functions (Chen et al. 1990). 
@@ -51,7 +52,8 @@ PFLOTRAN employs mathematical representations of physical and chemical process m
 \subsubsection{Biogeochemical Reaction}
 
 \subsection{Forcing Requirements (Boundary conditions, initial conditions and source/sinks)}
-PFLOTRAN shall allow the specification of the following flow boundary conditions:
+PFLOTRAN shall allow the specification of the following flow boundary conditions:
+
 
 \subsubsection{Liquid Pressure}
 \begin{enumerate}[label=FR \arabic*.,ref=FR \arabic*,nosep]
@@ -61,7 +63,8 @@ PFLOTRAN shall allow the specification of the following flow boundary conditions
 
 \subsubsection{Liquid Flux}
 \begin{enumerate}[label=FR \arabic*.,ref=FR \arabic*,nosep, resume]
-	\item Neumann: \label{neumann} Flux Neumann boundary conditions specify a Darcy flux [m/s] across a boundary.
+	\item Neumann: \label{neumann} Flux Neumann boundary conditions specify a Darcy flux [m/s] across a boundary.
+
 \end{enumerate}
 
 \subsubsection{Liquid Source/Sink}
@@ -178,9 +181,12 @@ PFLOTRAN shall allow the specification of various boundary conditions and source
 	\item The screen output is saved in an ASCII file, which also contains a summary of all parameters and problem setup inputs. \label{outputFile} HIGH - easy
 \end{enumerate}
 
-PFLOTRAN outputs the following results: 
+PFLOTRAN outputs the following results: 
+
 \begin{enumerate}[label=UI \arabic*.,ref=UI \arabic*,nosep, resume]
-	\item Snapshot file: \label{outSnapshot}A snapshot file outputs the value of specified variables over the entire domain at a specific time. Several file formats shall serve as snapshot files: Tecplot block, Tecplot point, VTK, and HDF5 (default). HIGH - easy
+	\item Snapshot file: \label{outSnapshot}A snapshot file outputs the value of specified variables over the entire domain at a specific time. Tecplot block, and HDF5 (default) formats shall serve as snapshot files.
+	\todo{VTK output files do not output the specific time of the results. I am not including it in the requirements.}
+	\todo{In the Tecplot manual, Tecplot block is recommended as the default format. I will only include Tecplot block in this requirement.}
 	\item Observation file: \label{outObservation}An observation file outputs the values of specified variables at a determined point over prescribed times. The observation file format in ASCII columns.HIGH - easy
 	\item Mass balance file: \label{outMassBalance}A mass balance output file returns the global mass balance and the fluxes at all boundaries for water at specified times using an ASCII file.HIGH - easy
 \end{enumerate}

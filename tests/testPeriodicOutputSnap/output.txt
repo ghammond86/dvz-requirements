@@ -1,0 +1,299 @@
+
+=================
+  PFLOTRAN v3.0
+=================
+
+ "grid_structured_type" set to default value.
+ pflotran card:: NUMERICAL_METHODS
+ pflotran card:: GRID
+ pflotran card:: MATERIAL_PROPERTY
+   Name :: soil1
+ pflotran card:: CHARACTERISTIC_CURVES
+   Name :: cc1
+ pflotran card:: OUTPUT
+ "OUTPUT,SNAPSHOT_FILE,FORMAT,HDF5" set to default value.
+ pflotran card:: TIME
+ pflotran card:: REGION
+ all
+ pflotran card:: REGION
+ top
+ pflotran card:: REGION
+ bottom
+ pflotran card:: FLOW_CONDITION
+ initial_pressure
+ pflotran card:: FLOW_CONDITION
+ recharge
+ pflotran card:: INITIAL_CONDITION
+ "Initial Condition name" set to default value.
+ pflotran card:: BOUNDARY_CONDITION
+ pflotran card:: BOUNDARY_CONDITION
+ pflotran card:: STRATA
+ pflotran card:: END_SUBSURFACE
+ Domain Bounds (x y z):
+     0.0000000000E+00  0.0000000000E+00  0.0000000000E+00
+     1.0000000000E+00  1.0000000000E+00  1.0000000000E+01
+ Extent of Gridded Domain
+  X: 0.0000000000000000 - 1.0000000000000000
+  Y: 0.0000000000000000 - 1.0000000000000000
+  Z: 0.0000000000000000 - 10.000000000000000
+
+ Default HDF5 method is used in Initialization
+
+ Requested processors and decomposition =     1, npx,y,z=   -1  -1  -1
+ Actual decomposition: npx,y,z=    1   1   1
+
+   Beginning setup of FLOW SNES
+ number of dofs =   1, number of phases =   1
+ mode = Richards: p
+   Finished setting up FLOW SNES
+
+FLOW Time Stepper
+                 acceleration: on
+       acceleration threshold: 5
+       number of ramp entries: 5
+                ramp entry #1: 2.0000
+                ramp entry #2: 2.0000
+                ramp entry #3: 2.0000
+                ramp entry #4: 2.0000
+                ramp entry #5: 2.0000
+                ramp entry #6: 1.8000
+                ramp entry #7: 1.6000
+                ramp entry #8: 1.4000
+                ramp entry #9: 1.2000
+               ramp entry #10: 1.0000
+               ramp entry #11: 1.0000
+               ramp entry #12: 1.0000
+               ramp entry #13: 1.0000
+      maximum number of steps: 999999
+constant time steps threshold: 5
+       maximum number of cuts: 16
+             reduction factor: 5.000000E-01
+        maximum growth factor: 2.000000E+00
+
+FLOW Newton Solver
+                         atol: 1.000000E-50
+                         rtol: 1.000000E-08
+                         stol: 1.000000E-08
+                         dtol: 1.000000E+04
+                      maxnorm: 1.000000E+20
+                    inftolres: -9.990000E+02
+                    inftolupd: -9.990000E+02
+                 inftolrelupd: -9.990000E+02
+                 inftolsclres: -9.990000E+02
+                     max iter: 50
+                     min iter: 1
+                         maxf: 10000
+                  matrix type: baij
+         precond. matrix type: baij
+               inexact newton: off
+            print convergence: on
+   print detailed convergence: off
+          check infinity norm: on
+
+FLOW Linear Solver
+                       solver: preonly
+               preconditioner: lu
+                         atol: 1.000000E-50
+                         rtol: 1.000000E-05
+                         dtol: 1.000000E+04
+            maximum iteration: 10000
+ --> creating hdf5 output file: vsat_flow.h5
+       0.14 Seconds to write HDF5 file.
+ --> write tecplot output file: vsat_flow-000.tec
+ max_local_size_saved:       100
+       0.01 Seconds to write to Tecplot file(s)
+ 
+   Finished Initialization
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 6.41E-09 2x: 0.00E+00 2u: 0.00E+00 ir: 6.41E-09 iu: 0.00E+00 rsn:   0
+  1 2r: 2.49E-14 2x: 6.83E+05 2u: 3.47E-01 ir: 2.49E-14 iu: 3.47E-01 rsn:   0
+  2 2r: 2.46E-17 2x: 6.83E+05 2u: 1.35E-06 ir: 1.04E-17 iu: 1.35E-06 rsn: rtol
+
+ Step      1 Time=  1.00000E-03 Dt=  1.00000E-03 [day] snes_conv_reason:    3
+  newton =   2 [       2] linear =     2 [         2] cuts =  0 [   0]
+  --> SNES Linear/Non-Linear Iterations =            2  /            2
+  --> SNES Residual:   2.462070E-17  2.462070E-19  1.040834E-17
+  --> max chng: dpmx=   3.4694E-01
+ 
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 6.40E-09 2x: 0.00E+00 2u: 0.00E+00 ir: 6.40E-09 iu: 0.00E+00 rsn:   0
+  1 2r: 9.99E-14 2x: 6.83E+05 2u: 1.38E+00 ir: 9.99E-14 iu: 1.38E+00 rsn:   0
+  2 2r: 2.21E-17 2x: 6.83E+05 2u: 2.16E-05 ir: 1.04E-17 iu: 2.16E-05 rsn: rtol
+
+ Step      3 Time=  7.00000E-03 Dt=  4.00000E-03 [day] snes_conv_reason:    3
+  newton =   2 [       6] linear =     2 [         6] cuts =  0 [   0]
+  --> SNES Linear/Non-Linear Iterations =            2  /            2
+  --> SNES Residual:   2.209300E-17  2.209300E-19  1.040834E-17
+  --> max chng: dpmx=   1.3838E+00
+ 
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 6.36E-09 2x: 0.00E+00 2u: 0.00E+00 ir: 6.36E-09 iu: 0.00E+00 rsn:   0
+  1 2r: 4.01E-13 2x: 6.83E+05 2u: 5.47E+00 ir: 4.00E-13 iu: 5.47E+00 rsn:   0
+  2 2r: 2.62E-17 2x: 6.83E+05 2u: 3.44E-04 ir: 1.24E-17 iu: 3.44E-04 rsn: rtol
+
+ Step      5 Time=  3.10000E-02 Dt=  1.60000E-02 [day] snes_conv_reason:    3
+  newton =   2 [      10] linear =     2 [        10] cuts =  0 [   0]
+  --> SNES Linear/Non-Linear Iterations =            2  /            2
+  --> SNES Residual:   2.624779E-17  2.624779E-19  1.235990E-17
+  --> max chng: dpmx=   5.4726E+00
+ 
+ --> appending to hdf5 output file: vsat_flow.h5
+       0.01 Seconds to write HDF5 file.
+ --> write tecplot output file: vsat_flow-001.tec
+       0.01 Seconds to write to Tecplot file(s)
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 6.22E-09 2x: 0.00E+00 2u: 0.00E+00 ir: 6.22E-09 iu: 0.00E+00 rsn:   0
+  1 2r: 1.62E-12 2x: 6.83E+05 2u: 2.10E+01 ir: 1.61E-12 iu: 2.10E+01 rsn:   0
+  2 2r: 2.39E-17 2x: 6.83E+05 2u: 5.41E-03 ir: 9.87E-18 iu: 5.39E-03 rsn: rtol
+
+ Step      7 Time=  1.27000E-01 Dt=  6.40000E-02 [day] snes_conv_reason:    3
+  newton =   2 [      14] linear =     2 [        14] cuts =  0 [   0]
+  --> SNES Linear/Non-Linear Iterations =            2  /            2
+  --> SNES Residual:   2.387567E-17  2.387567E-19  9.866240E-18
+  --> max chng: dpmx=   2.0958E+01
+ 
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 5.77E-09 2x: 0.00E+00 2u: 0.00E+00 ir: 5.74E-09 iu: 0.00E+00 rsn:   0
+  1 2r: 6.35E-12 2x: 6.83E+05 2u: 7.36E+01 ir: 6.13E-12 iu: 7.23E+01 rsn:   0
+  2 2r: 1.65E-17 2x: 6.83E+05 2u: 7.51E-02 ir: 8.92E-18 iu: 7.43E-02 rsn: rtol
+
+ Step      9 Time=  5.11000E-01 Dt=  2.56000E-01 [day] snes_conv_reason:    3
+  newton =   2 [      18] linear =     2 [        18] cuts =  0 [   0]
+  --> SNES Linear/Non-Linear Iterations =            2  /            2
+  --> SNES Residual:   1.652264E-17  1.652264E-19  8.917563E-18
+  --> max chng: dpmx=   7.2197E+01
+ 
+ --> appending to hdf5 output file: vsat_flow.h5
+       0.01 Seconds to write HDF5 file.
+ --> write tecplot output file: vsat_flow-002.tec
+       0.01 Seconds to write to Tecplot file(s)
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 4.75E-09 2x: 0.00E+00 2u: 0.00E+00 ir: 4.50E-09 iu: 0.00E+00 rsn:   0
+  1 2r: 7.83E-12 2x: 6.83E+05 2u: 1.17E+02 ir: 7.69E-12 iu: 1.06E+02 rsn:   0
+  2 2r: 3.28E-17 2x: 6.83E+05 2u: 1.67E-01 ir: 2.43E-17 iu: 1.66E-01 rsn: rtol
+
+ Step     11 Time=  1.50000E+00 Dt=  5.00000E-01 [day] snes_conv_reason:    3
+  newton =   2 [      23] linear =     2 [        23] cuts =  0 [   0]
+  --> SNES Linear/Non-Linear Iterations =            2  /            2
+  --> SNES Residual:   3.279719E-17  3.279719E-19  2.426072E-17
+  --> max chng: dpmx=   1.0619E+02
+ 
+ --> appending to hdf5 output file: vsat_flow.h5
+       0.01 Seconds to write HDF5 file.
+ --> write tecplot output file: vsat_flow-003.tec
+       0.01 Seconds to write to Tecplot file(s)
+ --> appending to hdf5 output file: vsat_flow.h5
+       0.00 Seconds to write HDF5 file.
+ --> write tecplot output file: vsat_flow-004.tec
+       0.01 Seconds to write to Tecplot file(s)
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 4.06E-09 2x: 0.00E+00 2u: 0.00E+00 ir: 3.53E-09 iu: 0.00E+00 rsn:   0
+  1 2r: 4.67E-12 2x: 6.83E+05 2u: 1.05E+02 ir: 4.64E-12 iu: 8.77E+01 rsn:   0
+  2 2r: 3.26E-17 2x: 6.83E+05 2u: 1.09E-01 ir: 1.43E-17 iu: 1.06E-01 rsn: rtol
+
+ Step     13 Time=  2.51200E+00 Dt=  5.12000E-01 [day] snes_conv_reason:    3
+  newton =   2 [      27] linear =     2 [        27] cuts =  0 [   0]
+  --> SNES Linear/Non-Linear Iterations =            2  /            2
+  --> SNES Residual:   3.259063E-17  3.259063E-19  1.434535E-17
+  --> max chng: dpmx=   8.7578E+01
+ 
+ --> appending to hdf5 output file: vsat_flow.h5
+       0.01 Seconds to write HDF5 file.
+ --> write tecplot output file: vsat_flow-005.tec
+       0.01 Seconds to write to Tecplot file(s)
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 3.66E-09 2x: 0.00E+00 2u: 0.00E+00 ir: 2.94E-09 iu: 0.00E+00 rsn:   0
+  1 2r: 6.78E-12 2x: 6.83E+05 2u: 1.81E+02 ir: 6.52E-12 iu: 1.37E+02 rsn:   0
+  2 2r: 4.29E-17 2x: 6.83E+05 2u: 2.93E-01 ir: 3.53E-17 iu: 2.69E-01 rsn:   0
+  3 2r: 2.10E-17 2x: 6.83E+05 2u: 1.26E-06 ir: 1.31E-17 iu: 1.25E-06 rsn: rtol
+
+ Step     15 Time=  4.00000E+00 Dt=  1.00000E+00 [day] snes_conv_reason:    3
+  newton =   3 [      32] linear =     3 [        32] cuts =  0 [   0]
+  --> SNES Linear/Non-Linear Iterations =            3  /            3
+  --> SNES Residual:   2.095465E-17  2.095465E-19  1.308835E-17
+  --> max chng: dpmx=   1.3698E+02
+ 
+ --> appending to hdf5 output file: vsat_flow.h5
+       0.01 Seconds to write HDF5 file.
+ --> write tecplot output file: vsat_flow-006.tec
+       0.01 Seconds to write to Tecplot file(s)
+ --> appending to hdf5 output file: vsat_flow.h5
+       0.01 Seconds to write HDF5 file.
+ --> write tecplot output file: vsat_flow-007.tec
+       0.01 Seconds to write to Tecplot file(s)
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 3.22E-09 2x: 0.00E+00 2u: 0.00E+00 ir: 2.30E-09 iu: 0.00E+00 rsn:   0
+  1 2r: 4.27E-12 2x: 6.83E+05 2u: 1.61E+02 ir: 3.76E-12 iu: 1.11E+02 rsn:   0
+  2 2r: 2.45E-17 2x: 6.83E+05 2u: 1.98E-01 ir: 1.47E-17 iu: 1.66E-01 rsn: rtol
+
+ Step     17 Time=  6.00000E+00 Dt=  1.00000E+00 [day] snes_conv_reason:    3
+  newton =   2 [      36] linear =     2 [        36] cuts =  0 [   0]
+  --> SNES Linear/Non-Linear Iterations =            2  /            2
+  --> SNES Residual:   2.446892E-17  2.446892E-19  1.472821E-17
+  --> max chng: dpmx=   1.1070E+02
+ 
+ --> appending to hdf5 output file: vsat_flow.h5
+       0.01 Seconds to write HDF5 file.
+ --> write tecplot output file: vsat_flow-008.tec
+       0.01 Seconds to write to Tecplot file(s)
+ --> appending to hdf5 output file: vsat_flow.h5
+       0.01 Seconds to write HDF5 file.
+ --> write tecplot output file: vsat_flow-009.tec
+       0.01 Seconds to write to Tecplot file(s)
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 2.95E-09 2x: 0.00E+00 2u: 0.00E+00 ir: 1.92E-09 iu: 0.00E+00 rsn:   0
+  1 2r: 3.14E-12 2x: 6.83E+05 2u: 1.48E+02 ir: 2.53E-12 iu: 9.44E+01 rsn:   0
+  2 2r: 2.21E-17 2x: 6.83E+05 2u: 1.50E-01 ir: 1.26E-17 iu: 1.16E-01 rsn: rtol
+
+ Step     19 Time=  8.00000E+00 Dt=  1.00000E+00 [day] snes_conv_reason:    3
+  newton =   2 [      40] linear =     2 [        40] cuts =  0 [   0]
+  --> SNES Linear/Non-Linear Iterations =            2  /            2
+  --> SNES Residual:   2.209820E-17  2.209820E-19  1.262418E-17
+  --> max chng: dpmx=   9.4301E+01
+ 
+ --> appending to hdf5 output file: vsat_flow.h5
+       0.01 Seconds to write HDF5 file.
+ --> write tecplot output file: vsat_flow-010.tec
+       0.01 Seconds to write to Tecplot file(s)
+ --> appending to hdf5 output file: vsat_flow.h5
+       0.01 Seconds to write HDF5 file.
+ --> write tecplot output file: vsat_flow-011.tec
+       0.01 Seconds to write to Tecplot file(s)
+
+== RICHARDS FLOW ===============================================================
+  0 2r: 2.75E-09 2x: 0.00E+00 2u: 0.00E+00 ir: 1.67E-09 iu: 0.00E+00 rsn:   0
+  1 2r: 2.50E-12 2x: 6.83E+05 2u: 1.38E+02 ir: 1.87E-12 iu: 8.31E+01 rsn:   0
+  2 2r: 2.83E-17 2x: 6.83E+05 2u: 1.21E-01 ir: 1.24E-17 iu: 8.82E-02 rsn:   0
+  3 2r: 2.83E-17 2x: 6.83E+05 2u: 1.27E-07 ir: 1.24E-17 iu: 1.08E-07 rsn: stol
+
+ Step     21 Time=  1.00000E+01 Dt=  1.00000E+00 [day] snes_conv_reason:    4
+  newton =   3 [      45] linear =     3 [        45] cuts =  0 [   0]
+  --> SNES Linear/Non-Linear Iterations =            3  /            3
+  --> SNES Residual:   2.827183E-17  2.827183E-19  1.238701E-17
+  --> max chng: dpmx=   8.2980E+01
+ 
+ --> appending to hdf5 output file: vsat_flow.h5
+       0.01 Seconds to write HDF5 file.
+ --> write tecplot output file: vsat_flow-012.tec
+       0.01 Seconds to write to Tecplot file(s)
+
+PMCSubsurfaceFlow
+ Total Time:   1.1312E-02 [sec]
+
+ FLOW TS BE steps =     21 newton =       45 linear =         45 cuts =      0
+FLOW TS BE Wasted Linear Iterations = 0
+FLOW TS BE Wasted Newton Iterations = 0
+ FLOW TS BE SNES time = 0.0 seconds
+----------
+
+ Wall Clock Time:  3.6722E-01 [sec]   6.1204E-03 [min]   1.0201E-04 [hr]
